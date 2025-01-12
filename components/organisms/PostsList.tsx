@@ -1,12 +1,12 @@
 import type { FC } from 'react'
 import React from 'react'
 
-import { IPost } from '@/graphql/entities/Post'
 import Container from '@/atoms/Container'
 import PostListItem from '@/molecules/PostListItem'
+import { BlogPost } from '@/interfaces/BlogPost'
 
 interface PostsListProps {
-    posts: IPost[]
+    posts: BlogPost[]
 }
 
 const PostsList: FC<PostsListProps> = ({ posts }) => {

@@ -1,21 +1,30 @@
 import Link from 'next/link'
 import type { FC } from 'react'
-import { ContentTypeHeading } from '@/graphql/entities/Post'
+
+export interface ContentHeading {
+    identifier: string
+    text: string
+    level: number
+}
 
 interface TableOfContentsProps {
-    headers: ContentTypeHeading[]
+    headers: ContentHeading[]
 }
 
 const TableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
     return (
-        <div className="mb-4 p-4 flex flex-col border border-orange gap-1 sticky top-4">
-            <span className="font-merienda text-xl font-bold">Inhoud</span>
+        <div className="flex flex-col  bg-primary-lighter rounded-xl sticky top-4 py-md px-lg">
+            <span className="font-noto text-[22px] text-primary mb-sm">
+                Inhoud
+            </span>
             {headers.map((header) => (
                 <Link
                     href={`#${header.identifier}`}
                     key={header.identifier}
                     className={`text-green-primary hover:underline ${
-                        header.level === 3 ? 'pl-4 text-sm' : ''
+                        header.level === 3
+                            ? 'pl-4 text-xs mb-xs'
+                            : 'test-sm mb-[8px]'
                     }`}
                 >
                     {header.text}

@@ -3,16 +3,9 @@
 @tailwind utilities;
 
 body {
-    background-size: 50%;
-    background: #FFF9F3;
-    font-family: 'Roboto', sans-serif;
+    background: #FFFFFF;
+    font-family: 'Lato', sans-serif;
     min-height: 100vh;
-}
-
-p {
-    font-size: 1rem;
-    line-height: 2rem;
-    margin-bottom: 1rem;
 }
 
 a {

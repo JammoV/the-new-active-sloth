@@ -1,26 +1,7 @@
-import type { FC, ReactNode } from 'react'
+import type { FC, PropsWithChildren } from 'react'
 
-export enum PageType {
-    DEFAULT,
-    BLOGPOST,
-}
-
-interface ContainerProps {
-    children: ReactNode
-    pageType?: PageType
-}
-
-const Container: FC<ContainerProps> = ({
-    children,
-    pageType = PageType.DEFAULT,
-}) => (
-    <div
-        className={`px-4 mx-auto ${
-            pageType === PageType.DEFAULT ? 'max-w-[900px]' : 'max-w-[1200px]'
-        }`}
-    >
-        {children}
-    </div>
+const Container: FC<PropsWithChildren> = ({ children }) => (
+    <div className="container mx-auto h-full relative">{children}</div>
 )
 
 export default Container

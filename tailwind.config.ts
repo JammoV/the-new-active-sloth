@@ -8,31 +8,57 @@ const config: Config = {
         './app/**/*.{js,ts,jsx,tsx}',
     ],
     theme: {
+        screens: {
+            desktop: '1280px',
+            tablet: '768px',
+            mobile: '378px',
+        },
         extend: {
+            fontSize: {
+                xs: '14px',
+                md: '16px', // tip
+                lg: '18px', // paragraph
+                xl: '20px', //h4 / intro
+                '2xl': '26px', //h3
+                '3xl': '32px', // h2
+                '4xl': '48px', // title
+            },
             colors: {
-                'green-primary': '#347378',
-                'green-light': '#EEF6F6',
-                sandy: '#FFF9F3',
-                sand: '#F9EBDD',
-                orange: '#FCD8C9',
-                'orange-dark': '#f3936d',
-                dark: '#444444',
-                grey: '#3C484B',
+                primary: {
+                    DEFAULT: '#0C392D',
+                    grey: '#99B4B2',
+                    light: '#C8E4DC',
+                    lighter: '#F3F8F7',
+                },
+                cta: {
+                    DEFAULT: '#FE5328',
+                },
+                link: {
+                    DEFAULT: '#d2916b',
+                },
+                black: {
+                    DEFAULT: '#010101',
+                },
+                white: {
+                    DEFAULT: '#FFFFFF',
+                },
+            },
+            spacing: {
+                xs: '6px',
+                sm: '12px',
+                md: '24px',
+                lg: '48px',
+                xl: '96px',
             },
         },
         transitionProperty: {
             horizontal: 'left, right',
             vertical: 'top, bottom',
         },
-        screens: {
-            sm: '640px',
-            md: '768px',
-            lg: '1024px',
-            xl: '1440px',
-        },
         fontFamily: {
-            roboto: ['var(--font-roboto)', ...fontFamily.serif],
-            merienda: ['var(--font-merienda)', ...fontFamily.sans],
+            fira: ['var(--font-fira)', ...fontFamily.sans], // logo
+            noto: ['var(--font-noto)', ...fontFamily.serif], // headers
+            lato: ['var(--font-lato)', ...fontFamily.sans], // body
         },
     },
     plugins: [],

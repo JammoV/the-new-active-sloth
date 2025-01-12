@@ -1,99 +1,95 @@
-import type { FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import React from 'react'
 
-import TableOfContents from '@/molecules/TableOfContents'
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import {
-    BodyNode,
-    ContentTypeHeading,
-    ContentTypeList,
-    ContentTypeBlockQuote,
-    ContentTypeParagraph,
-    ContentTypeTip,
-    ContentTypeGallery,
-} from '@/graphql/entities/Post'
+    Block,
+    BLOCKS,
+    Document,
+    Inline,
+    INLINES,
+    Text,
+} from '@contentful/rich-text-types'
 import Heading from '@/atoms/Heading'
-import Paragraph from '@/atoms/Paragraph'
-import BulletList from '@/atoms/BulletList'
-import OrderedList from '@/atoms/OrderedList'
-import BlockQuote from '@/atoms/BlockQuote'
-import Tip from '@/atoms/Tip'
 import Gallery from '@/organisms/Gallery'
+import Tip from '@/atoms/Tip'
 
 interface PostBodyProps {
-    body: BodyNode[]
+    body: Document
 }
 
-const getContentType = (node: BodyNode, index: number): React.ReactNode => {
-    switch (node.type) {
-        case 'heading':
-            return (
-                <Heading
-                    key={`h-${index}`}
-                    heading={node as ContentTypeHeading}
-                />
-            )
-        case 'paragraph':
-            return (
-                <Paragraph
-                    key={`p-${index}`}
-                    paragraph={node as ContentTypeParagraph}
-                />
-            )
-        case 'horizontalRule':
-            return <hr key={`hr-${index}`} className="my-8 border-orange" />
-        case 'bulletList':
-            return (
-                <BulletList
-                    key={`bl-${index}`}
-                    bulletList={node as ContentTypeList}
-                />
-            )
-        case 'orderedList':
-            return (
-                <OrderedList
-                    key={`ol-${index}`}
-                    orderedList={node as ContentTypeList}
-                />
-            )
-        case 'blockquote':
-            return (
-                <BlockQuote
-                    key={`bq-${index}`}
-                    blockQuote={node as ContentTypeBlockQuote}
-                />
-            )
-        case 'tip':
-            return <Tip key={`tip-${index}`} tip={node as ContentTypeTip} />
-        case 'gallery':
-            return (
-                <Gallery
-                    key={`gallery-${index}`}
-                    gallery={node as ContentTypeGallery}
-                />
-            )
-        default:
+const options = {
+    renderNode: {
+        [INLINES.ENTRY_HYPERLINK]: (node: Block | Inline) => {
+            if (node.data.target.sys.contentType.sys.id === 'blog') {
+                return (
+                    <a
+                        href={`/posts/${node.data.target.fields.slug}`}
+                        title="Bekijk artikel"
+                        className="text-[#d2916b] font-bold underline underline-offset-4"
+                    >
+                        {node.data.target.fields.title}
+                    </a>
+                )
+            }
+
+            return <a></a>
+        },
+        [BLOCKS.HEADING_1]: (node: Block | Inline) => {
+            const textContent = node.content[0] as Text
+            return <Heading level={1} value={textContent.value} />
+        },
+        [BLOCKS.HEADING_2]: (node: Block | Inline) => {
+            const textContent = node.content[0] as Text
+            return <Heading level={2} value={textContent.value} />
+        },
+        [BLOCKS.HEADING_3]: (node: Block | Inline) => {
+            const textContent = node.content[0] as Text
+            return <Heading level={3} value={textContent.value} />
+        },
+        [BLOCKS.HEADING_4]: (node: Block | Inline) => {
+            const textContent = node.content[0] as Text
+            return <Heading level={4} value={textContent.value} />
+        },
+        [BLOCKS.HR]: () => <hr className="border-primary-light my-md" />,
+        [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: ReactNode[]) => {
+            return <p className="text-lg leading-relaxed">{children}</p>
+        },
+        [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
+            const contentTypeId = node.data.target.sys.contentType?.sys
+                .id as string
+
+            if (contentTypeId === 'blogGallery') {
+                const { display, images } = node.data.target.fields
+
+                return <Gallery images={images} displayType={display} />
+            }
+
+            if (contentTypeId === 'blogTip') {
+                const { title, body, linkTitle, linkUrl, category } =
+                    node.data.target.fields
+
+                return (
+                    <Tip
+                        tip={{
+                            title,
+                            body,
+                            linkTitle,
+                            linkUrl,
+                            category,
+                        }}
+                    />
+                )
+            }
+
             return <></>
-    }
+        },
+    },
 }
 
 const PostBody: FC<PostBodyProps> = ({ body }) => {
-    const tableOfContents = body.filter((node) => node.type === 'heading')
-
-    return (
-        <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-12">
-            <div className="md:w-2/3">
-                {body.map((node, index) => getContentType(node, index))}
-            </div>
-            {tableOfContents && (
-                <div>
-                    <TableOfContents
-                        headers={tableOfContents as ContentTypeHeading[]}
-                    />
-                </div>
-            )}
-        </div>
-    )
+    // @ts-ignore
+    return documentToReactComponents(body, options)
 }
 
 export default PostBody

@@ -2,26 +2,23 @@
 
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
-import { Wrapper } from '@googlemaps/react-wrapper'
-import { IPost } from '@/graphql/entities/Post'
+
+import { Category } from '@/interfaces/Category'
 import Container from '@/atoms/Container'
 import CategoryFilter from '@/molecules/CategoryFilter'
-import MapViewButtons from '@/molecules/MapViewButtons'
 import PostsList from '@/organisms/PostsList'
-import { ICategory } from '@/graphql/entities/Category'
-import PostsMap from '@/organisms/PostsMap'
+import { BlogPost } from '@/interfaces/BlogPost'
 
 interface PostsWithFilterProps {
-    posts: IPost[]
-    categories: ICategory[]
+    posts: BlogPost[]
+    categories: Category[]
 }
 
 const PostsWithFilter: FC<PostsWithFilterProps> = ({ posts, categories }) => {
-    const [activePosts, setActivePosts] = useState<IPost[]>(posts)
-    const [categoryFilter, setCategoryFilter] = useState<ICategory | null>(null)
-    const [mapView, setMapView] = useState<boolean>(false)
+    const [activePosts, setActivePosts] = useState<BlogPost[]>(posts)
+    const [categoryFilter, setCategoryFilter] = useState<Category | null>(null)
 
-    const handleCategoryFilterChange = (category: ICategory): void => {
+    const handleCategoryFilterChange = (category: Category): void => {
         if (category.id === categoryFilter?.id) {
             setCategoryFilter(null)
         } else {
@@ -29,16 +26,16 @@ const PostsWithFilter: FC<PostsWithFilterProps> = ({ posts, categories }) => {
         }
     }
 
-    useEffect(() => {
-        if (categoryFilter) {
-            const newPosts = posts.filter(
-                (post) => post.category.id === categoryFilter.id
-            )
-            setActivePosts(newPosts)
-        } else {
-            setActivePosts(posts)
-        }
-    }, [categoryFilter, posts])
+    // useEffect(() => {
+    //     if (categoryFilter) {
+    //         const newPosts = posts.filter(
+    //             (post) => post.category.id === categoryFilter.id
+    //         )
+    //         setActivePosts(newPosts)
+    //     } else {
+    //         setActivePosts(posts)
+    //     }
+    // }, [categoryFilter, posts])
 
     return (
         <>
@@ -49,23 +46,10 @@ const PostsWithFilter: FC<PostsWithFilterProps> = ({ posts, categories }) => {
                         activeCategory={categoryFilter}
                         clickHandler={handleCategoryFilterChange}
                     />
-                    <MapViewButtons
-                        activeView={mapView ? 'map' : 'list'}
-                        onClick={(mapView): void => setMapView(mapView)}
-                    />
                 </div>
             </Container>
 
-            {mapView ? (
-                <Wrapper apiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY || ''}>
-                    <PostsMap
-                        posts={activePosts}
-                        categoryFilter={categoryFilter}
-                    />
-                </Wrapper>
-            ) : (
-                <PostsList posts={activePosts} />
-            )}
+            <PostsList posts={activePosts} />
         </>
     )
 }

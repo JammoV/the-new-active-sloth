@@ -1,31 +1,25 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import headerImg from '@/public/images/Logo.png'
 import type { FC } from 'react'
 
 const HeaderLogo: FC = () => {
     return (
-        <div className="relative md:w-[180px] md:h-[190px] md:flex-none">
-            <div className="hidden md:block md:absolute bg-sandy md:top-4 md:p-4 rounded-full z-20">
+        <div className="flex flex-row items-center gap-4">
+            <div>
                 <Link href={'/'}>
                     <Image
-                        src="/images/LogoWithTextBlush.png"
-                        width={166.4}
-                        height={179.4}
+                        src={headerImg}
+                        width={354}
+                        height={357}
                         alt="Back to home"
-                        className="cursor-pointer"
+                        className="cursor-pointer w-28"
                     />
                 </Link>
             </div>
-            <div className="md:hidden">
-                <Link href={'/'}>
-                    <Image
-                        src="/images/LogoSmall.png"
-                        width={73}
-                        height={74}
-                        alt="Back to home"
-                        className="cursor-pointer"
-                    />
-                </Link>
+            <div className="flex flex-col">
+                <span className="font-fira font-extrabold text-3xl">The Active Sloth</span>
+                <span>Exploring the world, one step at a time</span>
             </div>
         </div>
     )

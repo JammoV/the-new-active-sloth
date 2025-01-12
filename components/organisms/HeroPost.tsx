@@ -1,35 +1,39 @@
 import Image from 'next/image'
 import type { FC } from 'react'
 
-import type { IPost } from '@/graphql/entities/Post'
 import Container from '@/atoms/Container'
 import HeroPostDescription from '@/molecules/HeroPostDescription'
-import getImageUrl from '@/graphql/utils/getImageUrl'
+import { BlogPost } from '@/interfaces/BlogPost'
 
 interface HeroPostProps {
-    post: IPost
-    withLink?: boolean
+    post: BlogPost
 }
 
-const HeroPost: FC<HeroPostProps> = ({ post, withLink = false }) => {
+const HeroPost: FC<HeroPostProps> = ({ post }) => {
+    const imageUrl = post.image?.fields?.file?.url
+
     return (
-        <div className={`max-w-[2400px] mx-auto relative`}>
-            <Image
-                src={getImageUrl(post.mainImage.id)}
-                className="z-0"
-                alt={post.title}
-                priority={true}
-                fill
-                style={{
-                    objectFit: 'cover',
-                }}
-            />
-            <div className="bg-gradient-to-r from-black/50 to-black/20 w-full h-full absolute"></div>
+        <div className={`relative h-[calc(100vh-72px)] bg-primary-light`}>
+            {imageUrl && (
+                <Image
+                    src={'https:' + post.image?.fields?.file?.url}
+                    className="z-0"
+                    alt={post.title}
+                    priority={true}
+                    quality={70}
+                    fill
+                    style={{
+                        objectFit: 'cover',
+                    }}
+                />
+            )}
+
             <Container>
-                <HeroPostDescription post={post} withLink={withLink} />
+                <HeroPostDescription post={post} withLink={false} />
             </Container>
         </div>
     )
 }
 
 export default HeroPost
+

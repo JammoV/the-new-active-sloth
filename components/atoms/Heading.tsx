@@ -1,46 +1,40 @@
 import type { FC } from 'react'
-import { ContentTypeHeading } from '@/graphql/entities/Post'
+import { generateIdentifier } from '@/utils/generateIdentifier'
 
 interface HeadingProps {
-    heading: ContentTypeHeading
+    level: number
+    value: string
 }
 
-const Heading: FC<HeadingProps> = ({ heading }) => {
-    if (heading.level === 1) {
-        return <h1>{heading.text}</h1>
+const Heading: FC<HeadingProps> = ({ level, value }) => {
+    const identifier = generateIdentifier(value)
+
+    if (level === 1) {
+        return <h1>{value}</h1>
     }
-    if (heading.level === 2) {
+    if (level === 2) {
         return (
-            <h2
-                className={`text-2xl font-merienda font-bold mt-12 mb-4`}
-                id={heading.identifier}
-            >
-                {heading.text}
+            <h2 className={`text-3xl font-noto`} id={identifier}>
+                {value}
             </h2>
         )
     }
-    if (heading.level === 3) {
+    if (level === 3) {
         return (
-            <h3
-                className={`text-xl font-merienda my-2`}
-                id={heading.identifier}
-            >
-                {heading.text}
+            <h3 className={`text-2xl font-noto`} id={identifier}>
+                {value}
             </h3>
         )
     }
-    if (heading.level === 4) {
+    if (level === 4) {
         return (
-            <h4
-                className={`text-lg font-medium pt-4 pb-2`}
-                id={heading.identifier}
-            >
-                {heading.text}
+            <h4 className={`text-xl font-noto -mb-sm`} id={identifier}>
+                {value}
             </h4>
         )
     }
 
-    return <span>{heading.text}</span>
+    return <span>{value}</span>
 }
 
 export default Heading

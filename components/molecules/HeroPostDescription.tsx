@@ -1,12 +1,9 @@
-import Link from 'next/link'
 import type { FC } from 'react'
 
-import type { IPost } from '@/graphql/entities/Post'
-import Button from '@/atoms/Button'
-import getPostDescription from '@/graphql/utils/getPostDescription'
+import { BlogPost } from '@/interfaces/BlogPost'
 
 interface HeroPostDescriptionProps {
-    post: IPost
+    post: BlogPost
     withLink: boolean
 }
 
@@ -15,26 +12,17 @@ const HeroPostDescription: FC<HeroPostDescriptionProps> = ({
     withLink,
 }) => {
     return (
-        <div
-            className={
-                'flex flex-col items-start text-center md:text-left md:w-1/2 pt-20 pb-24 md:pb-32 relative min-h-[360px]'
-            }
-        >
-            <h2 className={'font-roboto font-bold text-white text-4xl'}>
+        <div className={'absolute left-0 bottom-xl flex flex-col'}>
+            <h1
+                className={
+                    'font-noto font-bold text-white text-4xl bg-primary bg-opacity-90 py-md px-lg rounded-t-xl rouned-br-xl'
+                }
+            >
                 {post.title}
-            </h2>
-            {withLink && (
-                <>
-                    <p className="text-white mt-6 mb-8">
-                        {getPostDescription(post.body)}
-                    </p>
-                    <>
-                        <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
-                            <Button text="Artikel lezen" />
-                        </Link>
-                    </>
-                </>
-            )}
+            </h1>
+            <span className="bg-white text-lg px-lg py-xs self-start">
+                {post.category}
+            </span>
         </div>
     )
 }

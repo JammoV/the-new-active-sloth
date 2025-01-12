@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import type { FC } from 'react'
-import { ContentTypeTip } from '@/graphql/entities/Post'
+import { BlogTip } from '@/interfaces/BlogTip'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Link from 'next/link'
 
 export enum TipType {
-    GENERAL = 'general',
-    FOOD = 'food',
-    DRINKS = 'drinks',
-    ACTIVITY = 'activity',
-    ACCOMMODATION = 'accommodation',
+    GENERAL = 'General',
+    FOOD = 'Food',
+    DRINKS = 'Drinks',
+    ACTIVITY = 'Activity',
+    ACCOMMODATION = 'Accommodation',
 }
 
 type TipMap = {
@@ -53,14 +55,14 @@ const tipMap: TipMap = {
 }
 
 export interface TipProps {
-    tip: ContentTypeTip
+    tip: BlogTip
 }
 
 const Tip: FC<TipProps> = ({ tip }) => {
-    const tipConfig = tipMap[tip.tipType]
+    const tipConfig = tipMap[tip.category]
 
     return (
-        <div className="flex ml-2 mt-4 mb-8 items-center">
+        <div className="flex flex-row my-md gap-md">
             <div className={`min-w-[50px]`}>
                 <Image
                     src={tipConfig.src}
@@ -69,12 +71,22 @@ const Tip: FC<TipProps> = ({ tip }) => {
                     alt={tipConfig.alt}
                 />
             </div>
-            <div
-                className={`ml-4 m-h-[40px]`}
-                dangerouslySetInnerHTML={{
-                    __html: tip.html,
-                }}
-            />
+            <div className="flex flex-col gap-xs text-md">
+                <h4 className="font-bold text-primary">{tip.title}</h4>
+                {tip.body && documentToReactComponents(tip.body)}
+                {tip.linkUrl && (
+                    <Link
+                        href={tip.linkUrl}
+                        className="text-primary hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        {tip.linkUrl.startsWith('https://maps')
+                            ? 'Bekijk op Google Maps'
+                            : 'Meer informatie'}
+                    </Link>
+                )}
+            </div>
         </div>
     )
 }

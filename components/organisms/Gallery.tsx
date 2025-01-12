@@ -1,58 +1,23 @@
-import Image from 'next/image'
 import type { FC } from 'react'
-import { ContentTypeGallery } from '@/graphql/entities/Post'
-import getImageUrl from '@/graphql/utils/getImageUrl'
+import { Asset } from 'contentful'
+import ResponsiveImage from '@/atoms/ResponsiveImage'
 
-const imageHeight = 400
-const imageWidth = 450
-const imageLandscapeWidth = 900
-
-const getImageWidth = (length: number, index: number): number => {
-    if (length % 2 == 0) {
-        return imageWidth
+const getGalleryDisplayType = (display: string): GalleryDisplay => {
+    if (display.startsWith('Carousel')) {
+        return GalleryDisplay.CAROUSEL
     }
-
-    if (length === 1) {
-        return imageLandscapeWidth
+    if (display.startsWith('Thumbnails')) {
+        return GalleryDisplay.THUMBNAILS
     }
-
-    if ([2, 4, 6, 8].includes(index)) {
-        return imageLandscapeWidth
+    if (display.startsWith('In-line')) {
+        return GalleryDisplay.INLINE
     }
-
-    return imageWidth
-}
-
-const getImageClass = (width: number, index: number): string => {
-    if (width === imageLandscapeWidth) {
-        return 'flex-2'
-    }
-
-    if ([0, 3, 5].includes(index)) {
-        return 'flex-1 mr-2 mb-4'
-    }
-
-    if ([1, 4, 6].includes(index)) {
-        return 'flex-1 ml-2 mb-4'
-    }
-
-    return 'flex-1 m-2'
-}
-
-const getGalleryClass = (display: GalleryDisplay): string => {
-    switch (display) {
-        case GalleryDisplay.THUMBNAILS:
-            return 'flex flex-wrap my-4'
-        case GalleryDisplay.INLINE:
-            return 'flex flex-row my-4'
-        case GalleryDisplay.LANDSCAPE:
-        default:
-            return 'flex flex-col my-4'
-    }
+    return GalleryDisplay.LANDSCAPE
 }
 
 interface GalleryProps {
-    gallery: ContentTypeGallery
+    images: Asset[]
+    displayType: GalleryDisplay
 }
 
 export enum GalleryDisplay {
@@ -62,28 +27,18 @@ export enum GalleryDisplay {
     THUMBNAILS = 'thumbnails',
 }
 
-const Gallery: FC<GalleryProps> = ({ gallery }) => {
-    const imagesLength = gallery.items.length
-    const display = gallery.display
-    const images = gallery.items
+const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
+    const display = getGalleryDisplayType(displayType)
 
-    if (gallery.display === GalleryDisplay.INLINE && images.length < 5) {
-        const imageWidth = imageLandscapeWidth / images.length
-
+    if (display === GalleryDisplay.INLINE) {
         return (
-            <div className={getGalleryClass(display as GalleryDisplay)}>
+            <div className="flex flex-row gap-md">
                 {images.map((image) => (
-                    <div className="mx-2 first:ml-0 last:mr-0" key={image.id}>
-                        <Image
-                            alt={image.title || ''}
-                            width={imageWidth}
-                            height={550}
-                            quality={100}
-                            src={getImageUrl(image.id, {
-                                width: imageWidth.toString(),
-                                height: '550',
-                            })}
-                        />
+                    <div
+                        className="relative w-[388px] aspect-[3/4]"
+                        key={image.sys.id}
+                    >
+                        <ResponsiveImage image={image} />
                     </div>
                 ))}
             </div>
@@ -91,46 +46,49 @@ const Gallery: FC<GalleryProps> = ({ gallery }) => {
     }
 
     if (display === GalleryDisplay.LANDSCAPE) {
-        const imageWidth = imageLandscapeWidth
-
         return (
-            <div className={getGalleryClass(display)}>
+            <div className="flex flex-col gap-md">
                 {images.map((image) => (
-                    <div className="my-2 first:mt-0 last:mb-0" key={image.id}>
-                        <Image
-                            alt={image.title || ''}
-                            width={imageWidth}
-                            height={550}
-                            quality={100}
-                            src={getImageUrl(image.id, {
-                                width: imageWidth.toString(),
-                                height: '550',
-                            })}
-                        />
+                    <div
+                        className="relative w-[800px] aspect-video"
+                        key={image.sys.id}
+                    >
+                        <ResponsiveImage image={image} />
                     </div>
                 ))}
             </div>
         )
     }
 
-    return (
-        <div className={getGalleryClass(GalleryDisplay.THUMBNAILS)}>
-            {images.map((image, index) => {
-                const imageWidth = getImageWidth(imagesLength, index)
-                const flexClass = getImageClass(imageWidth, index)
+    if (display === GalleryDisplay.CAROUSEL && images.length === 3) {
+        return (
+            <div className="flex flex-col gap-md">
+                <div className="flex flex-row gap-md">
+                    {images.slice(0, 2).map((image) => (
+                        <div
+                            className="relative w-[388px] aspect-[3/4]"
+                            key={image.sys.id}
+                        >
+                            <ResponsiveImage image={image} />
+                        </div>
+                    ))}
+                </div>
+                <div className="relative w-[800px] aspect-video">
+                    <ResponsiveImage image={images[2]} />
+                </div>
+            </div>
+        )
+    }
 
+    return (
+        <div className="flex flex-wrap gap-md">
+            {images.map((image, index) => {
                 return (
-                    <div className={flexClass} key={image.id}>
-                        <Image
-                            alt={image.title || ''}
-                            width={imageWidth}
-                            height={550}
-                            quality={100}
-                            src={getImageUrl(image.id, {
-                                width: imageWidth.toString(),
-                                height: '550',
-                            })}
-                        />
+                    <div
+                        className="relative aspect-square w-[250px]"
+                        key={image.sys.id}
+                    >
+                        <ResponsiveImage image={image} />
                     </div>
                 )
             })}

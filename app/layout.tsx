@@ -1,22 +1,30 @@
 import type { Metadata } from 'next'
-import { Roboto, Merienda } from 'next/font/google'
+import { Lato, Fira_Sans_Condensed, Noto_Serif } from 'next/font/google'
 import './globals.css'
 import React from 'react'
 
 import Footer from '@/organisms/Footer'
 import Header from '@/organisms/Header'
+import Container from '@/atoms/Container'
 
-const roboto = Roboto({
+const lato = Lato({
     subsets: ['latin'],
-    weight: ['100', '300', '400', '500'],
+    weight: ['400', '700', '900'],
     display: 'swap',
-    variable: '--font-roboto',
+    variable: '--font-lato',
 })
-const merienda = Merienda({
+
+const noto = Noto_Serif({
     subsets: ['latin'],
-    weight: ['400', '700'],
+    weight: ['400', '500', '700'],
     display: 'swap',
-    variable: '--font-merienda',
+    variable: '--font-noto',
+})
+const fira = Fira_Sans_Condensed({
+    subsets: ['latin'],
+    weight: ['800'],
+    display: 'swap',
+    variable: '--font-fira',
 })
 
 export const metadata: Metadata = {
@@ -31,10 +39,14 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="nl">
-            <body className={`${roboto.variable} ${merienda.variable}`}>
+            <body
+                className={`${lato.variable} ${noto.variable} ${fira.variable}`}
+            >
                 <div className="min-h-screen flex flex-col">
                     <Header />
+
                     <main className="flex-grow">{children}</main>
+
                     <Footer />
                 </div>
             </body>
