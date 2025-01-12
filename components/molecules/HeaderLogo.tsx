@@ -18,7 +18,9 @@ const HeaderLogo: FC = () => {
                 </Link>
             </div>
             <div className="flex flex-col">
-                <span className="font-fira font-extrabold text-3xl">The Active Sloth</span>
+                <span className="font-fira font-extrabold text-3xl">
+                    The Active Sloth
+                </span>
                 <span>Exploring the world, one step at a time</span>
             </div>
         </div>

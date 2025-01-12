@@ -10,7 +10,10 @@ const Header: FC = () => {
     return (
         <Container>
             <div className="flex flex-row justify-between items-center py-sm">
-                <Link href={'/'} className="font-fira font-extrabold text-[32px] text-primary">
+                <Link
+                    href={'/'}
+                    className="font-fira font-extrabold text-[32px] text-primary"
+                >
                     The Active Sloth
                 </Link>
                 <div className="flex flex-row gap-xl">

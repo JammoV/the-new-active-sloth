@@ -36,4 +36,3 @@ const HeroPost: FC<HeroPostProps> = ({ post }) => {
 }
 
 export default HeroPost
-
