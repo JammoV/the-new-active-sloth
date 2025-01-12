@@ -13,7 +13,9 @@ const HeroPost: FC<HeroPostProps> = ({ post }) => {
     const imageUrl = post.image?.fields?.file?.url
 
     return (
-        <div className={`relative mobile:h-[336px] desktop:h-[calc(100vh-72px)] bg-primary-light`}>
+        <div
+            className={`relative mobile:h-[336px] desktop:h-[calc(100vh-72px)] bg-primary-light`}
+        >
             {imageUrl && (
                 <Image
                     src={'https:' + post.image?.fields?.file?.url}
