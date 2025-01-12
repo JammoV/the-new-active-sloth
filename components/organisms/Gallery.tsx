@@ -50,7 +50,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
             <div className="flex flex-col gap-md">
                 {images.map((image) => (
                     <div
-                        className="relative w-[800px] aspect-video"
+                        className="relative w-full desktop:w-[800px] aspect-video"
                         key={image.sys.id}
                     >
                         <ResponsiveImage image={image} />
@@ -73,7 +73,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         </div>
                     ))}
                 </div>
-                <div className="relative w-[800px] aspect-video">
+                <div className="relative w-full desktop:w-[800px] aspect-video">
                     <ResponsiveImage image={images[2]} />
                 </div>
             </div>

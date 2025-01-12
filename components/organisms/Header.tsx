@@ -16,7 +16,7 @@ const Header: FC = () => {
                 >
                     The Active Sloth
                 </Link>
-                <div className="flex flex-row gap-xl">
+                <div className="flex-row gap-xl hidden desktop:flex">
                     <Link
                         href={'#'}
                         className="font-lato font-black text-lg hover:underline"

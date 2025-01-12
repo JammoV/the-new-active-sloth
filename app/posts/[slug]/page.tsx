@@ -26,8 +26,8 @@ export default async function Post({
         <article>
             <HeroPost post={post} />
             <Container>
-                <div className="flex flex-row gap-xl">
-                    <div className="w-[800px] flex flex-col gap-md">
+                <div className="flex flex-col desktop:flex-row gap-xl">
+                    <div className="desktop:w-[800px] flex flex-col gap-md">
                         <p className="my-md font-noto text-primary text-lg">
                             Geplaatst op 12 januari 2024
                         </p>

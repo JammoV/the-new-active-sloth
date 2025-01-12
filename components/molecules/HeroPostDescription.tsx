@@ -12,10 +12,10 @@ const HeroPostDescription: FC<HeroPostDescriptionProps> = ({
     withLink,
 }) => {
     return (
-        <div className={'absolute left-0 bottom-xl flex flex-col'}>
+        <div className={'absolute left-0 bottom-md desktop:bottom-xl flex flex-col'}>
             <h1
                 className={
-                    'font-noto font-bold text-white text-4xl bg-primary bg-opacity-90 py-md px-lg rounded-t-xl rouned-br-xl'
+                    'font-noto font-bold text-white text-2xl desktop:text-4xl bg-primary bg-opacity-90 p-sm desktop:py-md desktop:px-lg rounded-t-xl rounded-br-xl'
                 }
             >
                 {post.title}
