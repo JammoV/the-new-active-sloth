@@ -7,6 +7,7 @@ import HeroPost from '@/organisms/HeroPost'
 import Container from '@/atoms/Container'
 import TableOfContents from '@/molecules/TableOfContents'
 import { extractBlogHeaders } from '@/utils/extractBlogHeaders'
+import { draftMode } from 'next/headers'
 
 export default async function Post({
     params,
@@ -14,7 +15,8 @@ export default async function Post({
     params: Promise<{ slug: string }>
 }) {
     const { slug } = await params
-    const post = await getBlogPostBySlug(slug)
+    const { isEnabled } = await draftMode()
+    const post = await getBlogPostBySlug(slug, isEnabled)
 
     if (!post || !post.body) {
         return notFound()

@@ -1,13 +1,16 @@
-import client from '@/client/contentful/Client'
+import client, { previewClient } from '@/client/contentful/Client'
 import { BlogPost } from '@/interfaces/BlogPost'
 import { mapBlogPost } from '@/client/mappers/PostMapper'
 import { TypeBlog } from '@/client/contentful/types'
 
 export const getBlogPostBySlug = async (
-    slug: string
+    slug: string,
+    preview = false
 ): Promise<BlogPost | null> => {
+    const apiClient = preview ? previewClient : client
+
     // @ts-ignore
-    const response = await client.getEntries<TypeBlog>({
+    const response = await apiClient.getEntries<TypeBlog>({
         content_type: 'blog',
         limit: 1,
         'fields.slug': slug,
