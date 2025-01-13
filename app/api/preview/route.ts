@@ -6,12 +6,12 @@ import * as process from 'node:process'
 export async function GET(request: Request) {
     // Parse query string parameters
     const { searchParams } = new URL(request.url)
-    const secret = searchParams.get('secret')
+    const token = searchParams.get('token')
     const slug = searchParams.get('slug')
 
     // Check the secret and next parameters
     // This secret should only be known to this Route Handler and the CMS
-    if (secret !== process.env.CONTENTFUL_PREVIEW_URL_TOKEN || !slug) {
+    if (token !== process.env.CONTENTFUL_PREVIEW_URL_TOKEN || !slug) {
         return new Response('Invalid token', { status: 401 })
     }
 
