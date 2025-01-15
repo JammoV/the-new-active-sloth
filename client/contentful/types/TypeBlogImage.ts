@@ -4,6 +4,7 @@ export interface TypeBlogImageFields {
     title?: EntryFields.Symbol
     image: Asset
     position:
+        | 'top'
         | 'bottom'
         | 'center'
         | 'left'

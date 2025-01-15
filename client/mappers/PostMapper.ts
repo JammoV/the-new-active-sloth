@@ -1,6 +1,6 @@
 import { BlogPost } from '@/interfaces/BlogPost'
 
-import { TypeBlog } from '@/client/contentful/types'
+import { TypeBlog, TypeBlogImageFields } from '@/client/contentful/types'
 
 export const mapBlogPost = (post: TypeBlog): BlogPost => {
     const fields = post.fields
@@ -13,15 +13,7 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         slug: fields.slug,
         // @ts-ignore
         category: fields.category?.fields?.name || '',
-        image: {
-            title:
-                // @ts-ignore
-                fields.blogImage?.fields?.title || fields.image?.fields?.title,
-            // @ts-ignore
-            position: fields.blogImage?.fields?.position || 'center',
-            // @ts-ignore
-            image: fields.blogImage?.fields?.image || fields.image,
-        },
+        image: fields.blogImage?.fields,
         body: post.fields.body,
     }
 

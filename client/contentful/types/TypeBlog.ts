@@ -1,4 +1,4 @@
-import type { Asset, Entry, EntryFields } from 'contentful'
+import type { Entry, EntryFields } from 'contentful'
 import type { TypeBlogCategory } from './TypeBlogCategory'
 import type { TypeBlogImage } from './TypeBlogImage'
 
@@ -8,7 +8,6 @@ export interface TypeBlogFields {
     category: TypeBlogCategory
     featured?: EntryFields.Boolean
     blogImage?: TypeBlogImage
-    image?: Asset
     intro: EntryFields.Text
     body?: EntryFields.RichText
 }

@@ -7,6 +7,17 @@ const config: Config = {
         './components/**/*.{js,ts,jsx,tsx}',
         './app/**/*.{js,ts,jsx,tsx}',
     ],
+    safelist: [
+        'object-bottom',
+        'object-center',
+        'object-left',
+        'object-left-bottom',
+        'object-left-top',
+        'object-right',
+        'object-right-bottom',
+        'object-right-top',
+        'object-top',
+    ],
     theme: {
         screens: {
             desktop: '1280px',
