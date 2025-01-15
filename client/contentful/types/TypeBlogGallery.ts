@@ -1,4 +1,5 @@
 import type { Asset, Entry, EntryFields } from 'contentful'
+import type { TypeBlogImage } from './TypeBlogImage'
 
 export interface TypeBlogGalleryFields {
     title: EntryFields.Symbol
@@ -7,7 +8,8 @@ export interface TypeBlogGalleryFields {
         | 'In-line (portrait images)'
         | 'Stacked (landscape images)'
         | 'Thumbnails'
-    images: Asset[]
+    images?: Asset[]
+    blogImages?: TypeBlogImage[]
 }
 
 export type TipGallery = {

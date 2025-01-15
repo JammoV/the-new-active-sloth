@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "cf:export": "cf-content-types-generator -s $spadeId -t $token -o client/contentful/types"
+        "cf:export": "cf-content-types-generator -s {space} -t {token} -o client/contentful/types_new"
     },
     "dependencies": {
         "@contentful/rich-text-react-renderer": "^16.0.1",

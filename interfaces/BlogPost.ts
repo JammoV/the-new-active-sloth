@@ -8,6 +8,20 @@ export interface BlogPost {
     slug: string
     category: string
     featured: boolean
-    image: Asset | undefined
+    image?: BlogImage | undefined
     body?: Document
+}
+
+export interface BlogImage {
+    title?: string
+    image: Asset
+    position:
+        | 'bottom'
+        | 'center'
+        | 'left'
+        | 'left-bottom'
+        | 'left-top'
+        | 'right'
+        | 'right-bottom'
+        | 'right-top'
 }

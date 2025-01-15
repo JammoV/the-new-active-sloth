@@ -13,6 +13,7 @@ export const getBlogPostBySlug = async (
     const response = await apiClient.getEntries<TypeBlog>({
         content_type: 'blog',
         limit: 1,
+        include: 3,
         'fields.slug': slug,
     })
 

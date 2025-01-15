@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import { Asset } from 'contentful'
 import ResponsiveImage from '@/atoms/ResponsiveImage'
+import { BlogImage } from '@/interfaces/BlogPost'
 
 const getGalleryDisplayType = (display: string): GalleryDisplay => {
     if (display.startsWith('Carousel')) {
@@ -16,8 +17,8 @@ const getGalleryDisplayType = (display: string): GalleryDisplay => {
 }
 
 interface GalleryProps {
-    images: Asset[]
-    displayType: GalleryDisplay
+    images: BlogImage[]
+    displayType: string
 }
 
 export enum GalleryDisplay {
@@ -30,15 +31,28 @@ export enum GalleryDisplay {
 const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
     const display = getGalleryDisplayType(displayType)
 
+    let errors = 0
+
+    images.forEach((image) => {
+        if (!image.image) {
+            console.log(image)
+            errors++
+        }
+    })
+
+    if (errors > 0) {
+        return <>erros</>
+    }
+
     if (display === GalleryDisplay.INLINE) {
         return (
             <div className="flex flex-row gap-md">
                 {images.map((image) => (
                     <div
                         className="relative w-[388px] aspect-[3/4]"
-                        key={image.sys.id}
+                        key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image} />
+                        <ResponsiveImage image={image.image} />
                     </div>
                 ))}
             </div>
@@ -51,9 +65,9 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                 {images.map((image) => (
                     <div
                         className="relative w-full desktop:w-[800px] aspect-video"
-                        key={image.sys.id}
+                        key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image} />
+                        <ResponsiveImage image={image.image} />
                     </div>
                 ))}
             </div>
@@ -67,14 +81,14 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                     {images.slice(0, 2).map((image) => (
                         <div
                             className="relative w-[388px] aspect-[3/4]"
-                            key={image.sys.id}
+                            key={image.image.sys.id}
                         >
-                            <ResponsiveImage image={image} />
+                            <ResponsiveImage image={image.image} />
                         </div>
                     ))}
                 </div>
                 <div className="relative w-full desktop:w-[800px] aspect-video">
-                    <ResponsiveImage image={images[2]} />
+                    <ResponsiveImage image={images[2].image} />
                 </div>
             </div>
         )
@@ -86,9 +100,9 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                 return (
                     <div
                         className="relative aspect-square w-[250px]"
-                        key={image.sys.id}
+                        key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image} />
+                        <ResponsiveImage image={image.image} />
                     </div>
                 )
             })}

@@ -5,3 +5,4 @@ export type {
 } from './TypeBlogCategory'
 export type { TypeBlogGallery, TypeBlogGalleryFields } from './TypeBlogGallery'
 export type { TypeBlogTip, TypeBlogTipFields } from './TypeBlogTip'
+export type { TypeBlogImage, TypeBlogImageFields } from './TypeBlogImage'

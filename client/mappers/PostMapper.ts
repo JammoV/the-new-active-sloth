@@ -13,7 +13,15 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         slug: fields.slug,
         // @ts-ignore
         category: fields.category?.fields?.name || '',
-        image: post.fields.image,
+        image: {
+            title:
+                // @ts-ignore
+                fields.blogImage?.fields?.title || fields.image?.fields?.title,
+            // @ts-ignore
+            position: fields.blogImage?.fields?.position || 'center',
+            // @ts-ignore
+            image: fields.blogImage?.fields?.image || fields.image,
+        },
         body: post.fields.body,
     }
 

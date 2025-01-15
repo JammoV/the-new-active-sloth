@@ -10,7 +10,7 @@ interface HeroPostProps {
 }
 
 const HeroPost: FC<HeroPostProps> = ({ post }) => {
-    const imageUrl = post.image?.fields?.file?.url
+    const imageUrl = post.image?.image?.fields?.file?.url
 
     return (
         <div
@@ -18,8 +18,8 @@ const HeroPost: FC<HeroPostProps> = ({ post }) => {
         >
             {imageUrl && (
                 <Image
-                    src={'https:' + post.image?.fields?.file?.url}
-                    className="z-0"
+                    src={'https:' + imageUrl}
+                    className={`z-0 object-${post.image?.position}`}
                     alt={post.title}
                     priority={true}
                     quality={70}
