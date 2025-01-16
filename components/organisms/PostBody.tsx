@@ -23,20 +23,23 @@ interface PostBodyProps {
 
 const options = {
     renderNode: {
-        [INLINES.ENTRY_HYPERLINK]: (node: Block | Inline) => {
+        [INLINES.ENTRY_HYPERLINK]: (
+            node: Block | Inline,
+            children: ReactNode[]
+        ) => {
             if (node.data.target.sys.contentType.sys.id === 'blog') {
                 return (
                     <a
                         href={`/posts/${node.data.target.fields.slug}`}
-                        title="Bekijk artikel"
+                        title={`Bekijk mijn artikel: ${node.data.target.fields.title}`}
                         className="text-[#d2916b] font-bold underline underline-offset-4"
                     >
-                        {node.data.target.fields.title}
+                        {children}
                     </a>
                 )
             }
 
-            return <a></a>
+            return <a>{children}</a>
         },
         [BLOCKS.HEADING_1]: (node: Block | Inline) => {
             const textContent = node.content[0] as Text
