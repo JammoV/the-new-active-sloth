@@ -1,4 +1,6 @@
 import Image from 'next/image'
+import { faMap } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { FC } from 'react'
 import { BlogTip } from '@/interfaces/BlogTip'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -71,19 +73,27 @@ const Tip: FC<TipProps> = ({ tip }) => {
                     alt={tipConfig.alt}
                 />
             </div>
-            <div className="flex flex-col gap-xs text-md">
+            <div className="flex flex-col gap-[3px] text-md">
                 <h4 className="font-bold text-primary">{tip.title}</h4>
                 {tip.body && documentToReactComponents(tip.body)}
                 {tip.linkUrl && (
                     <Link
                         href={tip.linkUrl}
-                        className="text-primary hover:underline"
+                        className="flex flex-row items-center gap-xs text-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        {tip.linkUrl.startsWith('https://maps')
-                            ? 'Bekijk op Google Maps'
-                            : 'Meer informatie'}
+                        {tip.linkUrl.startsWith('https://maps') ? (
+                            <>
+                                <FontAwesomeIcon
+                                    className="w-4 mt-[2px] text-primary/40"
+                                    icon={faMap}
+                                />
+                                <span>Bekijk op Google Maps</span>
+                            </>
+                        ) : (
+                            'Meer informatie'
+                        )}
                     </Link>
                 )}
             </div>
