@@ -32,7 +32,7 @@ export default async function Post({
             <Container>
                 <div className="flex flex-col desktop:flex-row gap-xl">
                     <div className="desktop:w-[800px] flex flex-col gap-md">
-                        <div className="flex flex-row items-center gap-xs my-sm desktop:my-md">
+                        <div className="flex flex-col tablet:flex-row tablet:items-center gap-xs my-sm desktop:my-md">
                             <span className="font-noto text-sm desktop:text-primary desktop:text-lg">
                                 Geplaatst op{' '}
                                 {post.publishedAt.toLocaleDateString('nl', {
@@ -43,8 +43,10 @@ export default async function Post({
                             </span>
                             {post.updatedAt && (
                                 <>
-                                    <span>-</span>
-                                    <span className="font-noto text-sm desktop:text-primary/60 desktop:text-lg">
+                                    <span className="hidden tablet:block">
+                                        -
+                                    </span>
+                                    <span className="font-noto text-sm text-primary/60 desktop:text-lg">
                                         bijgewerkt op{' '}
                                         {post.updatedAt.toLocaleDateString(
                                             'nl',
