@@ -1,7 +1,9 @@
 import client, { previewClient } from '@/client/contentful/Client'
 import { BlogPost } from '@/interfaces/BlogPost'
 import { mapBlogPost } from '@/client/mappers/PostMapper'
-import { TypeBlog } from '@/client/contentful/types'
+import { TypeBlog, TypeBlogCategory } from '@/client/contentful/types'
+import { mapBlogCategory } from '@/client/mappers/PostCategoryMapper'
+import { BlogCategory } from '@/interfaces/BlogCategory'
 
 export const getBlogPostBySlug = async (
     slug: string,
@@ -36,6 +38,54 @@ export const getBlogPosts = async (limit = 30): Promise<BlogPost[]> => {
             'fields.featured',
             'fields.category',
         ],
+        order: '-fields.publishedAt',
+        limit,
+    })
+
+    if (!response.items.length) {
+        return []
+    }
+
+    return response.items.map((post) => mapBlogPost(post as TypeBlog))
+}
+
+export const getBlogCategoryBySlug = async (
+    slug: string,
+    preview = false
+): Promise<BlogCategory | null> => {
+    const apiClient = preview ? previewClient : client
+
+    // @ts-ignore
+    const response = await apiClient.getEntries<TypeBlogCategory>({
+        content_type: 'blogCategory',
+        limit: 1,
+        include: 3,
+        'fields.slug': slug,
+    })
+
+    if (!response.items.length) {
+        return null
+    }
+
+    return mapBlogCategory(response.items[0] as TypeBlogCategory)
+}
+
+export const getBlogPostsByCategoryId = async (
+    categoryId: string,
+    limit = 3
+): Promise<BlogPost[]> => {
+    // @ts-ignore
+    const response = await client.getEntries<TypeBlog>({
+        content_type: 'blog',
+        select: [
+            'fields.slug',
+            'fields.title',
+            'fields.publishedAt',
+            'fields.blogImage',
+            'fields.featured',
+            'fields.category',
+        ],
+        'fields.category.sys.id': categoryId,
         order: '-fields.publishedAt',
         limit,
     })

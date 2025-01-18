@@ -3,14 +3,13 @@ import { Document } from '@contentful/rich-text-types'
 
 import {
     TypeBlog,
-    TypeBlogCategoryFields,
     TypeBlogFields,
     TypeBlogImageFields,
 } from '@/client/contentful/types'
+import { mapBlogCategory } from '@/client/mappers/PostCategoryMapper'
 
 export const mapBlogPost = (post: TypeBlog): BlogPost => {
     const fields = post.fields as TypeBlogFields
-    const categoryFields = fields.category?.fields as TypeBlogCategoryFields
     const blogImageFields = fields.blogImage?.fields as TypeBlogImageFields
 
     return {
@@ -21,7 +20,7 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         intro: fields.intro,
         featured: fields.featured ?? false,
         slug: fields.slug,
-        category: categoryFields ? categoryFields.name : '',
+        category: mapBlogCategory(fields.category),
         image: blogImageFields ?? undefined,
         body: fields.body as Document,
     } satisfies BlogPost

@@ -13,11 +13,12 @@ import MobileTableOfContents from '@/molecules/MobileTableOfContents'
 export default async function Post({
     params,
 }: {
-    params: Promise<{ slug: string }>
+    params: Promise<{ postSlug: string }>
 }) {
-    const { slug } = await params
+    const { postSlug } = await params
     const { isEnabled } = await draftMode()
-    const post = await getBlogPostBySlug(slug, isEnabled)
+
+    const post = await getBlogPostBySlug(postSlug, isEnabled)
 
     if (!post || !post.body) {
         return notFound()

@@ -36,7 +36,7 @@ const HeroPostDescription: FC<HeroPostDescriptionProps> = ({
                     'px-sm py-xs desktop:px-lg desktop:py-xs'
                 )}
             >
-                {post.category}
+                {post.category.name}
             </span>
         </div>
     )

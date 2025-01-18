@@ -14,7 +14,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
             <ul>
                 {posts.map((post) => (
                     <li key={post.slug}>
-                        <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
+                        <Link href={`/${post.category.slug}/${post.slug}`}>
                             {post.title}
                         </Link>
                     </li>

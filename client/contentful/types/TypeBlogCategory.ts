@@ -2,6 +2,7 @@ import type { Entry, EntryFields } from 'contentful'
 
 export interface TypeBlogCategoryFields {
     name: EntryFields.Symbol
+    slug: EntryFields.Symbol
 }
 
 export type CategorySkeleton = {

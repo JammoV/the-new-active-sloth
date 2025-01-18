@@ -15,18 +15,27 @@ const Header: FC = () => {
                 </Link>
                 <div className="flex-row gap-xl hidden desktop:flex">
                     <Link
-                        href={'#'}
+                        href={'/azie'}
                         className="font-lato font-black text-lg hover:underline"
                     >
                         Azië
                     </Link>
-                    <Link href={'#'} className="font-lato font-black text-lg">
-                        Amerika
+                    <Link
+                        href={'/midden-amerika'}
+                        className="font-lato font-black text-lg"
+                    >
+                        Midden-Amerika
                     </Link>
-                    <Link href={'#'} className="font-lato font-black text-lg">
+                    <Link
+                        href={'/europa'}
+                        className="font-lato font-black text-lg"
+                    >
                         Europa
                     </Link>
-                    <Link href={'#'} className="font-lato font-black text-lg">
+                    <Link
+                        href={'/overig'}
+                        className="font-lato font-black text-lg"
+                    >
                         Overig
                     </Link>
                 </div>
