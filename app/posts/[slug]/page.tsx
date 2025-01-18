@@ -8,6 +8,7 @@ import Container from '@/atoms/Container'
 import TableOfContents from '@/molecules/TableOfContents'
 import { extractBlogHeaders } from '@/utils/extractBlogHeaders'
 import { draftMode } from 'next/headers'
+import MobileTableOfContents from '@/molecules/MobileTableOfContents'
 
 export default async function Post({
     params,
@@ -30,20 +31,21 @@ export default async function Post({
             <Container>
                 <div className="flex flex-col desktop:flex-row gap-xl">
                     <div className="desktop:w-[800px] flex flex-col gap-md">
-                        <p className="my-md font-noto text-primary text-lg">
+                        <p className="my-sm desktop:my-md font-noto text-sm desktop:text-primary text-lg">
                             Geplaatst op 12 januari 2024
                         </p>
                         {post.intro && (
                             <>
-                                <p className="text-xl leading-relaxed">
+                                <p className="text-[18px] desktop:text-xl leading-relaxed">
                                     {post.intro}
                                 </p>
-                                <hr className="border-primary-light my-md" />
+                                <hr className="hidden desktop:block border-primary-light my-sm desktop:my-md" />
                             </>
                         )}
+                        <MobileTableOfContents headers={contentHeadings} />
                         <PostBody body={post.body} />
                     </div>
-                    <div className="pt-lg flex-grow">
+                    <div className="hidden desktop:pt-lg desktop:flex-grow desktop:block">
                         <TableOfContents headers={contentHeadings} />
                     </div>
                 </div>

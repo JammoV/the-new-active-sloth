@@ -14,21 +14,30 @@ const Heading: FC<HeadingProps> = ({ level, value }) => {
     }
     if (level === 2) {
         return (
-            <h2 className={`text-3xl font-noto`} id={identifier}>
+            <h2
+                className={`text-2xl desktop:text-3xl font-noto -mb-sm tablet:-mb-0`}
+                id={identifier}
+            >
                 {value}
             </h2>
         )
     }
     if (level === 3) {
         return (
-            <h3 className={`text-2xl font-noto`} id={identifier}>
+            <h3
+                className={`text-xl desktop:text-2xl font-noto -mb-sm tablet:-mb-0`}
+                id={identifier}
+            >
                 {value}
             </h3>
         )
     }
     if (level === 4) {
         return (
-            <h4 className={`text-xl font-noto -mb-sm`} id={identifier}>
+            <h4
+                className={`font-bold font-noto desktop:font-medium -mb-xs desktop:text-xl desktop:-mb-sm`}
+                id={identifier}
+            >
                 {value}
             </h4>
         )

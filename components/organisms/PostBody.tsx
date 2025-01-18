@@ -57,9 +57,11 @@ const options = {
             const textContent = node.content[0] as Text
             return <Heading level={4} value={textContent.value} />
         },
-        [BLOCKS.HR]: () => <hr className="border-primary-light my-md" />,
+        [BLOCKS.HR]: () => (
+            <hr className="border-primary-light my-sm desktop:my-md" />
+        ),
         [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: ReactNode[]) => {
-            return <p className="text-lg leading-relaxed">{children}</p>
+            return <p className="desktop:text-lg leading-relaxed">{children}</p>
         },
         [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
             const contentTypeId = node.data.target.sys.contentType?.sys

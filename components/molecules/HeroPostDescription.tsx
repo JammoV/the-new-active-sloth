@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import { BlogPost } from '@/interfaces/BlogPost'
+import { cn } from '@/utils/cn'
 
 interface HeroPostDescriptionProps {
     post: BlogPost
@@ -18,13 +19,23 @@ const HeroPostDescription: FC<HeroPostDescriptionProps> = ({
             }
         >
             <h1
-                className={
-                    'font-noto font-bold text-white text-2xl desktop:text-4xl bg-primary bg-opacity-90 p-sm desktop:py-md desktop:px-lg rounded-t-xl rounded-br-xl'
-                }
+                className={cn(
+                    'font-noto font-bold text-white text-xl desktop:text-4xl',
+                    'bg-primary bg-opacity-90',
+                    'p-sm desktop:py-md desktop:px-lg',
+                    'rounded-t-md rounded-br-md',
+                    'desktop:rounded-t-xl desktop:rounded-br-xl'
+                )}
             >
                 {post.title}
             </h1>
-            <span className="bg-white text-lg px-lg py-xs self-start">
+            <span
+                className={cn(
+                    'bg-white self-start',
+                    'text-sm desktop:text-lg',
+                    'px-sm py-xs desktop:px-lg desktop:py-xs'
+                )}
+            >
                 {post.category}
             </span>
         </div>

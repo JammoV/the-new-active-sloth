@@ -52,7 +52,10 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         className="relative w-[388px] aspect-[3/4]"
                         key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image.image} />
+                        <ResponsiveImage
+                            image={image.image}
+                            sizes="(max-width: 768px) 50vw, 388px"
+                        />
                     </div>
                 ))}
             </div>
@@ -67,7 +70,10 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         className="relative w-full desktop:w-[800px] aspect-video"
                         key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image.image} />
+                        <ResponsiveImage
+                            image={image.image}
+                            sizes="(max-width: 768px) 100vw, 800px"
+                        />
                     </div>
                 ))}
             </div>
@@ -83,12 +89,18 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                             className="relative w-[388px] aspect-[3/4]"
                             key={image.image.sys.id}
                         >
-                            <ResponsiveImage image={image.image} />
+                            <ResponsiveImage
+                                image={image.image}
+                                sizes="(max-width: 768px) 50vw, 388px"
+                            />
                         </div>
                     ))}
                 </div>
                 <div className="relative w-full desktop:w-[800px] aspect-video">
-                    <ResponsiveImage image={images[2].image} />
+                    <ResponsiveImage
+                        image={images[2].image}
+                        sizes="(max-width: 768px) 100vw, 800px"
+                    />
                 </div>
             </div>
         )
@@ -102,7 +114,10 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         className="relative aspect-square w-[250px]"
                         key={image.image.sys.id}
                     >
-                        <ResponsiveImage image={image.image} />
+                        <ResponsiveImage
+                            image={image.image}
+                            sizes="(max-width: 768px) 30vw, 250px"
+                        />
                     </div>
                 )
             })}
