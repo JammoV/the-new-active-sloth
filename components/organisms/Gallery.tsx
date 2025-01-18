@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Asset } from 'contentful'
+
 import ResponsiveImage from '@/atoms/ResponsiveImage'
 import { BlogImage } from '@/interfaces/BlogPost'
 
@@ -31,19 +31,6 @@ export enum GalleryDisplay {
 const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
     const display = getGalleryDisplayType(displayType)
 
-    let errors = 0
-
-    images.forEach((image) => {
-        if (!image.image) {
-            console.log(image)
-            errors++
-        }
-    })
-
-    if (errors > 0) {
-        return <>erros</>
-    }
-
     if (display === GalleryDisplay.INLINE) {
         return (
             <div className="flex flex-row gap-md">
@@ -53,7 +40,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         key={image.image.sys.id}
                     >
                         <ResponsiveImage
-                            image={image.image}
+                            image={image}
                             sizes="(max-width: 768px) 50vw, 388px"
                         />
                     </div>
@@ -71,7 +58,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         key={image.image.sys.id}
                     >
                         <ResponsiveImage
-                            image={image.image}
+                            image={image}
                             sizes="(max-width: 768px) 100vw, 800px"
                         />
                     </div>
@@ -90,7 +77,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                             key={image.image.sys.id}
                         >
                             <ResponsiveImage
-                                image={image.image}
+                                image={image}
                                 sizes="(max-width: 768px) 50vw, 388px"
                             />
                         </div>
@@ -98,7 +85,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                 </div>
                 <div className="relative w-full desktop:w-[800px] aspect-video">
                     <ResponsiveImage
-                        image={images[2].image}
+                        image={images[2]}
                         sizes="(max-width: 768px) 100vw, 800px"
                     />
                 </div>
@@ -115,7 +102,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         key={image.image.sys.id}
                     >
                         <ResponsiveImage
-                            image={image.image}
+                            image={image}
                             sizes="(max-width: 768px) 30vw, 250px"
                         />
                     </div>

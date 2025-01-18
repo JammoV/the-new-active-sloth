@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import type { FC } from 'react'
-import { BlogPost } from '@/interfaces/BlogPost'
+import { BlogImage, BlogPost } from '@/interfaces/BlogPost'
 import ResponsiveImage from '@/atoms/ResponsiveImage'
 
 interface PostTileProps {
@@ -11,7 +11,7 @@ const PostTile: FC<PostTileProps> = ({ post }) => (
     <div className="relative aspect-video rounded-xl">
         {post.image && (
             <ResponsiveImage
-                image={post.image.image}
+                image={post.image as BlogImage}
                 className="rounded-xl"
                 sizes="(max-width: 768px) 100vw, 250px"
             />

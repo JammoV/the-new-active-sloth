@@ -1,9 +1,11 @@
 import type { FC } from 'react'
-import { Asset } from 'contentful'
+
 import Image from 'next/image'
+import { BlogImage } from '@/interfaces/BlogPost'
+import { cn } from '@/utils/cn'
 
 interface ResponsiveImageProps {
-    image: Asset
+    image: BlogImage
     className?: string
     sizes?: string
 }
@@ -13,7 +15,7 @@ const ResponsiveImage: FC<ResponsiveImageProps> = ({
     className,
     sizes,
 }) => {
-    if (!image.fields?.file?.url) {
+    if (!image.image.fields?.file?.url) {
         return (
             <div className="w-full h-full bg-gray-200 flex justify-center items-center">
                 <span className="text-sm">
@@ -25,17 +27,17 @@ const ResponsiveImage: FC<ResponsiveImageProps> = ({
 
     return (
         <Image
-            alt={(image.fields?.title as string) || ''}
+            alt={(image.image.fields?.title as string) || ''}
             quality={100}
             fill
             style={{
                 objectFit: 'cover',
             }}
-            className={className}
+            className={cn(`object-${image.position}`, className)}
             sizes={sizes}
             src={
-                image.fields?.file?.url
-                    ? (('https:' + image.fields?.file?.url) as string)
+                image.image.fields?.file?.url
+                    ? (('https:' + image.image.fields?.file?.url) as string)
                     : ''
             }
         />
