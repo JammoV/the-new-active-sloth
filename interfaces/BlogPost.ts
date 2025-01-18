@@ -1,14 +1,17 @@
 import { Document } from '@contentful/rich-text-types'
 import { Asset } from 'contentful'
+import { TypeBlogImageFields } from '@/client/contentful/types'
 
 export interface BlogPost {
     id: string
     title: string
+    publishedAt: Date
+    updatedAt?: Date
     intro: string
     slug: string
     category: string
     featured: boolean
-    image?: BlogImage | undefined
+    image?: TypeBlogImageFields | undefined
     body?: Document
 }
 

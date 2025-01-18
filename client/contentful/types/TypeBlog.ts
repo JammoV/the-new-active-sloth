@@ -5,6 +5,8 @@ import type { TypeBlogImage } from './TypeBlogImage'
 export interface TypeBlogFields {
     title: EntryFields.Symbol
     slug: EntryFields.Symbol
+    publishedAt: EntryFields.Date
+    updatedAt?: EntryFields.Date
     category: TypeBlogCategory
     featured?: EntryFields.Boolean
     blogImage?: TypeBlogImage

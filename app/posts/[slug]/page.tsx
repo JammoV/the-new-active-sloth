@@ -31,9 +31,32 @@ export default async function Post({
             <Container>
                 <div className="flex flex-col desktop:flex-row gap-xl">
                     <div className="desktop:w-[800px] flex flex-col gap-md">
-                        <p className="my-sm desktop:my-md font-noto text-sm desktop:text-primary text-lg">
-                            Geplaatst op 12 januari 2024
-                        </p>
+                        <div className="flex flex-row items-center gap-xs my-sm desktop:my-md">
+                            <span className="font-noto text-sm desktop:text-primary desktop:text-lg">
+                                Geplaatst op{' '}
+                                {post.publishedAt.toLocaleDateString('nl', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                })}
+                            </span>
+                            {post.updatedAt && (
+                                <>
+                                    <span>-</span>
+                                    <span className="font-noto text-sm desktop:text-primary/60 desktop:text-lg">
+                                        bijgewerkt op{' '}
+                                        {post.updatedAt.toLocaleDateString(
+                                            'nl',
+                                            {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                            }
+                                        )}
+                                    </span>
+                                </>
+                            )}
+                        </div>
                         {post.intro && (
                             <>
                                 <p className="text-[18px] desktop:text-xl leading-relaxed">

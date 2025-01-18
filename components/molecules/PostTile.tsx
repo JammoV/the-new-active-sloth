@@ -16,13 +16,13 @@ const PostTile: FC<PostTileProps> = ({ post }) => (
                     <h3 className="md:text-xl font-fira font-bold md:py-2 pt-0 drop-shadow-md">
                         {post.title}
                     </h3>
-                    {/*<span className="hidden md:block md:text-xl drop-shadow-md">*/}
-                    {/*    {new Date(post.publishedAt).toLocaleDateString('nl', {*/}
-                    {/*        year: 'numeric',*/}
-                    {/*        month: 'long',*/}
-                    {/*        day: 'numeric',*/}
-                    {/*    })}*/}
-                    {/*</span>*/}
+                    <span className="hidden md:block md:text-xl drop-shadow-md">
+                        {new Date(post.publishedAt).toLocaleDateString('nl', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                        })}
+                    </span>
                 </div>
             </div>
         </Link>

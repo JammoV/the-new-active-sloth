@@ -31,10 +31,12 @@ export const getBlogPosts = async (limit = 30): Promise<BlogPost[]> => {
         select: [
             'fields.slug',
             'fields.title',
+            'fields.publishedAt',
             'fields.blogImage',
             'fields.featured',
             'fields.category',
         ],
+        order: '-fields.publishedAt',
         limit,
     })
 
