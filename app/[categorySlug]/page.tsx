@@ -3,8 +3,8 @@ import {
     getBlogCategoryBySlug,
     getBlogPostsByCategoryId,
 } from '@/client/contentful/BlogApi'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import PostTile from '@/molecules/PostTile'
 
 export default async function CategoryPage({
     params,
@@ -23,16 +23,10 @@ export default async function CategoryPage({
 
     return (
         <Container>
-            <div className="flex flex-row gap-8 my-4">
-                <ul>
-                    {posts.map((post) => (
-                        <li key={post.slug}>
-                            <Link href={`/${categorySlug}/${post.slug}`}>
-                                {post.title}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
+            <div className="my-lg grid gap-sm grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 ">
+                {posts.map((post) => (
+                    <PostTile key={post.id} post={post} />
+                ))}
             </div>
         </Container>
     )

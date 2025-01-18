@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { getBlogPosts } from '@/client/contentful/BlogApi'
-import Link from 'next/link'
+import PostTile from '@/molecules/PostTile'
 
 const HomepageRecentPosts = async (): Promise<ReactElement> => {
     const posts = await getBlogPosts()
@@ -10,16 +10,10 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
     }
 
     return (
-        <div className="flex flex-row gap-8 my-4">
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.slug}>
-                        <Link href={`/${post.category.slug}/${post.slug}`}>
-                            {post.title}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
+        <div className="my-sm grid gap-sm grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 ">
+            {posts.map((post) => (
+                <PostTile key={post.id} post={post} />
+            ))}
         </div>
     )
 }

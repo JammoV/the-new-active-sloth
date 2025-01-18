@@ -13,7 +13,7 @@ const PostTile: FC<PostTileProps> = ({ post }) => (
             <ResponsiveImage
                 image={post.image as BlogImage}
                 className="rounded-xl"
-                sizes="(max-width: 768px) 100vw, 250px"
+                sizes="(max-width: 768px) 100vw, 360px"
             />
         )}
         <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
