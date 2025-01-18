@@ -9,6 +9,8 @@ import TableOfContents from '@/molecules/TableOfContents'
 import { extractBlogHeaders } from '@/utils/extractBlogHeaders'
 import { draftMode } from 'next/headers'
 import MobileTableOfContents from '@/molecules/MobileTableOfContents'
+import PostDates from '@/molecules/PostDates'
+import PostSidebarTiles from '@/molecules/PostSidebarTiles'
 
 export default async function Post({
     params,
@@ -30,36 +32,12 @@ export default async function Post({
         <article>
             <HeroPost post={post} />
             <Container>
-                <div className="flex flex-col desktop:flex-row gap-xl">
+                <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
                     <div className="desktop:w-[800px] flex flex-col gap-md">
-                        <div className="flex flex-col tablet:flex-row tablet:items-center gap-xs my-sm desktop:my-md">
-                            <span className="font-noto text-sm desktop:text-primary desktop:text-lg">
-                                Geplaatst op{' '}
-                                {post.publishedAt.toLocaleDateString('nl', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                })}
-                            </span>
-                            {post.updatedAt && (
-                                <>
-                                    <span className="hidden tablet:block">
-                                        -
-                                    </span>
-                                    <span className="font-noto text-sm text-primary/60 desktop:text-lg">
-                                        bijgewerkt op{' '}
-                                        {post.updatedAt.toLocaleDateString(
-                                            'nl',
-                                            {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric',
-                                            }
-                                        )}
-                                    </span>
-                                </>
-                            )}
-                        </div>
+                        <PostDates
+                            publishedAt={post.publishedAt}
+                            updatedAt={post.updatedAt}
+                        />
                         {post.intro && (
                             <>
                                 <p className="text-[18px] desktop:text-xl leading-relaxed">
@@ -71,8 +49,12 @@ export default async function Post({
                         <MobileTableOfContents headers={contentHeadings} />
                         <PostBody body={post.body} />
                     </div>
-                    <div className="hidden desktop:pt-lg desktop:flex-grow desktop:block">
+                    <div className="flex flex-col flex-grow gap-lg pt-md desktop:border-t-none desktop:pt-lg border-t border-t-primary-light">
                         <TableOfContents headers={contentHeadings} />
+                        <PostSidebarTiles
+                            postId={post.id}
+                            categoryId={post.category.id}
+                        />
                     </div>
                 </div>
             </Container>

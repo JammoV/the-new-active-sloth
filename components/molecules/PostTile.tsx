@@ -8,10 +8,16 @@ interface PostTileProps {
 }
 
 const PostTile: FC<PostTileProps> = ({ post }) => (
-    <div className="relative h-[400px] w-[350px] rounded-2xl">
-        {/*{post.image && <ResponsiveImage image={post.image} />}*/}
+    <div className="relative aspect-video rounded-xl">
+        {post.image && (
+            <ResponsiveImage
+                image={post.image.image}
+                className="rounded-xl"
+                sizes="(max-width: 768px) 100vw, 250px"
+            />
+        )}
         <Link href="/posts/[slug]" as={`/posts/${post.slug}`}>
-            <div className="bg-gradient-to-t from-black/80 w-full h-full absolute z-20 top-0 text-white hover:from-black/90 hover:cursor-pointer rounded-2xl">
+            <div className="bg-gradient-to-t from-black/60 w-full h-full absolute z-20 top-0 text-white hover:from-black/70 hover:cursor-pointer rounded-2xl">
                 <div className="text-white absolute bottom-0 p-4">
                     <h3 className="md:text-xl font-fira font-bold md:py-2 pt-0 drop-shadow-md">
                         {post.title}

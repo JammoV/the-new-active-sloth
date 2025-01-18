@@ -72,7 +72,8 @@ export const getBlogCategoryBySlug = async (
 
 export const getBlogPostsByCategoryId = async (
     categoryId: string,
-    limit = 3
+    limit = 3,
+    postIdToExclude?: string
 ): Promise<BlogPost[]> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
@@ -86,6 +87,7 @@ export const getBlogPostsByCategoryId = async (
             'fields.category',
         ],
         'fields.category.sys.id': categoryId,
+        'sys.id[ne]': postIdToExclude,
         order: '-fields.publishedAt',
         limit,
     })

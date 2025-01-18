@@ -4,10 +4,15 @@ import Image from 'next/image'
 
 interface ResponsiveImageProps {
     image: Asset
+    className?: string
     sizes?: string
 }
 
-const ResponsiveImage: FC<ResponsiveImageProps> = ({ image, sizes }) => {
+const ResponsiveImage: FC<ResponsiveImageProps> = ({
+    image,
+    className,
+    sizes,
+}) => {
     if (!image.fields?.file?.url) {
         return (
             <div className="w-full h-full bg-gray-200 flex justify-center items-center">
@@ -26,6 +31,7 @@ const ResponsiveImage: FC<ResponsiveImageProps> = ({ image, sizes }) => {
             style={{
                 objectFit: 'cover',
             }}
+            className={className}
             sizes={sizes}
             src={
                 image.fields?.file?.url

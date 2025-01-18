@@ -13,7 +13,7 @@ interface TableOfContentsProps {
 
 const TableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
     return (
-        <div className="flex flex-col  bg-primary-lighter rounded-xl sticky top-4 py-md px-lg">
+        <div className="hidden desktop:flex flex-col  bg-primary-lighter rounded-xl py-md px-lg">
             <span className="font-noto text-[22px] text-primary mb-sm">
                 Inhoud
             </span>
