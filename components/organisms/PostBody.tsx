@@ -16,6 +16,7 @@ import Tip from '@/atoms/Tip'
 import { BlogImage } from '@/interfaces/BlogPost'
 import { Asset } from 'contentful'
 import { TypeBlogGalleryFields, TypeBlogImage } from '@/client/contentful/types'
+import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
 
 interface PostBodyProps {
     body: Document
@@ -68,28 +69,16 @@ const options = {
                 .id as string
 
             if (contentTypeId === 'blogGallery') {
-                const { display, images, blogImages } = node.data.target
+                const { display, blogImages } = node.data.target
                     .fields as TypeBlogGalleryFields
 
-                let galleryImages: BlogImage[] = []
+                if (blogImages && blogImages?.length > 0) {
+                    const images = blogImages.map((image) =>
+                        mapBlogImage(image)
+                    )
 
-                if (images && images.length > 0) {
-                    images.map((image: Asset) => {
-                        galleryImages.push({
-                            title: (image.fields.title as string) || '',
-                            image: image,
-                            position: 'center',
-                        })
-                    })
+                    return <Gallery images={images} displayType={display} />
                 }
-
-                if (blogImages && blogImages.length > 0) {
-                    blogImages.map((image: TypeBlogImage) => {
-                        galleryImages.push(image.fields as BlogImage)
-                    })
-                }
-
-                return <Gallery images={galleryImages} displayType={display} />
             }
 
             if (contentTypeId === 'blogTip') {

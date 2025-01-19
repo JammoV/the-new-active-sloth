@@ -8,13 +8,12 @@ export interface TypeBlogGalleryFields {
         | 'In-line (portrait images)'
         | 'Stacked (landscape images)'
         | 'Thumbnails'
-    images?: Asset[]
     blogImages?: TypeBlogImage[]
 }
 
-export type TipGallery = {
+export type BlogGallerySkeleton = {
     contentTypeId: 'blogGallery'
     fields: TypeBlogGalleryFields
 }
 
-export type TypeBlogGallery = Entry<TipGallery>
+export type TypeBlogGallery = Entry<BlogGallerySkeleton>

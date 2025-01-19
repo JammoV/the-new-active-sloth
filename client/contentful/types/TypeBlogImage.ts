@@ -3,6 +3,7 @@ import type { Asset, Entry, EntryFields } from 'contentful'
 export interface TypeBlogImageFields {
     title?: EntryFields.Symbol
     image: Asset
+    featured?: EntryFields.Boolean
     position:
         | 'top'
         | 'bottom'

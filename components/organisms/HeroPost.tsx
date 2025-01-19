@@ -1,39 +1,18 @@
-import Image from 'next/image'
 import type { FC } from 'react'
 
-import Container from '@/atoms/Container'
 import HeroPostDescription from '@/molecules/HeroPostDescription'
 import { BlogPost } from '@/interfaces/BlogPost'
+import HeroWrapper from '@/organisms/HeroWrapper'
 
 interface HeroPostProps {
     post: BlogPost
 }
 
 const HeroPost: FC<HeroPostProps> = ({ post }) => {
-    const imageUrl = post.image?.image?.fields?.file?.url
-
     return (
-        <div
-            className={`relative mobile:h-[336px] desktop:h-[calc(100vh-72px)] bg-primary-light`}
-        >
-            {imageUrl && (
-                <Image
-                    src={'https:' + imageUrl}
-                    className={`z-0 object-${post.image?.position}`}
-                    alt={post.title}
-                    priority={true}
-                    quality={70}
-                    fill
-                    style={{
-                        objectFit: 'cover',
-                    }}
-                />
-            )}
-
-            <Container>
-                <HeroPostDescription post={post} withLink={false} />
-            </Container>
-        </div>
+        <HeroWrapper image={post.image ?? null}>
+            <HeroPostDescription post={post} />
+        </HeroWrapper>
     )
 }
 

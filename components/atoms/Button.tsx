@@ -13,13 +13,13 @@ type ButtonMap = {
 
 const buttonMap: ButtonMap = {
     ['sm']: {
-        class: 'text-sm py-1 px-4',
+        class: 'font-bold text-sm py-1 px-4',
     },
     ['md']: {
-        class: 'text-sm py-2 px-5',
+        class: 'font-bold text-md py-2 px-5',
     },
     ['lg']: {
-        class: 'font-medium text-lg py-3 px-10',
+        class: 'font-bold text-lg py-3 px-10',
     },
 }
 
@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({ text, size = 'lg' }) => {
 
     return (
         <span
-            className={`bg-green-primary mx-auto md:mx-0 text-white rounded-full cursor-pointer ${buttonStyling.class}`}
+            className={`bg-cta/80 hover:bg-cta mx-auto md:mx-0 text-white rounded-full cursor-pointer ${buttonStyling.class}`}
         >
             {text}
         </span>

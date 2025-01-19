@@ -1,6 +1,5 @@
 import { Document } from '@contentful/rich-text-types'
 import { Asset } from 'contentful'
-import { TypeBlogImageFields } from '@/client/contentful/types'
 import { BlogCategory } from '@/interfaces/BlogCategory'
 
 export interface BlogPost {
@@ -12,14 +11,17 @@ export interface BlogPost {
     slug: string
     category: BlogCategory
     featured: boolean
-    image?: TypeBlogImageFields | undefined
+    image?: BlogImage | undefined
     body?: Document
 }
 
 export interface BlogImage {
+    id: string
     title?: string
+    featured: boolean
     image: Asset
     position:
+        | 'top'
         | 'bottom'
         | 'center'
         | 'left'

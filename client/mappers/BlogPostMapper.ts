@@ -6,11 +6,11 @@ import {
     TypeBlogFields,
     TypeBlogImageFields,
 } from '@/client/contentful/types'
-import { mapBlogCategory } from '@/client/mappers/PostCategoryMapper'
+import { mapBlogCategory } from '@/client/mappers/BlogCategoryMapper'
+import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
 
 export const mapBlogPost = (post: TypeBlog): BlogPost => {
     const fields = post.fields as TypeBlogFields
-    const blogImageFields = fields.blogImage?.fields as TypeBlogImageFields
 
     return {
         id: post.sys.id,
@@ -21,7 +21,7 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         featured: fields.featured ?? false,
         slug: fields.slug,
         category: mapBlogCategory(fields.category),
-        image: blogImageFields ?? undefined,
+        image: fields.blogImage ? mapBlogImage(fields.blogImage) : undefined,
         body: fields.body as Document,
     } satisfies BlogPost
 }
