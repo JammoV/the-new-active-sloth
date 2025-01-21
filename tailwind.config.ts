@@ -70,6 +70,7 @@ const config: Config = {
             fira: ['var(--font-fira)', ...fontFamily.sans], // logo
             noto: ['var(--font-noto)', ...fontFamily.serif], // headers
             lato: ['var(--font-lato)', ...fontFamily.sans], // body
+            caveat: ['var(--font-caveat)', ...fontFamily.serif], // home hero
         },
     },
     plugins: [],

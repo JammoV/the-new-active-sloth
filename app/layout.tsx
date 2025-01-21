@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Lato, Fira_Sans_Condensed, Noto_Serif } from 'next/font/google'
+import { Lato, Fira_Sans_Condensed, Noto_Serif, Caveat } from 'next/font/google'
 import './globals.css'
 import React from 'react'
 
@@ -20,11 +20,19 @@ const noto = Noto_Serif({
     display: 'swap',
     variable: '--font-noto',
 })
+
 const fira = Fira_Sans_Condensed({
     subsets: ['latin'],
     weight: ['800'],
     display: 'swap',
     variable: '--font-fira',
+})
+
+const caveat = Caveat({
+    subsets: ['latin'],
+    weight: ['700'],
+    display: 'swap',
+    variable: '--font-caveat',
 })
 
 export const metadata: Metadata = {
@@ -40,7 +48,7 @@ export default function RootLayout({
     return (
         <html lang="nl">
             <body
-                className={`${lato.variable} ${noto.variable} ${fira.variable}`}
+                className={`${lato.variable} ${noto.variable} ${fira.variable} ${caveat.variable}`}
             >
                 <div className="min-h-screen flex flex-col">
                     <Header />

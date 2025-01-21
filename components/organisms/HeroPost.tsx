@@ -10,9 +10,13 @@ interface HeroPostProps {
 
 const HeroPost: FC<HeroPostProps> = ({ post }) => {
     return (
-        <HeroWrapper image={post.image ?? null}>
-            <HeroPostDescription post={post} />
-        </HeroWrapper>
+        <div
+            className={`desktop:h-[calc(100vh-72px)] h-[336px] desktop:px-sm pb-sm  bg-white`}
+        >
+            <HeroWrapper image={post.image ?? null}>
+                <HeroPostDescription post={post} />
+            </HeroWrapper>
+        </div>
     )
 }
 

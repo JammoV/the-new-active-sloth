@@ -12,26 +12,22 @@ const HeroWrapper: FC<HeroWrapperProps> = async ({ image, children }) => {
     const rounded = 'desktop:rounded-xl'
 
     return (
-        <div
-            className={`desktop:h-[calc(100vh-72px)] h-[336px] desktop:px-sm pb-sm  bg-white`}
-        >
-            <div className={`relative bg-primary ${rounded} h-full w-full `}>
-                {image && (
-                    <Image
-                        src={'https:' + image.image.fields.file?.url}
-                        className={`z-0 ${rounded} object-${image?.position}`}
-                        alt={image.title ?? 'The Active Sloth'}
-                        priority={true}
-                        quality={100}
-                        fill
-                        sizes="100vw"
-                        style={{
-                            objectFit: 'cover',
-                        }}
-                    />
-                )}
-                <Container>{children}</Container>
-            </div>
+        <div className={`relative bg-primary ${rounded} h-full w-full `}>
+            {image && (
+                <Image
+                    src={'https:' + image.image.fields.file?.url}
+                    className={`z-0 ${rounded} object-${image?.position}`}
+                    alt={image.title ?? 'The Active Sloth'}
+                    priority={true}
+                    quality={100}
+                    fill
+                    sizes="100vw"
+                    style={{
+                        objectFit: 'cover',
+                    }}
+                />
+            )}
+            <Container>{children}</Container>
         </div>
     )
 }
