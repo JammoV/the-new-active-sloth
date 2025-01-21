@@ -64,6 +64,17 @@ const options = {
         [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: ReactNode[]) => {
             return <p className="desktop:text-lg leading-relaxed">{children}</p>
         },
+        [BLOCKS.UL_LIST]: (node: Block | Inline, children: ReactNode[]) => {
+            return <ul className="list-disc pl-md">{children}</ul>
+        },
+        [BLOCKS.OL_LIST]: (node: Block | Inline, children: ReactNode[]) => {
+            return <ol className="list-decimal pl-md">{children}</ol>
+        },
+        [BLOCKS.LIST_ITEM]: (node: Block | Inline, children: ReactNode[]) => {
+            return (
+                <li className="desktop:text-lg leading-relaxed">{children}</li>
+            )
+        },
         [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
             const contentTypeId = node.data.target.sys.contentType?.sys
                 .id as string
