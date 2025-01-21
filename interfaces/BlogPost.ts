@@ -11,7 +11,7 @@ export interface BlogPost {
     slug: string
     category: BlogCategory
     featured: boolean
-    image?: BlogImage | undefined
+    image: BlogImage
     body?: Document
 }
 

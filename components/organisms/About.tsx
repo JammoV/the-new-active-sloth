@@ -1,23 +1,34 @@
 import Image from 'next/image'
 import type { FC } from 'react'
-import aboutImg from '@/public/images/the-active-sloth.png'
+import aboutImg from '@/public/images/Eline.png'
 
 const About: FC = () => {
     return (
-        <div className="py-24">
-            <div className="bg-green p-8 mx-auto w-1/2">
-                <div className="text-center text-white text-2xl font-fira">
-                    <span className="font-light">Wie is</span>{' '}
-                    <span className="font-semibold">The Active Sloth?</span>
-                </div>
-                <div className="flex flex-row items-center pt-4">
-                    <div className="flex-1 p-6">
-                        <Image src={aboutImg} alt="Wie is The Active Sloth?" />
+        <div className="py-lg tablet:py-xl">
+            <div className="mx-auto desktop:w-2/3">
+                <div className="flex flex-col tablet:flex-row items-center gap-lg">
+                    <div className="w-1/2 tablet:w-autotablet:flex-1">
+                        <Image
+                            src={aboutImg}
+                            width={280}
+                            className="ml-auto border-[10px] -rotate-6 border-white shadow"
+                            alt="Eline, de verhalenschrijfster van The Active Sloth"
+                        />
                     </div>
-                    <div className="flex-1 p-6">
-                        Hoi! Ik ben Eline, de verhalenschrijfster achter deze
-                        reiswebsite. Je vindt hier van alles wat met reizen te
-                        maken heef: van stedentrips tot verre reizen.
+                    <div className="tablet:flex-1 flex flex-col gap-sm">
+                        <div className="px-md tablet:px-0 font-noto text-3xl">
+                            <span className="font-bold">Hoi!</span> Ik ben Eline
+                        </div>
+                        <p className="px-md tablet:px-0 text-lg">
+                            Welkom op mijn persoonlijke travel blog{' '}
+                            <b>The Active Sloth!</b>
+                        </p>
+                        <p className="px-md tablet:px-0 text-lg">
+                            Of je nu houdt van actief avontuur of juist van
+                            ontspannen momenten, hier vind je tips, verhalen en
+                            inspiratie om het beste van beide werelden te
+                            combineren.
+                        </p>
                     </div>
                 </div>
             </div>

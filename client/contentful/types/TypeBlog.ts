@@ -9,7 +9,7 @@ export interface TypeBlogFields {
     updatedAt?: EntryFields.Date
     category: TypeBlogCategory
     featured?: EntryFields.Boolean
-    blogImage?: TypeBlogImage
+    blogImage: TypeBlogImage
     intro: EntryFields.Text
     body?: EntryFields.RichText
 }

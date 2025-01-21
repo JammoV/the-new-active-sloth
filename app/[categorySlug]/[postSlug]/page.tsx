@@ -22,6 +22,8 @@ export default async function Post({
 
     const post = await getBlogPostBySlug(postSlug, isEnabled)
 
+    /* @TODO Prevent access when incorrect category path is used */
+
     if (!post || !post.body) {
         return notFound()
     }

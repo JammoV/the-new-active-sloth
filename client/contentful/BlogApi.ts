@@ -71,6 +71,7 @@ export const getBlogPosts = async (limit = 30): Promise<BlogPost[]> => {
         select: [
             'fields.slug',
             'fields.title',
+            'fields.intro',
             'fields.publishedAt',
             'fields.blogImage',
             'fields.featured',

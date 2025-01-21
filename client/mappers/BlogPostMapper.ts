@@ -21,7 +21,7 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         featured: fields.featured ?? false,
         slug: fields.slug,
         category: mapBlogCategory(fields.category),
-        image: fields.blogImage ? mapBlogImage(fields.blogImage) : undefined,
+        image: mapBlogImage(fields.blogImage),
         body: fields.body as Document,
     } satisfies BlogPost
 }
