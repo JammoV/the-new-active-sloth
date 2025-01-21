@@ -9,7 +9,7 @@ const Header: FC = () => {
             <div className="flex flex-row justify-between items-center py-sm">
                 <Link
                     href={'/'}
-                    className="font-fira font-extrabold text-xl desktop:text-[32px] text-primary"
+                    className="font-fira font-extrabold text-xl desktop:text-[32px] text-black"
                 >
                     The Active Sloth
                 </Link>

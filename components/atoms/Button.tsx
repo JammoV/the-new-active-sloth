@@ -28,7 +28,7 @@ const Button: FC<ButtonProps> = ({ text, size = 'lg' }) => {
 
     return (
         <span
-            className={`bg-cta/80 hover:bg-cta mx-auto md:mx-0 text-white rounded-full cursor-pointer ${buttonStyling.class}`}
+            className={`bg-secondary/80 hover:bg-secondary mx-auto md:mx-0 text-white rounded-full cursor-pointer ${buttonStyling.class}`}
         >
             {text}
         </span>

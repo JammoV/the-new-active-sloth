@@ -36,13 +36,17 @@ const config: Config = {
             },
             colors: {
                 primary: {
-                    DEFAULT: '#0C392D',
+                    DEFAULT: '#686F3C',
                     grey: '#99B4B2',
-                    light: '#C8E4DC',
-                    lighter: '#F3F8F7',
+                    light: '#C3C6B3',
+                    lighter: '#EAEBE4',
+                },
+                secondary: {
+                    DEFAULT: '#D47C56',
+                    light: '#F6C7B3',
                 },
                 cta: {
-                    DEFAULT: '#FE5328',
+                    DEFAULT: '#E7AE45',
                 },
                 link: {
                     DEFAULT: '#d2916b',

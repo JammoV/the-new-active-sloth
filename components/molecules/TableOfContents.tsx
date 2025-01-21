@@ -14,9 +14,7 @@ interface TableOfContentsProps {
 const TableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
     return (
         <div className="hidden desktop:flex flex-col  bg-primary-lighter rounded-xl py-md px-lg">
-            <span className="font-noto text-[22px] text-primary mb-sm">
-                Inhoud
-            </span>
+            <span className="font-noto text-[22px] mb-sm">Inhoudsopgave</span>
             {headers.map((header) => (
                 <Link
                     href={`#${header.identifier}`}

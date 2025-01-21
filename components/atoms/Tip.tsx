@@ -74,12 +74,12 @@ const Tip: FC<TipProps> = ({ tip }) => {
                 />
             </div>
             <div className="flex flex-col gap-[3px] text-md">
-                <h4 className="font-bold text-primary">{tip.title}</h4>
+                <h4 className="font-bold ">{tip.title}</h4>
                 {tip.body && documentToReactComponents(tip.body)}
                 {tip.linkUrl && (
                     <Link
                         href={tip.linkUrl}
-                        className="flex flex-row items-center gap-xs text-primary hover:underline"
+                        className="flex flex-row items-center gap-xs text-secondary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

@@ -45,7 +45,7 @@ export default async function Post({
                                 <p className="text-[18px] desktop:text-xl leading-relaxed">
                                     {post.intro}
                                 </p>
-                                <hr className="hidden desktop:block border-primary-light my-sm desktop:my-md" />
+                                <hr className="hidden desktop:block border-secondary-light my-sm desktop:my-md" />
                             </>
                         )}
                         <MobileTableOfContents headers={contentHeadings} />

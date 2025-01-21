@@ -59,7 +59,7 @@ const options = {
             return <Heading level={4} value={textContent.value} />
         },
         [BLOCKS.HR]: () => (
-            <hr className="border-primary-light my-sm desktop:my-md" />
+            <hr className="border-secondary-light my-sm desktop:my-md" />
         ),
         [BLOCKS.PARAGRAPH]: (node: Block | Inline, children: ReactNode[]) => {
             return <p className="desktop:text-lg leading-relaxed">{children}</p>
