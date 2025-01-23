@@ -5,6 +5,8 @@ import type { FC } from 'react'
 import { BlogTip } from '@/interfaces/BlogTip'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Link from 'next/link'
+import ResponsiveImage from '@/atoms/ResponsiveImage'
+import { cn } from '@/utils/cn'
 
 export enum TipType {
     GENERAL = 'General',
@@ -62,16 +64,27 @@ export interface TipProps {
 
 const Tip: FC<TipProps> = ({ tip }) => {
     const tipConfig = tipMap[tip.category]
+    const tipImageUrl = tip.tipImage?.fields?.image?.fields?.file?.url
 
     return (
         <div className="flex flex-row my-md gap-md">
             <div className={`min-w-[50px]`}>
-                <Image
-                    src={tipConfig.src}
-                    width={tipConfig.width}
-                    height={tipConfig.height}
-                    alt={tipConfig.alt}
-                />
+                {tipImageUrl ? (
+                    <Image
+                        alt={tipConfig.alt}
+                        quality={100}
+                        width={50}
+                        height={60}
+                        src={`https:${tipImageUrl as string}`}
+                    />
+                ) : (
+                    <Image
+                        src={tipConfig.src}
+                        width={tipConfig.width}
+                        height={tipConfig.height}
+                        alt={tipConfig.alt}
+                    />
+                )}
             </div>
             <div className="flex flex-col gap-[3px] text-md">
                 <h4 className="font-bold ">{tip.title}</h4>

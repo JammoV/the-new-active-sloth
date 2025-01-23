@@ -1,4 +1,5 @@
 import type { Entry, EntryFields } from 'contentful'
+import { TypeBlogTipImage } from '@/client/contentful/types/TypeBlogTipImage'
 
 export interface TypeBlogTipFields {
     title: EntryFields.Symbol
@@ -7,6 +8,7 @@ export interface TypeBlogTipFields {
     linkTitle?: EntryFields.Symbol
     linkUrl?: EntryFields.Symbol
     category: 'Accommodation' | 'Activity' | 'Drinks' | 'Food' | 'General'
+    tipImage?: TypeBlogTipImage
 }
 
 export type TipSkeleton = {

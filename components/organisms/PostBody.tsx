@@ -13,9 +13,7 @@ import {
 import Heading from '@/atoms/Heading'
 import Gallery from '@/organisms/Gallery'
 import Tip from '@/atoms/Tip'
-import { BlogImage } from '@/interfaces/BlogPost'
-import { Asset } from 'contentful'
-import { TypeBlogGalleryFields, TypeBlogImage } from '@/client/contentful/types'
+import { TypeBlogGalleryFields } from '@/client/contentful/types'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
 
 interface PostBodyProps {
@@ -93,7 +91,7 @@ const options = {
             }
 
             if (contentTypeId === 'blogTip') {
-                const { title, body, linkTitle, linkUrl, category } =
+                const { title, body, linkTitle, linkUrl, category, tipImage } =
                     node.data.target.fields
 
                 return (
@@ -104,6 +102,7 @@ const options = {
                             linkTitle,
                             linkUrl,
                             category,
+                            tipImage,
                         }}
                     />
                 )
