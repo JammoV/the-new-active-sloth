@@ -64,6 +64,7 @@ export interface TipProps {
 
 const Tip: FC<TipProps> = ({ tip }) => {
     const tipConfig = tipMap[tip.category]
+    // @ts-ignore
     const tipImageUrl = tip.tipImage?.fields?.image?.fields?.file?.url
 
     return (
