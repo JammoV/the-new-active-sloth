@@ -1,25 +1,46 @@
 'use client'
 
 import type { FC } from 'react'
+import Button from '@/atoms/Button'
 
-const ScrollDown: FC = () => {
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { cn } from '@/utils/cn'
+
+type ScrollDownProps = {
+    label: string
+    toPage?: number
+    className?: string
+}
+
+const ScrollDown: FC<ScrollDownProps> = ({ label, toPage = 1, className }) => {
     const scrollDown = () => {
         window.scrollTo({
-            top: window.innerHeight,
+            top: window.innerHeight * toPage,
             behavior: 'smooth',
         })
     }
 
     return (
-        <div className="relative w-[84px] h-[32px]">
-            <button
-                className="absolute z-10 bg-secondary  text-sm w-[84px] h-[32px] rounded-lg text-white"
+        <div className={cn('relative self-start group', className)}>
+            <Button
                 onClick={() => scrollDown()}
+                className="z-10"
+                title="Scroll naar beneden"
             >
-                ONTDEK
-            </button>
-            <div className="absolute  -translate-x-1/2 left-1/2 bottom-[-10px] rotate-45 w-[20px] h-[20px]  border-secondary border-4 rounded-br-md  bg-white" />
-            <div className="absolute  -translate-x-1/2 left-1/2 bottom-[-1px] rotate-45 w-[20px] h-[20px] bg-secondary" />
+                {label}
+            </Button>
+            <FontAwesomeIcon
+                icon={faChevronDown}
+                className={cn(
+                    'absolute w-3 h-3',
+                    'text-white bg-primary',
+                    '-translate-x-1/2 left-1/2 bottom-[-8px]',
+                    'px-xs pb-[2px] rounded-b-md',
+                    'group-hover:bottom-[-9px]'
+                )}
+            />
         </div>
     )
 }

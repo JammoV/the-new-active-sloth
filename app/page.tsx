@@ -9,8 +9,9 @@ export default async function Home() {
     return (
         <>
             <HeroHome />
+
+            <About />
             <Container>
-                <About />
                 <HomepageRecentPosts />
             </Container>
         </>

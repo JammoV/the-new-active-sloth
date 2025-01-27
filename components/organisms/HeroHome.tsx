@@ -9,7 +9,7 @@ const HeroHome: FC = async () => {
 
     return (
         <div
-            className={`h-[calc(100vh-54px)] desktop:h-[calc(100vh-72px)] desktop:px-sm desktop:pb-sm  bg-white`}
+            className={`h-[calc(100vh-54px)] bg-gradient-to-b from-white to-primary-light desktop:h-[calc(100vh-72px)] desktop:px-sm desktop:pb-sm  bg-white`}
         >
             <HeroWrapper image={featuredImage}>
                 <div className="flex flex-col items-center justify-center h-full gap-lg desktop:gap-sm">
@@ -24,7 +24,9 @@ const HeroHome: FC = async () => {
                             Repeat
                         </span>
                     </div>
-                    <ScrollDown />
+                    <div className="mx-auto">
+                        <ScrollDown label="Ontdek" />
+                    </div>
                 </div>
             </HeroWrapper>
         </div>

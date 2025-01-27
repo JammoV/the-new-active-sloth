@@ -35,7 +35,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
                                 <p className="leading-relaxed">{post.intro}</p>
                             </div>
                             <Link href={`/${post.category.name}/${post.slug}`}>
-                                <Button text="Lees artikel" size="md" />
+                                <Button size="md">Lees artikel</Button>
                             </Link>
                         </div>
                     </div>
