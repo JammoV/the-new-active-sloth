@@ -5,6 +5,8 @@ import ResponsiveImage from '@/atoms/ResponsiveImage'
 import Link from 'next/link'
 import Button from '@/atoms/Button'
 import Heading from '@/atoms/Heading'
+import golfImg from '@/public/images/doodle/secondary/golf.png'
+import Image from 'next/image'
 
 const HomepageRecentPosts = async (): Promise<ReactElement> => {
     const posts = await getBlogPosts(3, true)
@@ -18,6 +20,13 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
             <div className="text-center">
                 <Heading level={2} value="Recente artikelen" />
             </div>
+            <Image
+                src={golfImg}
+                width={100}
+                height={10}
+                alt="Golf"
+                className="mx-auto mt-lg tablet:mt-md mb-md"
+            />
             <div className="flex flex-col my-lg gap-lg tablet:gap-md">
                 {posts.map((post) => (
                     <div

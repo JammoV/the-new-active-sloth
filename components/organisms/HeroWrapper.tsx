@@ -9,14 +9,14 @@ interface HeroWrapperProps extends PropsWithChildren {
 }
 
 const HeroWrapper: FC<HeroWrapperProps> = async ({ image, children }) => {
-    const rounded = 'desktop:rounded-xl'
-
     return (
-        <div className={`relative bg-primary ${rounded} h-full w-full `}>
+        <div
+            className={`relative bg-primary desktop:rounded-xl h-full w-full `}
+        >
             {image && (
                 <Image
                     src={'https:' + image.image.fields.file?.url}
-                    className={`z-0 ${rounded} object-${image?.position}`}
+                    className={`z-0 desktop:rounded-xl object-${image?.position}`}
                     alt={image.title ?? 'The Active Sloth'}
                     priority={true}
                     quality={100}

@@ -9,7 +9,7 @@ const HeroHome: FC = async () => {
 
     return (
         <div
-            className={`h-[calc(100dvh-72px)] tablet:min-h-[700px] bg-gradient-to-b from-white to-primary-light desktop:px-sm desktop:pb-sm  bg-white`}
+            className={`h-[calc(100dvh-52px)] tablet:min-h-[700px] bg-linear-to-b from-white to-primary-light desktop:px-sm desktop:pb-sm  bg-white`}
         >
             <HeroWrapper image={featuredImage}>
                 <div className="flex flex-col items-center justify-center h-full gap-lg desktop:gap-sm">

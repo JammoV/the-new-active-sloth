@@ -11,7 +11,7 @@ const Footer: FC = () => {
                 <Container>
                     <div className="flex flex-col-reverse desktop:flex-row">
                         <div className="desktop:w-1/4"></div>
-                        <div className="desktop:flex-grow text-center">
+                        <div className="desktop:grow text-center">
                             <span className="font-fira text-white">
                                 The Active Sloth ©{' '}
                                 {new Date().getFullYear().toString()}

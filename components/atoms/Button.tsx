@@ -15,7 +15,7 @@ const variantStyles = cva(
         'rounded-md',
         'bg-secondary/80 hover:bg-secondary mx-auto md:mx-0 text-white cursor-pointer',
         'transition-colors',
-        'focus:outline-none'
+        'focus:outline-hidden'
     ),
     {
         variants: {

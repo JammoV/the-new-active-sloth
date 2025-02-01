@@ -51,7 +51,7 @@ export default async function Post({
                         <MobileTableOfContents headers={contentHeadings} />
                         <PostBody body={post.body} />
                     </div>
-                    <div className="flex flex-col flex-grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
+                    <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
                         <TableOfContents headers={contentHeadings} />
                         <PostSidebarTiles
                             postId={post.id}

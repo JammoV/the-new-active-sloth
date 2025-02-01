@@ -15,7 +15,7 @@ const About: FC = () => {
                         <Image
                             src={aboutImg}
                             width={400}
-                            className="ml-auto border-[10px]  shadow"
+                            className="ml-auto border-[10px]  shadow-sm"
                             alt="Eline, de verhalenschrijfster van The Active Sloth"
                         />
                     </div>

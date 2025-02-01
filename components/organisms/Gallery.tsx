@@ -36,7 +36,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
             <div className="flex flex-row gap-md">
                 {images.map((image) => (
                     <div
-                        className="relative w-[388px] aspect-[3/4]"
+                        className="relative w-[388px] aspect-3/4"
                         key={image.image.sys.id}
                     >
                         <ResponsiveImage
@@ -73,7 +73,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                 <div className="flex flex-row gap-md">
                     {images.slice(0, 2).map((image) => (
                         <div
-                            className="relative w-[388px] aspect-[3/4]"
+                            className="relative w-[388px] aspect-3/4"
                             key={image.image.sys.id}
                         >
                             <ResponsiveImage

@@ -7,7 +7,7 @@ export interface HamburgerProps {
 }
 
 export const Hamburger: FC<HamburgerProps> = ({ active, onClick }) => {
-    const sharedClass = 'w-full h-1 bg-black rounded absolute transition-all'
+    const sharedClass = 'w-full h-1 bg-black rounded-sm absolute transition-all'
 
     return (
         <div
