@@ -64,7 +64,10 @@ export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
     return mapBlogImage(response.items[0] as TypeBlogImage)
 }
 
-export const getBlogPosts = async (limit = 30): Promise<BlogPost[]> => {
+export const getBlogPosts = async (
+    limit = 30,
+    skipFeatured = false
+): Promise<BlogPost[]> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
         content_type: 'blog',
@@ -77,6 +80,7 @@ export const getBlogPosts = async (limit = 30): Promise<BlogPost[]> => {
             'fields.featured',
             'fields.category',
         ],
+        'fields.featured[ne]': skipFeatured ? true : undefined,
         order: '-fields.publishedAt',
         limit,
     })

@@ -27,6 +27,7 @@ const ScrollDown: FC<ScrollDownProps> = ({ label, toPage = 1, className }) => {
             <Button
                 onClick={() => scrollDown()}
                 className="z-10"
+                variant="secondary"
                 title="Scroll naar beneden"
             >
                 {label}
@@ -35,7 +36,7 @@ const ScrollDown: FC<ScrollDownProps> = ({ label, toPage = 1, className }) => {
                 icon={faChevronDown}
                 className={cn(
                     'absolute w-3 h-3',
-                    'text-white bg-primary',
+                    'text-white bg-secondary',
                     '-translate-x-1/2 left-1/2 bottom-[-8px]',
                     'px-xs pb-[2px] rounded-b-md',
                     'group-hover:bottom-[-9px]'

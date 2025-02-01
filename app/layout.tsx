@@ -5,7 +5,6 @@ import React from 'react'
 
 import Footer from '@/organisms/Footer'
 import Header from '@/organisms/Header'
-import Container from '@/atoms/Container'
 
 const lato = Lato({
     subsets: ['latin'],

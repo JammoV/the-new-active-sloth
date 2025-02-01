@@ -38,11 +38,11 @@ const variantStyles = cva(
                 ),
                 tertiary: cn(
                     'text-white font-bold',
-                    'bg-primary',
-                    'hover:enabled:bg-primary',
-                    'active:bg-primary',
-                    'focus:bg-primary',
-                    'disabled:bg-primary-lighter'
+                    'bg-cta',
+                    'hover:enabled:bg-cta',
+                    'active:bg-cta',
+                    'focus:bg-cta',
+                    'disabled:bg-cta-lighter'
                 ),
                 transparent: cn(
                     'text-white font-bold',
