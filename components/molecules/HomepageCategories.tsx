@@ -20,7 +20,7 @@ const HomepageCategories: FC = () => {
                 width={100}
                 height={10}
                 alt="Golf"
-                className="mx-auto mt-lg tablet:mt-md mb-md"
+                className="mx-auto mt-md mb-md"
             />
             <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-md  tablet:my-md">
                 <CategoryTile

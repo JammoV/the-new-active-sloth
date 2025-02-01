@@ -17,7 +17,7 @@ const HeroFeatured: FC = async () => {
             <HeroWrapper image={featuredBlog.image}>
                 <div className="flex flex-col items-center justify-center h-full gap-lg desktop:gap-sm ">
                     <div className="flex flex-col tablet:flex-row items-center tablet:gap-xs px-md bg-black/30 rounded-xl">
-                        <span className="font-noto font-bold text-white text-xl desktop:text-4xl">
+                        <span className="font-fira text-white text-xl desktop:text-4xl">
                             {featuredBlog.title}
                         </span>
                     </div>

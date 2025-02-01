@@ -17,12 +17,12 @@ const PostTile: FC<PostTileProps> = ({ post }) => (
             />
         )}
         <Link href={`/${post.category.name}/${post.slug}`}>
-            <div className="bg-linear-to-t from-black/60 w-full h-full absolute z-20 top-0 text-white hover:from-black/70 hover:cursor-pointer rounded-2xl">
-                <div className="text-white absolute bottom-0 p-4">
-                    <h3 className="md:text-xl font-fira font-bold md:py-2 pt-0 drop-shadow-md">
+            <div className="bg-linear-to-t from-black/50 w-full h-full absolute z-20 top-0 text-white hover:from-black/60 hover:cursor-pointer rounded-2xl">
+                <div className="flex flex-col text-white absolute bottom-0 p-4">
+                    <h3 className="font-fira  pt-0 drop-shadow-md desktop:text-lg">
                         {post.title}
                     </h3>
-                    <span className="hidden md:block md:text-xl drop-shadow-md">
+                    <span className="hidden md:block text-sm drop-shadow-md">
                         {new Date(post.publishedAt).toLocaleDateString('nl', {
                             year: 'numeric',
                             month: 'long',
