@@ -10,6 +10,17 @@ import { mapBlogCategory } from '@/client/mappers/BlogCategoryMapper'
 import { BlogCategory } from '@/interfaces/BlogCategory'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
 
+export const getBlogPostById = async (id: string): Promise<BlogPost | null> => {
+    // @ts-ignore
+    const response = await client.getEntry<TypeBlog>(id)
+
+    if (!response) {
+        return null
+    }
+
+    return mapBlogPost(response as TypeBlog)
+}
+
 export const getBlogPostBySlug = async (
     slug: string,
     preview = false

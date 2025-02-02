@@ -1,23 +1,53 @@
 import { revalidatePath } from 'next/cache'
+import { headers } from 'next/headers'
 import type { NextRequest } from 'next/server'
+import { getBlogPostById } from '@/client/contentful/BlogApi'
 
-export async function GET(request: NextRequest) {
-    const { searchParams } = new URL(request.url)
-    const token = searchParams.get('token')
-    const path = searchParams.get('path')
+export async function POST(request: NextRequest) {
+    const headersList = await headers()
+    const token = headersList.get('token')
 
     if (token !== process.env.CONTENTFUL_REVALIDATE_TOKEN) {
         return new Response('Invalid token', { status: 401 })
     }
 
-    if (path) {
-        revalidatePath(path)
-        return Response.json({ revalidated: true, now: Date.now() })
+    const { entityId } = await request.json()
+
+    if (!entityId) {
+        return Response.json({
+            revalidated: false,
+            now: Date.now(),
+            message: 'Missing entity ID to revalidate',
+        })
     }
 
-    return Response.json({
-        revalidated: false,
-        now: Date.now(),
-        message: 'Missing path to revalidate',
-    })
+    if (entityId) {
+        try {
+            const post = await getBlogPostById(entityId)
+
+            if (post) {
+                const path = `/${post.category.slug}/${post.slug}`
+
+                revalidatePath(path)
+
+                return Response.json({
+                    revalidated: true,
+                    now: Date.now(),
+                    message: 'Revalidated',
+                })
+            } else {
+                return Response.json({
+                    revalidated: false,
+                    now: Date.now(),
+                    message: 'Could not find post to revalidate',
+                })
+            }
+        } catch (error) {
+            return Response.json({
+                revalidated: false,
+                now: Date.now(),
+                message: 'Failed to retrieve post to revalidate',
+            })
+        }
+    }
 }
