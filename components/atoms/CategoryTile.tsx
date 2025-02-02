@@ -25,7 +25,7 @@ const CategoryTile: React.FC<CategoryTileProps> = ({
                     className="z-20"
                     alt="Bekijk Europa"
                 />
-                <span className="font-fira z-20 mobile:text-xl bg-secondary-lighter px-sm desktop:px-md tablet:py-xs border-dashed border-b-2 border-secondary-light/50">
+                <span className="font-noto w-[160px] tablet:w-[210px] text-center z-20  bg-secondary-lighter/50 px-sm desktop:px-md tablet:py-xs border-dashed border-b-2 border-secondary-light/50">
                     {name}
                 </span>
             </div>

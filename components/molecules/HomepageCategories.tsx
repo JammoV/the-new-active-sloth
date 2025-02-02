@@ -22,7 +22,7 @@ const HomepageCategories: FC = () => {
                 alt="Golf"
                 className="mx-auto mt-md tablet:mb-md"
             />
-            <div className="grid grid-cols-2 tablet:grid-cols-4 gap-xs desktop:gap-md tablet:my-md">
+            <div className="grid grid-cols-2 desktop:grid-cols-4 gap-xs desktop:gap-md tablet:my-md">
                 <CategoryTile
                     name="Azië"
                     link="/azie"
