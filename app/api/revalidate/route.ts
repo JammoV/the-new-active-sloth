@@ -26,9 +26,10 @@ export async function POST(request: NextRequest) {
             const post = await getBlogPostById(entityId)
 
             if (post) {
-                const path = `/${post.category.slug}/${post.slug}`
-
-                revalidatePath(path)
+                revalidatePath(`/${post.category.slug}/${post.slug}`)
+                revalidatePath(`/${post.category.slug}`)
+                revalidatePath(`/artikelen`)
+                revalidatePath(`/`)
 
                 return Response.json({
                     revalidated: true,
