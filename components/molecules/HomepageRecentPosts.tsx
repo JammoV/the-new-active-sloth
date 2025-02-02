@@ -16,7 +16,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
     }
 
     return (
-        <div className="my-xl">
+        <div className="mt-xl">
             <div className="text-center">
                 <Heading level={2} value="Recente artikelen" />
             </div>
@@ -27,7 +27,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
                 alt="Golf"
                 className="mx-auto mt-md mb-md"
             />
-            <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-sm my-lg">
+            <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 gap-sm mt-lg">
                 {posts.map((post) => (
                     <PostTile post={post} key={post.id} />
                 ))}

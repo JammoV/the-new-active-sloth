@@ -10,12 +10,12 @@ const About: FC = () => {
             <div className="h-[60px] desktop:h-[100px] absolute left-0 top-0 w-full bg-[url('/images/doodle/primary/tegel.png')] bg-contain opacity-50"></div>
             <div className="h-[60px] desktop:h-[100px] absolute left-0 bottom-0 w-full bg-[url('/images/doodle/primary/tegel.png')] bg-contain  opacity-50"></div>
             <div className="h-full mx-auto tablet:w-2/3 flex flex-col tablet:flex-row items-center justify-center gap-md tablet:gap-lg">
-                <div className="w-[200px] text-right  tablet:w-auto tablet:flex-1">
+                <div className="w-[220px] text-right  tablet:w-auto tablet:flex-1">
                     <div className="inline-block ml-auto  border-dashed border-white border-2 p-2">
                         <Image
                             src={aboutImg}
-                            width={400}
-                            className="ml-auto border-[10px]  shadow-sm"
+                            width={320}
+                            className="ml-auto border-[10px] border-white  shadow-sm"
                             alt="Eline, de verhalenschrijfster van The Active Sloth"
                         />
                     </div>
@@ -45,7 +45,7 @@ const About: FC = () => {
                 <Image
                     src={kofferImg}
                     width={200}
-                    className="absolute bottom-0 right-0 opacity-50"
+                    className="max-tablet:hidden absolute bottom-0 right-0 opacity-50"
                     alt="Koffer"
                 />
             </div>

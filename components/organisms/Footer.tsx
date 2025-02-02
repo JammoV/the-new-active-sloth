@@ -7,7 +7,7 @@ import ScrollToTop from '@/atoms/ScrollToTop'
 const Footer: FC = () => {
     return (
         <>
-            <div className="bg-secondary text-white mt-lg py-sm">
+            <div className="bg-secondary text-white mt-sm tablet:mt-xl py-sm">
                 <Container>
                     <div className="flex flex-col-reverse desktop:flex-row">
                         <div className="desktop:w-1/4"></div>

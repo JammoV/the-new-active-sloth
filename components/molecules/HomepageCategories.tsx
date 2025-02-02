@@ -11,7 +11,7 @@ import Image from 'next/image'
 
 const HomepageCategories: FC = () => {
     return (
-        <div className="my-xl tablet:my-[200px]">
+        <div className="my-xl tablet:my-xl">
             <div className="text-center">
                 <Heading level={2} value="Artikelen per categorie" />
             </div>

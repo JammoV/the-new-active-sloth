@@ -30,7 +30,7 @@ const variantStyles = cva(
                 ),
                 secondary: cn(
                     'text-white font-bold',
-                    'bg-secondary',
+                    'bg-secondary/80',
                     'hover:enabled:bg-secondary',
                     'active:bg-secondary',
                     'focus:bg-secondary',
