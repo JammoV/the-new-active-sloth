@@ -75,6 +75,30 @@ export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
     return mapBlogImage(response.items[0] as TypeBlogImage)
 }
 
+export const getStaticParams = async (
+    limit = 30,
+    skipFeatured = false
+): Promise<{ slug: string }[]> => {
+    // @ts-ignore
+    const response = await client.getEntries<TypeBlog>({
+        content_type: 'blog',
+        select: ['fields.slug', 'fields.category'],
+        order: '-fields.updatedAt',
+        limit,
+    })
+
+    if (!response.items.length) {
+        return []
+    }
+
+    return response.items.map((post) => {
+        return {
+            // @ts-ignore
+            slug: `/${post.fields.category.fields.slug}/${post.fields.slug}`,
+        }
+    })
+}
+
 export const getBlogPosts = async (
     limit = 30,
     skipFeatured = false
@@ -92,7 +116,7 @@ export const getBlogPosts = async (
             'fields.category',
         ],
         'fields.featured[ne]': skipFeatured ? true : undefined,
-        order: '-fields.updatedAt',
+        order: '-fields.publishedAt',
         limit,
     })
 

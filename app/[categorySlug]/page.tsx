@@ -2,6 +2,7 @@ import Container from '@/atoms/Container'
 import {
     getBlogCategoryBySlug,
     getBlogPostsByCategoryId,
+    getStaticParams,
 } from '@/client/contentful/BlogApi'
 import { notFound } from 'next/navigation'
 import PostTile from '@/molecules/PostTile'
@@ -38,4 +39,21 @@ export default async function CategoryPage({
             </div>
         </Container>
     )
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+    return [
+        {
+            slug: '/azie',
+        },
+        {
+            slug: '/midden-amerika',
+        },
+        {
+            slug: '/europa',
+        },
+        {
+            slug: '/overig',
+        },
+    ]
 }

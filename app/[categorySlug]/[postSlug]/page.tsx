@@ -1,7 +1,7 @@
 import React from 'react'
 
 import PostBody from '@/organisms/PostBody'
-import { getBlogPostBySlug } from '@/client/contentful/BlogApi'
+import { getBlogPostBySlug, getStaticParams } from '@/client/contentful/BlogApi'
 import { notFound } from 'next/navigation'
 import HeroPost from '@/organisms/HeroPost'
 import Container from '@/atoms/Container'
@@ -70,6 +70,6 @@ export default async function Post({
     )
 }
 
-// export async function generateStaticParams(): Promise<{ slug: string }[]> {
-//     return await getStaticPaths()
-// }
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+    return await getStaticParams()
+}
