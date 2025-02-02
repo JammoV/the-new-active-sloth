@@ -21,7 +21,7 @@ export default async function CategoryPage({
         notFound()
     }
 
-    const posts = await getBlogPostsByCategoryId(category.id, 10)
+    const posts = await getBlogPostsByCategoryId(category.id, 30)
 
     return (
         <Container>
