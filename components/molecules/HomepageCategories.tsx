@@ -11,7 +11,7 @@ import Image from 'next/image'
 
 const HomepageCategories: FC = () => {
     return (
-        <div className="my-xl tablet:my-xl">
+        <div className="my-lg tablet:my-xl">
             <div className="text-center">
                 <Heading level={2} value="Artikelen per categorie" />
             </div>
@@ -20,9 +20,9 @@ const HomepageCategories: FC = () => {
                 width={100}
                 height={10}
                 alt="Golf"
-                className="mx-auto mt-md mb-md"
+                className="mx-auto mt-md tablet:mb-md"
             />
-            <div className="grid grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 gap-md  tablet:my-md">
+            <div className="grid grid-cols-2 tablet:grid-cols-4 gap-xs desktop:gap-md tablet:my-md">
                 <CategoryTile
                     name="Azië"
                     link="/azie"

@@ -11,6 +11,7 @@ import { draftMode } from 'next/headers'
 import MobileTableOfContents from '@/molecules/MobileTableOfContents'
 import PostDates from '@/molecules/PostDates'
 import PostSidebarTiles from '@/molecules/PostSidebarTiles'
+import Header from '@/organisms/Header'
 
 export default async function Post({
     params,
@@ -31,36 +32,41 @@ export default async function Post({
     const contentHeadings = extractBlogHeaders(post.body)
 
     return (
-        <article>
-            <HeroPost post={post} />
+        <>
             <Container>
-                <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
-                    <div className="desktop:w-[800px] flex flex-col gap-md">
-                        <PostDates
-                            publishedAt={post.publishedAt}
-                            updatedAt={post.updatedAt}
-                        />
-                        {post.intro && (
-                            <>
-                                <p className="text-[18px] desktop:text-xl leading-relaxed">
-                                    {post.intro}
-                                </p>
-                                <hr className="hidden desktop:block border-secondary-light my-sm desktop:my-md" />
-                            </>
-                        )}
-                        <MobileTableOfContents headers={contentHeadings} />
-                        <PostBody body={post.body} />
-                    </div>
-                    <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
-                        <TableOfContents headers={contentHeadings} />
-                        <PostSidebarTiles
-                            postId={post.id}
-                            categoryId={post.category.id}
-                        />
-                    </div>
-                </div>
+                <Header activeCategory={post.category.name} />
             </Container>
-        </article>
+            <article>
+                <HeroPost post={post} />
+                <Container>
+                    <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
+                        <div className="desktop:w-[800px] flex flex-col gap-md">
+                            <PostDates
+                                publishedAt={post.publishedAt}
+                                updatedAt={post.updatedAt}
+                            />
+                            {post.intro && (
+                                <>
+                                    <p className="text-[18px] desktop:text-xl leading-relaxed">
+                                        {post.intro}
+                                    </p>
+                                    <hr className="hidden desktop:block border-secondary-light my-sm desktop:my-md" />
+                                </>
+                            )}
+                            <MobileTableOfContents headers={contentHeadings} />
+                            <PostBody body={post.body} />
+                        </div>
+                        <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
+                            <TableOfContents headers={contentHeadings} />
+                            <PostSidebarTiles
+                                postId={post.id}
+                                categoryId={post.category.id}
+                            />
+                        </div>
+                    </div>
+                </Container>
+            </article>
+        </>
     )
 }
 

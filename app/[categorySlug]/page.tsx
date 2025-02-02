@@ -5,6 +5,8 @@ import {
 } from '@/client/contentful/BlogApi'
 import { notFound } from 'next/navigation'
 import PostTile from '@/molecules/PostTile'
+import React from 'react'
+import Header from '@/organisms/Header'
 
 export default async function CategoryPage({
     params,
@@ -23,10 +25,16 @@ export default async function CategoryPage({
 
     return (
         <Container>
-            <div className="my-lg grid gap-sm grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-4 ">
-                {posts.map((post) => (
-                    <PostTile key={post.id} post={post} />
-                ))}
+            <Header activeCategory={category.name} withBorder />
+            <div className="mt-md">
+                <h2 className={`text-2xl font-noto mb-md`}>
+                    Artikelen over {category.name}
+                </h2>
+                <div className="grid gap-sm grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3 ">
+                    {posts.map((post) => (
+                        <PostTile key={post.id} post={post} />
+                    ))}
+                </div>
             </div>
         </Container>
     )

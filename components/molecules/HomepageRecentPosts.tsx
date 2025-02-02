@@ -16,7 +16,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
     }
 
     return (
-        <div className="mt-xl">
+        <div className="my-lg tablet:my-xl">
             <div className="text-center">
                 <Heading level={2} value="Recente artikelen" />
             </div>

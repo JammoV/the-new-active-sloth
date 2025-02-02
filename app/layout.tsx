@@ -50,8 +50,6 @@ export default function RootLayout({
                 className={`${lato.variable} ${noto.variable} ${fira.variable} ${caveat.variable}`}
             >
                 <div className="min-h-screen flex flex-col">
-                    <Header />
-
                     <main className="grow">{children}</main>
 
                     <Footer />

@@ -1,47 +1,84 @@
 'use client'
 
-import { FC, useState } from 'react'
+import { FC, useState, useEffect } from 'react'
 
-import Container from '@/atoms/Container'
 import Link from 'next/link'
 import { Hamburger } from '@/atoms/Hamburger'
 import { cn } from '@/utils/cn'
 
-const Header: FC = () => {
+type HeaderProps = {
+    activeCategory?: string
+    withBorder?: boolean
+}
+
+const Header: FC<HeaderProps> = ({ activeCategory, withBorder = false }) => {
     const [isOpen, setIsOpen] = useState(false)
 
+    useEffect(() => {
+        if (!isOpen) return
+
+        // Store the original overflow value
+        const originalStyle = window.getComputedStyle(document.body).overflow
+
+        // Prevent scrolling on mount
+        document.body.style.overflow = 'hidden'
+        // Get the scrollbar width to prevent layout shift
+        const scrollBarWidth =
+            window.innerWidth - document.documentElement.clientWidth
+        // Add padding to prevent content jump
+        document.body.style.paddingRight = `${scrollBarWidth}px`
+
+        // Re-enable scrolling on cleanup
+        return () => {
+            document.body.style.overflow = originalStyle
+            document.body.style.paddingRight = '0px'
+        }
+    }, [isOpen])
+
+    const categories = [
+        {
+            text: 'Azië',
+            href: '/azie',
+        },
+        {
+            text: 'Midden Amerika',
+            href: '/midden-amerika',
+        },
+        {
+            text: 'Europa',
+            href: '/europa',
+        },
+        {
+            text: 'Overig',
+            href: '/overig',
+        },
+    ]
+
     return (
-        <Container>
-            <div className="flex flex-row justify-between items-center py-sm relative">
+        <>
+            <div
+                className={cn(
+                    'flex flex-row justify-between items-center py-sm relative',
+                    withBorder && 'border-b border-primary-lighter'
+                )}
+            >
                 <Link
                     href={'/'}
-                    className="font-fira font-extrabold text-xl desktop:text-[32px] text-black"
+                    className="font-fira font-extrabold text-xl desktop:text-[32px] text-black hover:text-secondary"
                 >
                     The Active Sloth
                 </Link>
                 <div className="flex-row gap-lg desktop:gap-xl hidden tablet:flex">
-                    {[
-                        {
-                            text: 'Azië',
-                            href: '/azie',
-                        },
-                        {
-                            text: 'Midden-Amerika',
-                            href: '/midden-amerika',
-                        },
-                        {
-                            text: 'Europa',
-                            href: '/europa',
-                        },
-                        {
-                            text: 'Overig',
-                            href: '/overig',
-                        },
-                    ].map(({ text, href }) => (
+                    {categories.map(({ text, href }) => (
                         <Link
                             key={text}
                             href={href}
-                            className="font-lato font-black text-lg underline-offset-4 hover:underline"
+                            className={cn(
+                                'font-lato font-black text-lg no-underline',
+                                'hover:underline hover:decoration-secondary decoration-4 underline-offset-4',
+                                activeCategory === text &&
+                                    'underline decoration-secondary-light'
+                            )}
                         >
                             {text}
                         </Link>
@@ -51,39 +88,38 @@ const Header: FC = () => {
             </div>
             <div
                 className={cn(
-                    'absolute w-screen top-0 left-0 bg-white p-sm pb-md tablet:hidden',
-                    isOpen ? 'z-50 flex flex-col top-[50px] gap-sm ' : 'hidden'
+                    'absolute w-screen top-0 left-0 bg-white px-sm pb-md tablet:hidden',
+                    isOpen ? 'z-50 top-[51px] h-[calc(100dvh-51px)]' : 'hidden'
                 )}
             >
-                {[
-                    {
-                        text: 'Azië',
-                        href: '/azie',
-                    },
-                    {
-                        text: 'Midden-Amerika',
-                        href: '/midden-amerika',
-                    },
-                    {
-                        text: 'Europa',
-                        href: '/europa',
-                    },
-                    {
-                        text: 'Overig',
-                        href: '/overig',
-                    },
-                ].map(({ text, href }) => (
+                <div className="flex flex-col gap-sm border-t border-b border-primary-lighter py-sm pl-sm">
                     <Link
-                        key={text}
-                        href={href}
-                        className="font-lato font-black text-lg underline-offset-4 hover:underline"
+                        key={'alle'}
+                        href={'/artikelen'}
+                        className={cn(
+                            'font-lato decoration-4 underline-offset-4'
+                        )}
                         onClick={() => setIsOpen(false)}
                     >
-                        {text}
+                        Alle artikelen
                     </Link>
-                ))}
+                    {categories.map(({ text, href }) => (
+                        <Link
+                            key={text}
+                            href={href}
+                            className={cn(
+                                'font-lato decoration-4 underline-offset-4',
+                                activeCategory === text &&
+                                    'underline decoration-secondary-light'
+                            )}
+                            onClick={() => setIsOpen(false)}
+                        >
+                            {text}
+                        </Link>
+                    ))}
+                </div>
             </div>
-        </Container>
+        </>
     )
 }
 

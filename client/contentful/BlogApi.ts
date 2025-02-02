@@ -81,7 +81,7 @@ export const getBlogPosts = async (
             'fields.category',
         ],
         'fields.featured[ne]': skipFeatured ? true : undefined,
-        order: '-fields.publishedAt',
+        order: '-fields.updatedAt',
         limit,
     })
 
