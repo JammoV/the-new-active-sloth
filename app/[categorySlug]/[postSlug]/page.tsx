@@ -16,16 +16,14 @@ import Header from '@/organisms/Header'
 export default async function Post({
     params,
 }: {
-    params: Promise<{ postSlug: string }>
+    params: Promise<{ postSlug: string; categorySlug: string }>
 }) {
-    const { postSlug } = await params
+    const { postSlug, categorySlug } = await params
     const { isEnabled } = await draftMode()
 
     const post = await getBlogPostBySlug(postSlug, isEnabled)
 
-    /* @TODO Prevent access when incorrect category path is used */
-
-    if (!post || !post.body) {
+    if (!post || !post.body || post.category.slug !== categorySlug) {
         return notFound()
     }
 
