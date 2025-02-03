@@ -2,12 +2,28 @@ import Container from '@/atoms/Container'
 import {
     getBlogCategoryBySlug,
     getBlogPostsByCategoryId,
-    getStaticParams,
 } from '@/client/contentful/BlogApi'
 import { notFound } from 'next/navigation'
 import PostTile from '@/molecules/PostTile'
 import React from 'react'
 import Header from '@/organisms/Header'
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ categorySlug: string }>
+}) {
+    const { categorySlug } = await params
+
+    const category = await getBlogCategoryBySlug(categorySlug)
+
+    if (!category) return {}
+
+    return {
+        title: `Reis artikelen over ${category.name} | The Active Sloth`,
+        description: `Reis, relax repeat! De leukste reisartikelen over ${category.name} vind je op The Active Sloth`,
+    }
+}
 
 export default async function CategoryPage({
     params,

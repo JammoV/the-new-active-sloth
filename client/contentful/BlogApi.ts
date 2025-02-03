@@ -75,7 +75,7 @@ export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
     return mapBlogImage(response.items[0] as TypeBlogImage)
 }
 
-export const getStaticParams = async (
+export const getDynamicBlogSlugs = async (
     limit = 30,
     skipFeatured = false
 ): Promise<{ slug: string }[]> => {

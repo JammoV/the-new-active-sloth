@@ -1,8 +1,11 @@
+'use client'
+
 import type { FC } from 'react'
 
 import Image from 'next/image'
 import { BlogImage } from '@/interfaces/BlogPost'
 import { cn } from '@/utils/cn'
+import { contentfulImageLoader } from '@/utils/imageLoader'
 
 interface ResponsiveImageProps {
     image: BlogImage
@@ -35,11 +38,8 @@ const ResponsiveImage: FC<ResponsiveImageProps> = ({
             }}
             className={cn(`object-${image.position}`, className)}
             sizes={sizes}
-            src={
-                image.image.fields?.file?.url
-                    ? (('https:' + image.image.fields?.file?.url) as string)
-                    : ''
-            }
+            loader={contentfulImageLoader}
+            src={(image.image.fields?.file?.url as string) ?? ''}
         />
     )
 }

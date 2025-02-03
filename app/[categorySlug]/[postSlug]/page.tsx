@@ -1,7 +1,10 @@
 import React from 'react'
 
 import PostBody from '@/organisms/PostBody'
-import { getBlogPostBySlug, getStaticParams } from '@/client/contentful/BlogApi'
+import {
+    getBlogPostBySlug,
+    getDynamicBlogSlugs,
+} from '@/client/contentful/BlogApi'
 import { notFound } from 'next/navigation'
 import HeroPost from '@/organisms/HeroPost'
 import Container from '@/atoms/Container'
@@ -12,6 +15,23 @@ import MobileTableOfContents from '@/molecules/MobileTableOfContents'
 import PostDates from '@/molecules/PostDates'
 import PostSidebarTiles from '@/molecules/PostSidebarTiles'
 import Header from '@/organisms/Header'
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ postSlug: string }>
+}) {
+    const { postSlug } = await params
+
+    const post = await getBlogPostBySlug(postSlug)
+
+    if (!post?.id) return {}
+
+    return {
+        title: `${post.title} | The Active Sloth`,
+        description: post.intro,
+    }
+}
 
 export default async function Post({
     params,
@@ -69,5 +89,5 @@ export default async function Post({
 }
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-    return await getStaticParams()
+    return await getDynamicBlogSlugs()
 }

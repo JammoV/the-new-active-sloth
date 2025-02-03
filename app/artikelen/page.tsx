@@ -5,6 +5,13 @@ import PostTile from '@/molecules/PostTile'
 import React from 'react'
 import Header from '@/organisms/Header'
 
+export function generateMetadata() {
+    return {
+        title: `Overzicht van alle reisartikelen | The Active Sloth`,
+        description: `Reis, relax repeat! De leukste reisartikelen vind je op The Active Sloth`,
+    }
+}
+
 export default async function PostsPage() {
     const posts = await getBlogPosts()
 
