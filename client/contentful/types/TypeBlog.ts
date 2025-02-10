@@ -10,6 +10,7 @@ export interface TypeBlogFields {
     category: TypeBlogCategory
     featured?: EntryFields.Boolean
     blogImage: TypeBlogImage
+    seoDescription?: EntryFields.Text
     intro: EntryFields.Text
     body?: EntryFields.RichText
 }

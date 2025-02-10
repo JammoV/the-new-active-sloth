@@ -7,6 +7,7 @@ export interface BlogPost {
     title: string
     publishedAt: Date
     updatedAt?: Date
+    seoDescription: string
     intro: string
     slug: string
     category: BlogCategory

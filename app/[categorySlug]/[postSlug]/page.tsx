@@ -29,7 +29,7 @@ export async function generateMetadata({
 
     return {
         title: `${post.title} | The Active Sloth`,
-        description: post.intro,
+        description: post.seoDescription || post.intro,
     }
 }
 

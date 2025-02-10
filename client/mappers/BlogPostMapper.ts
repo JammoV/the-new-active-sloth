@@ -18,6 +18,7 @@ export const mapBlogPost = (post: TypeBlog): BlogPost => {
         publishedAt: new Date(fields.publishedAt),
         updatedAt: fields.updatedAt ? new Date(fields.updatedAt) : undefined,
         intro: fields.intro,
+        seoDescription: fields.seoDescription ?? '',
         featured: fields.featured ?? false,
         slug: fields.slug,
         category: mapBlogCategory(fields.category),
