@@ -28,6 +28,13 @@ export enum GalleryDisplay {
     THUMBNAILS = 'thumbnails',
 }
 
+const isLandscape = (image: BlogImage): boolean => {
+    const width = image.image.fields.file?.details?.image?.width ?? 0
+    const height = image.image.fields.file?.details?.image?.height ?? 0
+
+    return width > height
+}
+
 const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
     const display = getGalleryDisplayType(displayType)
 
@@ -41,7 +48,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                     >
                         <ResponsiveImage
                             image={image}
-                            sizes="(max-width: 768px) 50vw, 388px"
+                            sizes={`(max-width: 768px) 50vw, ${isLandscape(image) ? '776px' : '388px'}`}
                         />
                     </div>
                 ))}
@@ -78,7 +85,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         >
                             <ResponsiveImage
                                 image={image}
-                                sizes="(max-width: 768px) 50vw, 388px"
+                                sizes={`(max-width: 768px) 50vw, ${isLandscape(image) ? '776px' : '388px'}`}
                             />
                         </div>
                     ))}
