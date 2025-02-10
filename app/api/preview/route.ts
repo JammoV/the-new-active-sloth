@@ -23,5 +23,5 @@ export async function GET(request: Request) {
 
     draft.enable()
 
-    redirect('/posts/' + post.slug)
+    redirect(`/${post.category.slug}/${post.slug}`)
 }
