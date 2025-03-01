@@ -51,9 +51,7 @@ export default async function Post({
 
     return (
         <>
-            <Container>
-                <Header activeCategory={post.category.name} />
-            </Container>
+            <Header activeCategory={post.category.name} />
             <article>
                 <HeroPost post={post} />
                 <Container>
