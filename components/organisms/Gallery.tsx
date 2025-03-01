@@ -29,7 +29,9 @@ export enum GalleryDisplay {
 }
 
 const isLandscape = (image: BlogImage): boolean => {
+    // @ts-ignore
     const width = image.image.fields.file?.details?.image?.width ?? 0
+    // @ts-ignore
     const height = image.image.fields.file?.details?.image?.height ?? 0
 
     return width > height
@@ -102,7 +104,7 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
 
     return (
         <div className="flex flex-wrap gap-md">
-            {images.map((image, index) => {
+            {images.map((image) => {
                 return (
                     <div
                         className="relative aspect-square w-[250px]"
