@@ -29,7 +29,7 @@ const options = {
             if (node.data.target.sys.contentType.sys.id === 'blog') {
                 return (
                     <a
-                        href={`/posts/${node.data.target.fields.slug}`}
+                        href={`/${node.data.target.fields.category.fields.slug}/${node.data.target.fields.slug}`}
                         title={`Bekijk mijn artikel: ${node.data.target.fields.title}`}
                         className="text-[#d2916b] font-bold underline underline-offset-4"
                     >
