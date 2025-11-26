@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react'
 import { getBlogPosts } from '@/client/contentful/BlogApi'
 import PostTile from '@/molecules/PostTile'
-import ResponsiveImage from '@/atoms/ResponsiveImage'
 import Link from 'next/link'
 import Button from '@/atoms/Button'
 import Heading from '@/atoms/Heading'
@@ -31,6 +30,11 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
                 {posts.map((post) => (
                     <PostTile post={post} key={post.id} />
                 ))}
+            </div>
+            <div className="my-md text-center">
+                <Link href="/artikelen">
+                    <Button variant="secondary">Bekijk alle artikelen</Button>
+                </Link>
             </div>
         </div>
     )

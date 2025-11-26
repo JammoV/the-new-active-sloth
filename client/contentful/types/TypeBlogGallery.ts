@@ -5,6 +5,7 @@ export interface TypeBlogGalleryFields {
     title: EntryFields.Symbol
     display:
         | 'Carousel (2 portrait, 1 landscape)'
+        | 'Carousel (1 landscape, 2 portrait)'
         | 'In-line (portrait images)'
         | 'Stacked (landscape images)'
         | 'Thumbnails'

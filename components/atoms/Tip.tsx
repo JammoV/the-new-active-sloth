@@ -69,13 +69,16 @@ const Tip: FC<TipProps> = ({ tip }) => {
 
     return (
         <div className="flex flex-row my-md gap-md">
-            <div className={`min-w-[50px]`}>
+            <div className={`w-[70px] h-[70px] relative flex-shrink-0`}>
                 {tipImageUrl ? (
                     <Image
                         alt={tipConfig.alt}
                         quality={100}
-                        width={50}
-                        height={60}
+                        style={{
+                            objectFit: 'contain',
+                        }}
+                        fill={true}
+                        className="max-h-[70px] w-auto"
                         src={`https:${tipImageUrl as string}`}
                     />
                 ) : (

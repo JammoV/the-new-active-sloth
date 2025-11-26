@@ -4,8 +4,11 @@ import ResponsiveImage from '@/atoms/ResponsiveImage'
 import { BlogImage } from '@/interfaces/BlogPost'
 
 const getGalleryDisplayType = (display: string): GalleryDisplay => {
-    if (display.startsWith('Carousel')) {
+    if (display.startsWith('Carousel (2 portrait')) {
         return GalleryDisplay.CAROUSEL
+    }
+    if (display.startsWith('Carousel (1 landscape')) {
+        return GalleryDisplay.CAROUSEL_REVERSED
     }
     if (display.startsWith('Thumbnails')) {
         return GalleryDisplay.THUMBNAILS
@@ -25,6 +28,7 @@ export enum GalleryDisplay {
     LANDSCAPE = 'landscape',
     INLINE = 'inline',
     CAROUSEL = 'carousel',
+    CAROUSEL_REVERSED = 'carousel_reversed',
     THUMBNAILS = 'thumbnails',
 }
 
@@ -76,9 +80,15 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
         )
     }
 
-    if (display === GalleryDisplay.CAROUSEL && images.length === 3) {
+    if (
+        (display === GalleryDisplay.CAROUSEL ||
+            display === GalleryDisplay.CAROUSEL_REVERSED) &&
+        images.length === 3
+    ) {
         return (
-            <div className="flex flex-col gap-md">
+            <div
+                className={`flex ${display === GalleryDisplay.CAROUSEL ? 'flex-col' : 'flex-col-reverse'} gap-md`}
+            >
                 <div className="flex flex-row gap-md">
                     {images.slice(0, 2).map((image) => (
                         <div
