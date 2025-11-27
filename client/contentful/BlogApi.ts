@@ -100,7 +100,7 @@ export const getDynamicBlogSlugs = async (
 }
 
 export const getBlogPosts = async (
-    limit = 30,
+    limit = 50,
     skipFeatured = false
 ): Promise<BlogPost[]> => {
     // @ts-ignore
