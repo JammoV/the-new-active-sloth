@@ -80,15 +80,9 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
         )
     }
 
-    if (
-        (display === GalleryDisplay.CAROUSEL ||
-            display === GalleryDisplay.CAROUSEL_REVERSED) &&
-        images.length === 3
-    ) {
+    if (display === GalleryDisplay.CAROUSEL && images.length === 3) {
         return (
-            <div
-                className={`flex ${display === GalleryDisplay.CAROUSEL ? 'flex-col' : 'flex-col-reverse'} gap-md`}
-            >
+            <div className={`flex flex-col gap-md`}>
                 <div className="flex flex-row gap-md">
                     {images.slice(0, 2).map((image) => (
                         <div
@@ -107,6 +101,32 @@ const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
                         image={images[2]}
                         sizes="(max-width: 768px) 100vw, 800px"
                     />
+                </div>
+            </div>
+        )
+    }
+
+    if (display === GalleryDisplay.CAROUSEL_REVERSED && images.length === 3) {
+        return (
+            <div className={`flex flex-col gap-md`}>
+                <div className="relative w-full desktop:w-[800px] aspect-video">
+                    <ResponsiveImage
+                        image={images[0]}
+                        sizes="(max-width: 768px) 100vw, 800px"
+                    />
+                </div>
+                <div className="flex flex-row gap-md">
+                    {images.slice(1, 3).map((image) => (
+                        <div
+                            className="relative w-[388px] aspect-3/4"
+                            key={image.image.sys.id}
+                        >
+                            <ResponsiveImage
+                                image={image}
+                                sizes={`(max-width: 768px) 50vw, ${isLandscape(image) ? '776px' : '388px'}`}
+                            />
+                        </div>
+                    ))}
                 </div>
             </div>
         )

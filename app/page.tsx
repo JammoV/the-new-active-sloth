@@ -8,7 +8,7 @@ import HomepageCategories from '@/molecules/HomepageCategories'
 import HeroFeatured from '@/organisms/HeroFeatured'
 import Header from '@/organisms/Header'
 
-export function generateMetadata() {
+export async function generateMetadata() {
     return {
         title: `The Active Sloth`,
         description: `Reis, relax repeat! De leukste reisinspiratie vind je op The Active Sloth`,

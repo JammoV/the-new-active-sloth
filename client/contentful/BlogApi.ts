@@ -76,8 +76,7 @@ export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
 }
 
 export const getDynamicBlogSlugs = async (
-    limit = 30,
-    skipFeatured = false
+    limit = 30
 ): Promise<{ slug: string }[]> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({

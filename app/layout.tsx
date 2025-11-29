@@ -4,7 +4,6 @@ import './globals.css'
 import React from 'react'
 
 import Footer from '@/organisms/Footer'
-import Header from '@/organisms/Header'
 
 const lato = Lato({
     subsets: ['latin'],
@@ -39,7 +38,7 @@ export const metadata: Metadata = {
     description: '',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode

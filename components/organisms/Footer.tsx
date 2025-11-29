@@ -13,8 +13,7 @@ const Footer: FC = () => {
                         <div className="desktop:w-1/4"></div>
                         <div className="desktop:grow text-center">
                             <span className="font-fira text-white">
-                                The Active Sloth ©{' '}
-                                {new Date().getFullYear().toString()}
+                                The Active Sloth ©2025
                             </span>
                         </div>
 
