@@ -10,9 +10,7 @@ interface HeroPostDescriptionProps {
 const HeroPostDescription: FC<HeroPostDescriptionProps> = ({ post }) => {
     return (
         <div
-            className={cn(
-                'absolute flex flex-col-reverse bottom-0 desktop:flex-col desktop:bottom-xl left-0'
-            )}
+            className="absolute flex flex-col-reverse bottom-0 desktop:flex-col desktop:bottom-xl left-0"
         >
             <h1
                 className={cn(

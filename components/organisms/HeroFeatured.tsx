@@ -9,6 +9,8 @@ import vliegtuigeImg from '@/public/images/doodle/primary-light/vliegtuigje.png'
 import Image from 'next/image'
 
 const HeroFeatured: FC = async () => {
+    'use cache'
+
     const featuredBlog = await getFeaturedBlogPost()
 
     if (!featuredBlog) return null

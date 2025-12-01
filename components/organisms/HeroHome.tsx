@@ -5,6 +5,8 @@ import HeroWrapper from '@/organisms/HeroWrapper'
 import ScrollDown from '@/atoms/ScrollDown'
 
 const HeroHome: FC = async () => {
+    'use cache'
+
     const featuredImage = await getFeaturedBlogImage()
 
     return (

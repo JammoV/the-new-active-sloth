@@ -1,31 +1,30 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
-import PostBody from '@/organisms/PostBody'
 import {
     getBlogPostBySlug,
     getDynamicBlogSlugs,
 } from '@/client/contentful/BlogApi'
-import { notFound } from 'next/navigation'
 import HeroPost from '@/organisms/HeroPost'
 import Container from '@/atoms/Container'
-import TableOfContents from '@/molecules/TableOfContents'
-import { extractBlogHeaders } from '@/utils/extractBlogHeaders'
-import { draftMode } from 'next/headers'
-import MobileTableOfContents from '@/molecules/MobileTableOfContents'
-import PostDates from '@/molecules/PostDates'
-import PostSidebarTiles from '@/molecules/PostSidebarTiles'
 import Header from '@/organisms/Header'
+import PostArticleWrapper from '@/organisms/PostArticleWrapper'
+import PostSidebarWrapper from '@/organisms/PostSidebarWrapper'
+import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
+import HeroPostSkeleton from '@/skeletons/HeroPostSkeleton'
 
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ postSlug: string }>
-}) {
+}): Promise<Metadata> {
+    'use cache'
+
     const { postSlug } = await params
 
     const post = await getBlogPostBySlug(postSlug)
 
-    if (!post?.id) return {}
+    if (!post?.id) return notFound()
 
     return {
         title: `${post.title} | The Active Sloth`,
@@ -38,46 +37,34 @@ export default async function Post({
 }: {
     params: Promise<{ postSlug: string; categorySlug: string }>
 }) {
-    const { postSlug, categorySlug } = await params
-    const { isEnabled } = await draftMode()
-
-    const post = await getBlogPostBySlug(postSlug, isEnabled)
-
-    if (!post || !post.body || post.category.slug !== categorySlug) {
-        return notFound()
-    }
-
-    const contentHeadings = extractBlogHeaders(post.body)
+    const postSlugPromise = params.then((pms) => pms.postSlug)
 
     return (
         <>
-            <Header activeCategory={post.category.name} />
+            <Header />
             <article>
-                <HeroPost post={post} />
+                <Suspense fallback={<HeroPostSkeleton />}>
+                    <HeroPost postSlugPromise={postSlugPromise} />
+                </Suspense>
                 <Container>
                     <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
                         <div className="desktop:w-[800px] flex flex-col gap-md">
-                            <PostDates
-                                publishedAt={post.publishedAt}
-                                updatedAt={post.updatedAt}
-                            />
-                            {post.intro && (
-                                <>
-                                    <p className="text-[18px] desktop:text-xl leading-relaxed">
-                                        {post.intro}
-                                    </p>
-                                    <hr className="hidden desktop:block border-secondary-light my-sm desktop:my-md" />
-                                </>
-                            )}
-                            <MobileTableOfContents headers={contentHeadings} />
-                            <PostBody body={post.body} />
+                            <Suspense
+                                fallback={'<div>Loading article...</div>'}
+                            >
+                                <PostArticleWrapper
+                                    postSlugPromise={postSlugPromise}
+                                />
+                            </Suspense>
                         </div>
                         <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
-                            <TableOfContents headers={contentHeadings} />
-                            <PostSidebarTiles
-                                postId={post.id}
-                                categoryId={post.category.id}
-                            />
+                            <Suspense
+                                fallback={'<div>Loading sidebar...</div>'}
+                            >
+                                <PostSidebarWrapper
+                                    postSlugPromise={postSlugPromise}
+                                />
+                            </Suspense>
                         </div>
                     </div>
                 </Container>

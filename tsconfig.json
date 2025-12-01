@@ -34,6 +34,9 @@
       ],
       "@/organisms/*": [
         "components/organisms/*"
+      ],
+      "@/skeletons/*": [
+        "components/skeletons/*"
       ]
     },
     "target": "ES2017"

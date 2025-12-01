@@ -8,6 +8,8 @@ import golfImg from '@/public/images/doodle/secondary/golf.png'
 import Image from 'next/image'
 
 const HomepageRecentPosts = async (): Promise<ReactElement> => {
+    'use cache'
+
     const posts = await getBlogPosts(6, true)
 
     if (!posts) {

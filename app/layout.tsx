@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Lato, Fira_Sans_Condensed, Noto_Serif, Caveat } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import React from 'react'
 
@@ -50,8 +51,8 @@ export default async function RootLayout({
             >
                 <div className="min-h-screen flex flex-col">
                     <main className="grow">{children}</main>
-
                     <Footer />
+                    <Analytics />
                 </div>
             </body>
         </html>
