@@ -52,16 +52,16 @@ export default async function CategoryPage({
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
     return [
         {
-            slug: '/azie',
+            slug: 'azie',
         },
         {
-            slug: '/midden-amerika',
+            slug: 'midden-amerika',
         },
         {
-            slug: '/europa',
+            slug: 'europa',
         },
         {
-            slug: '/overig',
+            slug: 'overig',
         },
     ]
 }
