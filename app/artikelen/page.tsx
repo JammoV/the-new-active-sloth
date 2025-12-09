@@ -13,8 +13,6 @@ export function generateMetadata() {
 }
 
 const AllBlogPosts: FC = async () => {
-    'use cache'
-
     const posts = await getBlogPosts()
 
     return (
@@ -32,9 +30,7 @@ export default async function PostsPage() {
             <Header withBorder />
             <div className="mt-md">
                 <h2 className={`text-2xl font-noto mb-md`}>Alle artikelen</h2>
-                <Suspense>
-                    <AllBlogPosts />
-                </Suspense>
+                <AllBlogPosts />
             </div>
         </Container>
     )

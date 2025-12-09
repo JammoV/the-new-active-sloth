@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import Container from '@/atoms/Container'
 import HomepageRecentPosts from '@/molecules/HomepageRecentPosts'
@@ -8,7 +8,6 @@ import HomepageCategories from '@/molecules/HomepageCategories'
 import HeroFeatured from '@/organisms/HeroFeatured'
 import Header from '@/organisms/Header'
 import { Metadata } from 'next'
-import HeroPostSkeleton from '@/skeletons/HeroPostSkeleton'
 
 export async function generateMetadata(): Promise<Metadata> {
     return {
@@ -23,22 +22,18 @@ export default async function Home() {
             <Container>
                 <Header />
             </Container>
-            <Suspense fallback={<HeroPostSkeleton />}>
-                <HeroHome />
-            </Suspense>
+
+            <HeroHome />
 
             <About />
 
             <Container>
                 <HomepageCategories />
             </Container>
-            <Suspense fallback={'<div>Loading...</div>'}>
-                <HeroFeatured />
-            </Suspense>
+            <HeroFeatured />
+
             <Container>
-                <Suspense fallback={'<div>Loading...</div>'}>
-                    <HomepageRecentPosts />
-                </Suspense>
+                <HomepageRecentPosts />
             </Container>
         </>
     )

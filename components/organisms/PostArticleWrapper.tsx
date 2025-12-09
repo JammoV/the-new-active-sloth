@@ -1,27 +1,18 @@
 import React, { FC } from 'react'
 
-import { getBlogPostBySlug } from '@/client/contentful/BlogApi'
 import PostDates from '@/molecules/PostDates'
 import MobileTableOfContents from '@/molecules/MobileTableOfContents'
 import PostBody from '@/organisms/PostBody'
-import { draftMode } from 'next/headers'
 import { extractBlogHeaders } from '@/utils/extractBlogHeaders'
+import { BlogPost } from '@/interfaces/BlogPost'
 
 interface PostArticleWrapperProps {
-    postSlugPromise: Promise<string>
+    post: BlogPost
 }
 
 const PostArticleWrapper: FC<PostArticleWrapperProps> = async ({
-    postSlugPromise,
+    post,
 }) => {
-    'use cache'
-
-    const postSlug = await postSlugPromise
-
-    const { isEnabled } = await draftMode()
-
-    const post = await getBlogPostBySlug(postSlug, isEnabled)
-
     if (!post || !post.body) {
         return null
     }

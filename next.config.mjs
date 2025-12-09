@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    cacheComponents: true,
     images: {
         qualities: [50, 75, 100],
         remotePatterns: [

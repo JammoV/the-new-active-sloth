@@ -12,14 +12,13 @@ import PostSidebarWrapper from '@/organisms/PostSidebarWrapper'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import HeroPostSkeleton from '@/skeletons/HeroPostSkeleton'
+import { draftMode } from 'next/headers'
 
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ postSlug: string }>
 }): Promise<Metadata> {
-    'use cache'
-
     const { postSlug } = await params
 
     const post = await getBlogPostBySlug(postSlug)
@@ -37,34 +36,27 @@ export default async function Post({
 }: {
     params: Promise<{ postSlug: string; categorySlug: string }>
 }) {
-    const postSlugPromise = params.then((pms) => pms.postSlug)
+    const { postSlug } = await params
+    const { isEnabled } = await draftMode()
+
+    const post = await getBlogPostBySlug(postSlug, isEnabled)
+
+    if (!post?.id) return notFound()
 
     return (
         <>
             <Header />
             <article>
                 <Suspense fallback={<HeroPostSkeleton />}>
-                    <HeroPost postSlugPromise={postSlugPromise} />
+                    <HeroPost post={post} />
                 </Suspense>
                 <Container>
                     <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
                         <div className="desktop:w-[800px] flex flex-col gap-md">
-                            <Suspense
-                                fallback={'<div>Loading article...</div>'}
-                            >
-                                <PostArticleWrapper
-                                    postSlugPromise={postSlugPromise}
-                                />
-                            </Suspense>
+                            <PostArticleWrapper post={post} />
                         </div>
                         <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
-                            <Suspense
-                                fallback={'<div>Loading sidebar...</div>'}
-                            >
-                                <PostSidebarWrapper
-                                    postSlugPromise={postSlugPromise}
-                                />
-                            </Suspense>
+                            <PostSidebarWrapper post={post} />
                         </div>
                     </div>
                 </Container>

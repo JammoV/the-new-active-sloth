@@ -1,20 +1,16 @@
 import Container from '@/atoms/Container'
 import {
-    getBlogCategoryBySlug
+    getBlogCategoryBySlug, getBlogPostsByCategoryId
 } from '@/client/contentful/BlogApi'
-import React, { Suspense } from 'react'
+import React from 'react'
 import Header from '@/organisms/Header'
 import CategoryPosts from '@/molecules/CategoryPosts'
-import CategoryPageTitle from '@/atoms/CategoryPageTitle'
-import PostsSkeleton from '@/skeletons/PostsSkeleton'
 
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ categorySlug: string }>
 }) {
-    'use cache'
-
     const { categorySlug } = await params
 
     const category = await getBlogCategoryBySlug(categorySlug)
@@ -32,18 +28,24 @@ export default async function CategoryPage({
 }: {
     params: Promise<{ categorySlug: string }>
 }) {
-    const categorySlugPromise = params.then(pms => pms.categorySlug)
+    const { categorySlug } = await params
+
+    const category = await getBlogCategoryBySlug(categorySlug)
+
+    if (!category) {
+        return null
+    }
+
+    const posts = await getBlogPostsByCategoryId(category.id)
 
     return (
         <Container>
             <Header withBorder />
             <div className="mt-md">
-                <Suspense fallback={<span className="animate-pulse block rounded-xl bg-gray-100 w-64 h-9 mb-md"></span>}>
-                    <CategoryPageTitle categorySlugPromise={categorySlugPromise} />
-                </Suspense>
-                <Suspense fallback={<PostsSkeleton />}>
-                    <CategoryPosts categorySlugPromise={categorySlugPromise} />
-                </Suspense>
+                <h2 className="text-xl desktop:text-2xl font-noto mb-md h-9">
+                    Artikelen over {category.name}
+                </h2>
+                    <CategoryPosts posts={posts} />
             </div>
         </Container>
     )
