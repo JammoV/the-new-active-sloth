@@ -1,5 +1,3 @@
-'use cache'
-
 import Container from '@/atoms/Container'
 import {
     getBlogCategoryBySlug
@@ -35,6 +33,8 @@ export default async function CategoryPage({
 }: {
     params: Promise<{ categorySlug: string }>
 }) {
+    'use cache'
+
     cacheLife('days')
 
     const categorySlugPromise = params.then(pms => pms.categorySlug)
