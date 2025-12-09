@@ -7,7 +7,7 @@ interface CategoryPostsProps {
 }
 
 const CategoryPageTitle: FC<CategoryPostsProps> = async ({ categorySlugPromise }) => {
-    'use cache'
+    'use cache: remote'
 
     const categorySlug = await categorySlugPromise
     const category = await getBlogCategoryBySlug(categorySlug)
