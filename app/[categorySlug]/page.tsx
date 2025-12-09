@@ -1,3 +1,5 @@
+'use cache'
+
 import Container from '@/atoms/Container'
 import {
     getBlogCategoryBySlug
@@ -7,6 +9,7 @@ import Header from '@/organisms/Header'
 import CategoryPosts from '@/molecules/CategoryPosts'
 import CategoryPageTitle from '@/atoms/CategoryPageTitle'
 import PostsSkeleton from '@/skeletons/PostsSkeleton'
+import { cacheLife } from 'next/cache'
 
 export async function generateMetadata({
     params,
@@ -32,6 +35,8 @@ export default async function CategoryPage({
 }: {
     params: Promise<{ categorySlug: string }>
 }) {
+    cacheLife('days')
+
     const categorySlugPromise = params.then(pms => pms.categorySlug)
 
     return (
