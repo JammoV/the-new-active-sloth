@@ -1,0 +1,43 @@
+{
+  "Header": {
+    "Categories": {
+      "Asia": {
+        "title": "Azië",
+        "url-path": "azie"
+      },
+      "Europe": {
+        "title": "Europa",
+        "url-path": "europa"
+      },
+      "CentralAmerica": {
+        "title": "Midden-Amerika",
+        "url-path": "midden-amerika"
+      },
+      "Other": {
+        "title": "Overig",
+        "url-path": "overig"
+      }
+    }
+  },
+  "Home": {
+    "Hero": {
+      "discover": "Ontdek"
+    },
+    "About": {
+      "title": "<b>Hoi!</b> Ik ben Eline",
+      "subtitle": "Welkom op mijn persoonlijke travel blog <b>The Active Sloth!</b>",
+      "content": "Of je nu houdt van actief avontuur of juist van ontspannen momenten, hier vind je tips, verhalen en inspiratie om het beste van beide werelden te combineren.",
+      "view-my-articles": "Bekijk mijn artikelen"
+    },
+    "Categories": {
+      "title": "Artikelen per categorie"
+    },
+    "Recent": {
+      "title": "Recente artikelen",
+      "view-all-articles": "Bekijk alle artikelen"
+    }
+  },
+  "Footer": {
+    "scroll-to-top": "Terug naar boven"
+  }
+}
