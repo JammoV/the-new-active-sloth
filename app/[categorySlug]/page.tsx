@@ -36,7 +36,7 @@ export default async function CategoryPage({
         return null
     }
 
-    const posts = await getBlogPostsByCategoryId(category.id)
+    const posts = await getBlogPostsByCategoryId(category.id, 30)
 
     return (
         <Container>
