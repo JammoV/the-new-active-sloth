@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
         return new Response('Invalid token', { status: 401 })
     }
 
-    const { entityId } = await request.json()
+    const { entityId, locale } = await request.json()
 
     if (!entityId) {
         return Response.json({
@@ -21,9 +21,17 @@ export async function POST(request: NextRequest) {
         })
     }
 
+    if (!locale) {
+        return Response.json({
+            revalidated: false,
+            now: Date.now(),
+            message: 'Missing locale to revalidate',
+        })
+    }
+
     if (entityId) {
         try {
-            const post = await getBlogPostById(entityId)
+            const post = await getBlogPostById(entityId, locale)
 
             if (post) {
                 revalidatePath(`/${post.category.slug}/${post.slug}`)
