@@ -2,14 +2,12 @@ import { draftMode } from 'next/headers'
 import { redirect } from '@/i18n/navigation'
 import { getBlogPostBySlug } from '@/client/contentful/BlogApi'
 import * as process from 'node:process'
-import { getRoutingLocale } from '@/utils/locales'
 
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const token = searchParams.get('token')
     const slug = searchParams.get('slug')
     const locale = searchParams.get('locale') || 'nl-NL'
-    const routingLocale = getRoutingLocale(locale)
 
     console.log(`Preview request received with slug: ${slug} and locale: ${locale}`)
 
@@ -32,6 +30,6 @@ export async function GET(request: Request) {
 
     return redirect({
         href: `/${post.category.slug}/${post.slug}`,
-        locale: routingLocale
+        locale: locale
     })
 }

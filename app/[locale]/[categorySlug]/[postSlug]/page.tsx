@@ -12,7 +12,6 @@ import PostSidebarWrapper from '@/organisms/PostSidebarWrapper'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
-import { getContentFullLocale } from '@/utils/locales'
 import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { setRequestLocale } from 'next-intl/server'
@@ -23,9 +22,8 @@ export async function generateMetadata({
     params: Promise<{ locale: string, postSlug: string }>
 }): Promise<Metadata> {
     const { locale, postSlug } = await params
-    const contentfulLocale = getContentFullLocale(locale)
 
-    const post = await getBlogPostBySlug(contentfulLocale, postSlug)
+    const post = await getBlogPostBySlug(locale, postSlug)
 
     if (!post?.id) return notFound()
 
@@ -50,9 +48,8 @@ export default async function Post({
     setRequestLocale(locale)
 
     const { isEnabled } = await draftMode()
-    const contentfulLocale = getContentFullLocale(locale)
 
-    const post = await getBlogPostBySlug(contentfulLocale, postSlug, isEnabled)
+    const post = await getBlogPostBySlug(locale, postSlug, isEnabled)
 
     if (!post?.id) return notFound()
 
@@ -67,7 +64,7 @@ export default async function Post({
                             <PostArticleWrapper post={post} />
                         </div>
                         <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
-                            <PostSidebarWrapper locale={contentfulLocale} post={post} />
+                            <PostSidebarWrapper locale={locale} post={post} />
                         </div>
                     </div>
                 </Container>

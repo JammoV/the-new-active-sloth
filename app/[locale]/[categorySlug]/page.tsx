@@ -7,7 +7,6 @@ import React from 'react'
 import Header from '@/organisms/Header'
 import CategoryPosts from '@/molecules/CategoryPosts'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { getContentFullLocale } from '@/utils/locales'
 import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
 import { notFound } from 'next/navigation'
@@ -20,9 +19,7 @@ export async function generateMetadata({
     const t = await getTranslations('Metadata')
     const { locale, categorySlug } = await params
 
-    const contentfulLocale = getContentFullLocale(locale)
-
-    const category = await getBlogCategoryBySlug(contentfulLocale, categorySlug)
+    const category = await getBlogCategoryBySlug(locale, categorySlug)
 
     if (!category) return {}
 
@@ -47,16 +44,14 @@ export default async function CategoryPage({
     // Enable static rendering
     setRequestLocale(locale)
 
-    const contentfulLocale = getContentFullLocale(locale)
-
-    const category = await getBlogCategoryBySlug(contentfulLocale, categorySlug)
+    const category = await getBlogCategoryBySlug(locale, categorySlug)
 
     if (!category) {
         return null
     }
 
     const posts = await getBlogPostsByCategoryId(
-        contentfulLocale,
+        locale,
         category.id,
         30
     )

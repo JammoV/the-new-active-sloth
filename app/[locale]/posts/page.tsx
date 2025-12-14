@@ -4,7 +4,6 @@ import { getBlogPosts } from '@/client/contentful/BlogApi'
 import PostTile from '@/molecules/PostTile'
 import React from 'react'
 import Header from '@/organisms/Header'
-import { getContentFullLocale } from '@/utils/locales'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { hasLocale } from 'next-intl'
 import { routing } from '@/i18n/routing'
@@ -28,8 +27,8 @@ export default async function PostsPage({ params }: PageProps<'/[locale]'>) {
     // Enable static rendering
     setRequestLocale(locale)
 
-    const contentfulLocale = getContentFullLocale(locale)
-    const posts = await getBlogPosts(contentfulLocale)
+    const posts = await getBlogPosts(locale)
+
     return (
         <Container>
             <Header withBorder />

@@ -9,7 +9,6 @@ import {
 import { mapBlogCategory } from '@/client/mappers/BlogCategoryMapper'
 import { BlogCategory } from '@/interfaces/BlogCategory'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
-import { getContentFullLocale } from '@/utils/locales'
 
 export const getBlogPostById = async (id: string, locale: string): Promise<BlogPost | null> => {
     // @ts-ignore
@@ -91,7 +90,7 @@ export const getDynamicBlogSlugs = async (
         select: ['fields.slug', 'fields.category'],
         order: '-fields.updatedAt',
         limit,
-        locale: getContentFullLocale('nl'),
+        locale: 'nl-NL',
     })
 
     if (!response.items.length) {

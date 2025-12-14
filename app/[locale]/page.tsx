@@ -9,7 +9,6 @@ import HeroFeatured from '@/organisms/HeroFeatured'
 import Header from '@/organisms/Header'
 import { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
-import { getContentFullLocale } from '@/utils/locales'
 
 export async function generateMetadata(): Promise<Metadata> {
     const t = await getTranslations('Metadata')
@@ -21,7 +20,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home({ params }: PageProps<'/[locale]'>) {
     const { locale } = await params
-    const contentfulLocale = getContentFullLocale(locale)
 
     return (
         <>
@@ -29,17 +27,17 @@ export default async function Home({ params }: PageProps<'/[locale]'>) {
                 <Header />
             </Container>
 
-            <HeroHome locale={contentfulLocale} />
+            <HeroHome locale={locale} />
 
             <About />
 
             <Container>
                 <HomepageCategories />
             </Container>
-            <HeroFeatured locale={contentfulLocale} />
+            <HeroFeatured locale={locale} />
 
             <Container>
-                <HomepageRecentPosts locale={contentfulLocale} />
+                <HomepageRecentPosts locale={locale} />
             </Container>
         </>
     )
