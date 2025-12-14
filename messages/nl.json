@@ -1,43 +1,56 @@
 {
-  "Header": {
-    "Categories": {
-      "Asia": {
-        "title": "Azië",
-        "url-path": "azie"
-      },
-      "Europe": {
-        "title": "Europa",
-        "url-path": "europa"
-      },
-      "CentralAmerica": {
-        "title": "Midden-Amerika",
-        "url-path": "midden-amerika"
-      },
-      "Other": {
-        "title": "Overig",
-        "url-path": "overig"
-      }
-    }
-  },
-  "Home": {
-    "Hero": {
-      "discover": "Ontdek"
+    "Metadata": {
+        "site-title": "The Active Sloth - Reisblog",
+        "site-description": "Reis, relax repeat! De leukste reisinspiratie vind je op The Active Sloth",
+        "category-title": "Reis artikelen over {category} | The Active Sloth",
+        "category-description": "Reis, relax repeat! De leukste reisartikelen over {category} vind je op The Active Sloth"
     },
-    "About": {
-      "title": "<b>Hoi!</b> Ik ben Eline",
-      "subtitle": "Welkom op mijn persoonlijke travel blog <b>The Active Sloth!</b>",
-      "content": "Of je nu houdt van actief avontuur of juist van ontspannen momenten, hier vind je tips, verhalen en inspiratie om het beste van beide werelden te combineren.",
-      "view-my-articles": "Bekijk mijn artikelen"
+    "Generic": {
+        "all-posts": "Alle artikelen",
+        "recent-posts": "Recente artikelen",
+        "view-all-posts": "Bekijk alle artikelen",
+        "view-post": "Bekijk artikel",
+        "featured-post": "Uitgelicht artikel",
+        "posts-about": "Artikelen over {topic}",
+        "back-to-top": "Terug naar boven"
     },
     "Categories": {
-      "title": "Artikelen per categorie"
+        "title": "Artikelen per categorie",
+        "Asia": {
+            "title": "Azië",
+            "url-path": "azie"
+        },
+        "Europe": {
+            "title": "Europa",
+            "url-path": "europa"
+        },
+        "CentralAmerica": {
+            "title": "Midden-Amerika",
+            "url-path": "midden-amerika"
+        },
+        "Other": {
+            "title": "Overig",
+            "url-path": "overig"
+        }
     },
-    "Recent": {
-      "title": "Recente artikelen",
-      "view-all-articles": "Bekijk alle artikelen"
+    "Home": {
+        "Hero": {
+            "travel": "Reis",
+            "discover": "Ontdek"
+        },
+        "About": {
+            "img-alt": "Eline, de verhalenschrijfster van The Active Sloth",
+            "title": "<bold>Hoi!</bold> Ik ben Eline",
+            "subtitle": "Welkom op mijn persoonlijke travel blog <bold>The Active Sloth!</bold>",
+            "content": "Of je nu houdt van actief avontuur of juist van ontspannen momenten, hier vind je tips, verhalen en inspiratie om het beste van beide werelden te combineren.",
+            "view-my-posts": "Bekijk mijn artikelen"
+        }
+    },
+    "Post": {
+        "created-at": "Geplaatst op {date}",
+        "updated-at": "bijgewerkt op {date}",
+        "contents": "Inhoudsopgave",
+        "contents-mobile": "Inhoud",
+        "also-see": "Bekijk ook"
     }
-  },
-  "Footer": {
-    "scroll-to-top": "Terug naar boven"
-  }
 }

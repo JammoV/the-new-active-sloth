@@ -5,7 +5,7 @@ export const routing = defineRouting({
     defaultLocale: 'nl',
     localeDetection: false,
     localeCookie: false,
-    localePrefix: process.env.I18N_USE_LOCALE_PREFIX === 'true' ? 'always' : 'as-needed',
+    localePrefix: process.env.I18N_USE_LOCALE_PREFIX,
     domains: [
         {
             domain: process.env.I18N_DOMAIN_NL,
@@ -16,6 +16,12 @@ export const routing = defineRouting({
             domain: process.env.I18N_DOMAIN_EN,
             defaultLocale: 'en',
             locales: ['en'],
-        }
-    ]
+        },
+    ],
+    pathnames: {
+        '/posts': {
+            nl: '/artikelen',
+            en: '/posts',
+        },
+    } as Record<string, Record<string, string> | string>,
 })

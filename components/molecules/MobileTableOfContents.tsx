@@ -1,10 +1,11 @@
 'use client'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { FC, useRef, useState } from 'react'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { cn } from '@/utils/cn'
+import { useTranslations } from 'next-intl'
 
 export interface ContentHeading {
     identifier: string
@@ -17,6 +18,7 @@ interface TableOfContentsProps {
 }
 
 const MobileTableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
+    const t = useTranslations('Post')
     const [collapsed, setCollapsed] = useState(true)
     const contentRef = useRef<HTMLDivElement>(null)
 
@@ -26,7 +28,7 @@ const MobileTableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
                 onClick={() => setCollapsed(!collapsed)}
                 className="flex flex-row px-sm py-xs justify-between items-center    text-primary"
             >
-                <span className="text-sm font-semibold">Inhoud</span>
+                <span className="text-sm font-semibold">{t('contents-mobile')}</span>
                 <FontAwesomeIcon
                     icon={faChevronDown}
                     className={cn(

@@ -8,12 +8,15 @@ import golfImg from '@/public/images/doodle/secondary/golf.png'
 
 import Heading from '@/atoms/Heading'
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 
-const HomepageCategories: FC = () => {
+const HomepageCategories: FC = async () => {
+    const t = await getTranslations('Categories')
+
     return (
         <div className="my-lg tablet:my-xl">
             <div className="text-center">
-                <Heading level={2} value="Artikelen per categorie" />
+                <Heading level={2} value={t('title')} />
             </div>
             <Image
                 src={golfImg}
@@ -24,28 +27,28 @@ const HomepageCategories: FC = () => {
             />
             <div className="grid grid-cols-2 desktop:grid-cols-4 gap-xs desktop:gap-md tablet:my-md">
                 <CategoryTile
-                    name="Azië"
-                    link="/azie"
+                    name={t('Asia.title')}
+                    link={`/${t('Asia.url-path')}`}
                     height={100}
                     image={azieImg}
                 />
                 <CategoryTile
-                    name="Europa"
-                    link="/europa"
+                    name={t('Europe.title')}
+                    link={`/${t('Europe.url-path')}`}
                     height={100}
                     image={europaImg}
                 />
 
                 <CategoryTile
-                    name="Midden-Amerika"
-                    link="/midden-amerika"
+                    name={t('CentralAmerica.title')}
+                    link={`/${t('CentralAmerica.url-path')}`}
                     image={amerikaImg}
                     height={100}
                 />
 
                 <CategoryTile
-                    name="Overig"
-                    link="/overig"
+                    name={t('Other.title')}
+                    link={`/${t('Other.url-path')}`}
                     height={100}
                     image={overigImg}
                 />

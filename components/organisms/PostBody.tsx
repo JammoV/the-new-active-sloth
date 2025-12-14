@@ -15,6 +15,7 @@ import Gallery from '@/organisms/Gallery'
 import Tip from '@/atoms/Tip'
 import { TypeBlogGalleryFields } from '@/client/contentful/types'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
+import PostLink from '@/atoms/PostLink'
 
 interface PostBodyProps {
     body: Document
@@ -28,13 +29,13 @@ const options = {
         ) => {
             if (node.data.target.sys.contentType.sys.id === 'blog') {
                 return (
-                    <a
-                        href={`/${node.data.target.fields.category.fields.slug}/${node.data.target.fields.slug}`}
+                    <PostLink
+                        categorySlug={node.data.target.fields.category.fields.slug}
+                        postSlug={node.data.target.fields.slug}
                         title={`Bekijk mijn artikel: ${node.data.target.fields.title}`}
-                        className="text-[#d2916b] font-bold underline underline-offset-4"
                     >
                         {children}
-                    </a>
+                    </PostLink>
                 )
             }
 

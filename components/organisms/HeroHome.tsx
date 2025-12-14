@@ -3,9 +3,15 @@ import type { FC } from 'react'
 import { getFeaturedBlogImage } from '@/client/contentful/BlogApi'
 import HeroWrapper from '@/organisms/HeroWrapper'
 import ScrollDown from '@/atoms/ScrollDown'
+import { getTranslations } from 'next-intl/server'
 
-const HeroHome: FC = async () => {
-    const featuredImage = await getFeaturedBlogImage()
+interface Props {
+    locale: string
+}
+
+const HeroHome: FC<Props> = async ({ locale }) => {
+    const featuredImage = await getFeaturedBlogImage(locale)
+    const t = await getTranslations('Home.Hero')
 
     return (
         <div
@@ -15,7 +21,7 @@ const HeroHome: FC = async () => {
                 <div className="flex flex-col items-center justify-center h-full gap-lg desktop:gap-sm">
                     <div className="flex flex-col tablet:flex-row items-center tablet:gap-xs">
                         <span className="font-fira leading-10 tablet:leading-normal text-4xl">
-                            Reis
+                            {t('travel')}
                         </span>
                         <span className="font-caveat leading-10 tablet:leading-normal text-4xl">
                             Relax
@@ -25,7 +31,7 @@ const HeroHome: FC = async () => {
                         </span>
                     </div>
                     <div className="mx-auto">
-                        <ScrollDown label="Ontdek" />
+                        <ScrollDown label={t('discover')} />
                     </div>
                 </div>
             </HeroWrapper>

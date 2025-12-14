@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 
 import {
     getBlogPostBySlug,
@@ -11,17 +11,18 @@ import PostArticleWrapper from '@/organisms/PostArticleWrapper'
 import PostSidebarWrapper from '@/organisms/PostSidebarWrapper'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-import HeroPostSkeleton from '@/skeletons/HeroPostSkeleton'
 import { draftMode } from 'next/headers'
+import { getContentFullLocale } from '@/utils/locales'
 
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ postSlug: string }>
+    params: Promise<{ locale: string, postSlug: string }>
 }): Promise<Metadata> {
-    const { postSlug } = await params
+    const { locale, postSlug } = await params
+    const contentfulLocale = getContentFullLocale(locale)
 
-    const post = await getBlogPostBySlug(postSlug)
+    const post = await getBlogPostBySlug(contentfulLocale, postSlug)
 
     if (!post?.id) return notFound()
 
@@ -34,12 +35,13 @@ export async function generateMetadata({
 export default async function Post({
     params,
 }: {
-    params: Promise<{ postSlug: string; categorySlug: string }>
+    params: Promise<{ locale: string, postSlug: string; }>
 }) {
-    const { postSlug } = await params
+    const { locale, postSlug } = await params
     const { isEnabled } = await draftMode()
+    const contentfulLocale = getContentFullLocale(locale)
 
-    const post = await getBlogPostBySlug(postSlug, isEnabled)
+    const post = await getBlogPostBySlug(contentfulLocale, postSlug, isEnabled)
 
     if (!post?.id) return notFound()
 
@@ -47,16 +49,14 @@ export default async function Post({
         <>
             <Header />
             <article>
-                <Suspense fallback={<HeroPostSkeleton />}>
-                    <HeroPost post={post} />
-                </Suspense>
+                <HeroPost post={post} />
                 <Container>
                     <div className="flex flex-col desktop:flex-row gap-md desktop:gap-xl">
                         <div className="desktop:w-[800px] flex flex-col gap-md">
                             <PostArticleWrapper post={post} />
                         </div>
                         <div className="flex flex-col grow gap-lg pt-md desktop:border-t-0 desktop:pt-lg border-t border-t-primary-light">
-                            <PostSidebarWrapper post={post} />
+                            <PostSidebarWrapper locale={contentfulLocale} post={post} />
                         </div>
                     </div>
                 </Container>
@@ -65,6 +65,6 @@ export default async function Post({
     )
 }
 
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams(): Promise<{ locale: string, slug: string }[]> {
     return await getDynamicBlogSlugs()
 }

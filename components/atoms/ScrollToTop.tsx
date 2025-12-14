@@ -3,8 +3,11 @@
 import type { FC } from 'react'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useTranslations } from 'next-intl'
 
 const ScrollToTop: FC = () => {
+    const t = useTranslations('Generic')
+
     const scrollToTop = () => {
         window.scrollTo({
             top: 0,
@@ -21,7 +24,7 @@ const ScrollToTop: FC = () => {
                 icon={faArrowUp}
                 className="w-4 desktop:hidden desktop:group-hover:inline-block group-hover:animate-bounce"
             />
-            Terug naar boven
+            {t('back-to-top')}
         </span>
     )
 }

@@ -1,14 +1,21 @@
-import React, { ReactElement } from 'react'
+import React, { type FC } from 'react'
 import { getBlogPosts } from '@/client/contentful/BlogApi'
 import PostTile from '@/molecules/PostTile'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import Button from '@/atoms/Button'
 import Heading from '@/atoms/Heading'
 import golfImg from '@/public/images/doodle/secondary/golf.png'
 import Image from 'next/image'
+import { getLocale, getTranslations } from 'next-intl/server'
 
-const HomepageRecentPosts = async (): Promise<ReactElement> => {
-    const posts = await getBlogPosts(6, true)
+interface Props {
+    locale: string
+}
+
+const HomepageRecentPosts: FC<Props> = async ({ locale }) => {
+    const t = await getTranslations('Generic')
+
+    const posts = await getBlogPosts(locale, 6, true)
 
     if (!posts) {
         return <></>
@@ -17,7 +24,7 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
     return (
         <div className="my-lg tablet:my-xl">
             <div className="text-center">
-                <Heading level={2} value="Recente artikelen" />
+                <Heading level={2} value={t('recent-posts')} />
             </div>
             <Image
                 src={golfImg}
@@ -32,8 +39,8 @@ const HomepageRecentPosts = async (): Promise<ReactElement> => {
                 ))}
             </div>
             <div className="my-md text-center">
-                <Link href="/artikelen">
-                    <Button variant="secondary">Bekijk alle artikelen</Button>
+                <Link href="/posts">
+                    <Button variant="secondary">{t('view-all-posts')}</Button>
                 </Link>
             </div>
         </div>

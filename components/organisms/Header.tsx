@@ -2,10 +2,11 @@
 
 import { FC, useState, useEffect, useRef } from 'react'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { Hamburger } from '@/atoms/Hamburger'
 import Container from '@/atoms/Container'
 import { cn } from '@/utils/cn'
+import { useTranslations } from 'next-intl'
 
 type HeaderProps = {
     activeCategory?: string
@@ -13,6 +14,8 @@ type HeaderProps = {
 }
 
 const Header: FC<HeaderProps> = ({ activeCategory, withBorder = false }) => {
+    const tCategories = useTranslations('Categories')
+    const tGeneric = useTranslations('Generic')
     const [isOpen, setIsOpen] = useState(false)
     const [visible, setVisible] = useState(true)
     const [atTop, setAtTop] = useState(true)
@@ -73,20 +76,20 @@ const Header: FC<HeaderProps> = ({ activeCategory, withBorder = false }) => {
 
     const categories = [
         {
-            text: 'Azië',
-            href: '/azie',
+            text: tCategories('Asia.title'),
+            href: tCategories('Asia.url-path'),
         },
         {
-            text: 'Midden Amerika',
-            href: '/midden-amerika',
+            text: tCategories('CentralAmerica.title'),
+            href: tCategories('CentralAmerica.url-path'),
         },
         {
-            text: 'Europa',
-            href: '/europa',
+            text: tCategories('Europe.title'),
+            href: tCategories('Europe.url-path'),
         },
         {
-            text: 'Overig',
-            href: '/overig',
+            text: tCategories('Other.title'),
+            href: tCategories('Other.url-path'),
         },
     ]
 
@@ -114,7 +117,7 @@ const Header: FC<HeaderProps> = ({ activeCategory, withBorder = false }) => {
                             {categories.map(({ text, href }) => (
                                 <Link
                                     key={text}
-                                    href={href}
+                                    href={`/${href}`}
                                     className={cn(
                                         'font-lato font-black text-lg no-underline',
                                         'hover:underline hover:decoration-secondary decoration-4 underline-offset-4',
@@ -142,19 +145,19 @@ const Header: FC<HeaderProps> = ({ activeCategory, withBorder = false }) => {
                 <Container>
                     <div className="flex flex-col gap-sm border-t border-b border-primary-lighter py-sm">
                         <Link
-                            key={'alle'}
-                            href={'/artikelen'}
+                            key={'all'}
+                            href={'/posts'}
                             className={cn(
                                 'font-lato decoration-4 underline-offset-4'
                             )}
                             onClick={() => setIsOpen(false)}
                         >
-                            Alle artikelen
+                            {tGeneric('all-posts')}
                         </Link>
                         {categories.map(({ text, href }) => (
                             <Link
                                 key={text}
-                                href={href}
+                                href={`/${href}`}
                                 className={cn(
                                     'font-lato decoration-4 underline-offset-4',
                                     activeCategory === text &&

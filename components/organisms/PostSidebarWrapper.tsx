@@ -7,9 +7,13 @@ import { BlogPost } from '@/interfaces/BlogPost'
 
 interface PostSidebarWrapperProps {
     post: BlogPost
+    locale: string
 }
 
-const PostSidebarWrapper: FC<PostSidebarWrapperProps> = async ({ post }) => {
+const PostSidebarWrapper: FC<PostSidebarWrapperProps> = async ({
+    post,
+    locale,
+}) => {
     if (!post.body) {
         return null
     }
@@ -19,7 +23,11 @@ const PostSidebarWrapper: FC<PostSidebarWrapperProps> = async ({ post }) => {
     return (
         <>
             <TableOfContents headers={contentHeadings} />
-            <PostSidebarTiles postId={post.id} categoryId={post.category.id} />
+            <PostSidebarTiles
+                locale={locale}
+                postId={post.id}
+                categoryId={post.category.id}
+            />
         </>
     )
 }

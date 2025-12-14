@@ -9,10 +9,13 @@ import {
 import { mapBlogCategory } from '@/client/mappers/BlogCategoryMapper'
 import { BlogCategory } from '@/interfaces/BlogCategory'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
+import { getContentFullLocale } from '@/utils/locales'
 
-export const getBlogPostById = async (id: string): Promise<BlogPost | null> => {
+export const getBlogPostById = async (id: string, locale: string): Promise<BlogPost | null> => {
     // @ts-ignore
-    const response = await client.getEntry<TypeBlog>(id)
+    const response = await client.getEntry<TypeBlog>(id, {
+        locale
+    })
 
     if (!response) {
         return null
@@ -22,6 +25,7 @@ export const getBlogPostById = async (id: string): Promise<BlogPost | null> => {
 }
 
 export const getBlogPostBySlug = async (
+    locale: string,
     slug: string,
     preview = false
 ): Promise<BlogPost | null> => {
@@ -33,6 +37,7 @@ export const getBlogPostBySlug = async (
         limit: 1,
         include: 3,
         'fields.slug': slug,
+        locale
     })
 
     if (!response.items.length) {
@@ -42,7 +47,7 @@ export const getBlogPostBySlug = async (
     return mapBlogPost(response.items[0] as TypeBlog)
 }
 
-export const getFeaturedBlogPost = async (): Promise<BlogPost | null> => {
+export const getFeaturedBlogPost = async (locale: string): Promise<BlogPost | null> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
         content_type: 'blog',
@@ -50,6 +55,7 @@ export const getFeaturedBlogPost = async (): Promise<BlogPost | null> => {
         include: 2,
         order: '-fields.publishedAt',
         'fields.featured': true,
+        locale,
     })
 
     if (!response.items.length) {
@@ -59,13 +65,14 @@ export const getFeaturedBlogPost = async (): Promise<BlogPost | null> => {
     return mapBlogPost(response.items[0] as TypeBlog)
 }
 
-export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
+export const getFeaturedBlogImage = async ( locale: string ): Promise<BlogImage | null> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlogImage>({
         content_type: 'blogImage',
         limit: 1,
         include: 2,
         'fields.featured': true,
+        locale,
     })
 
     if (!response.items.length) {
@@ -77,13 +84,14 @@ export const getFeaturedBlogImage = async (): Promise<BlogImage | null> => {
 
 export const getDynamicBlogSlugs = async (
     limit = 30
-): Promise<{ slug: string }[]> => {
+): Promise<{ locale: string, slug: string }[]> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
         content_type: 'blog',
         select: ['fields.slug', 'fields.category'],
         order: '-fields.updatedAt',
         limit,
+        locale: getContentFullLocale('nl'),
     })
 
     if (!response.items.length) {
@@ -92,6 +100,7 @@ export const getDynamicBlogSlugs = async (
 
     return response.items.map((post) => {
         return {
+            locale: 'nl',
             // @ts-ignore
             slug: `/${post.fields.category.fields.slug}/${post.fields.slug}`,
         }
@@ -99,6 +108,7 @@ export const getDynamicBlogSlugs = async (
 }
 
 export const getBlogPosts = async (
+    locale: string,
     limit = 50,
     skipFeatured = false
 ): Promise<BlogPost[]> => {
@@ -117,6 +127,7 @@ export const getBlogPosts = async (
         'fields.featured[ne]': skipFeatured ? true : undefined,
         order: '-fields.publishedAt',
         limit,
+        locale,
     })
 
     if (!response.items.length) {
@@ -127,6 +138,7 @@ export const getBlogPosts = async (
 }
 
 export const getBlogCategoryBySlug = async (
+    locale: string,
     slug: string,
     preview = false
 ): Promise<BlogCategory | null> => {
@@ -138,6 +150,7 @@ export const getBlogCategoryBySlug = async (
         limit: 1,
         include: 3,
         'fields.slug': slug,
+        locale,
     })
 
     if (!response.items.length) {
@@ -148,6 +161,7 @@ export const getBlogCategoryBySlug = async (
 }
 
 export const getBlogPostsByCategoryId = async (
+    locale: string,
     categoryId: string,
     limit = 3,
     postIdToExclude?: string
@@ -167,6 +181,7 @@ export const getBlogPostsByCategoryId = async (
         'sys.id[ne]': postIdToExclude,
         order: '-fields.publishedAt',
         limit,
+        locale,
     })
 
     if (!response.items.length) {

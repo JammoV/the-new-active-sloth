@@ -13,7 +13,7 @@ const HeroWrapper: FC<HeroWrapperProps> = async ({ image, children }) => {
         <div
             className={`relative bg-primary desktop:rounded-xl h-full w-full `}
         >
-            {image && (
+            {image?.image.fields.file?.url && (
                 <Image
                     src={'https:' + image.image.fields.file?.url}
                     className={`z-0 desktop:rounded-xl object-${image?.position}`}

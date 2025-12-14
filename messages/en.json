@@ -1,3 +1,56 @@
 {
-  "welcome": "Welcome"
+    "Metadata": {
+        "site-title": "The Active Sloth - Travelblog",
+        "site-description": "Travel, relax repeat! Find the best travel inspiration at The Active Sloth",
+        "category-title": "Travel posts about {category} | The Active Sloth",
+        "category-description": "Travel, relax repeat! Find the best travel inspiration about {category} at The Active Sloth"
+    },
+    "Generic": {
+        "all-posts": "All posts",
+        "recent-posts": "Recent posts",
+        "view-all-posts": "View all posts",
+        "view-post": "View post",
+        "featured-post": "Featured artikel",
+        "posts-about": "Posts about {topic}",
+        "back-to-top": "Back to top"
+    },
+    "Categories": {
+        "title": "Posts by category",
+        "Asia": {
+            "title": "Asia",
+            "url-path": "asia"
+        },
+        "Europe": {
+            "title": "Europe",
+            "url-path": "europe"
+        },
+        "CentralAmerica": {
+            "title": "Central America",
+            "url-path": "central-america"
+        },
+        "Other": {
+            "title": "Other",
+            "url-path": "other"
+        }
+    },
+    "Home": {
+        "Hero": {
+            "travel": "Travel",
+            "discover": "Discover"
+        },
+        "About": {
+            "img-alt": "Eline, the storywriter of The Active Sloth",
+            "title": "<bold>Hi!</bold> I am Eline",
+            "subtitle": "Welcome to my personal travel blog <bold>The Active Sloth!</bold>",
+            "content": "Whether you enjoy active adventure or relaxing moments, here you'll find tips, stories, and inspiration to combine the best of both worlds.",
+            "view-my-posts": "View my posts"
+        }
+    },
+    "Post": {
+        "created-at": "Published on {date}",
+        "updated-at": "updated on {date}",
+        "contents": "Contents",
+        "contents-mobile": "Contents",
+        "also-see": "Also see"
+    }
 }

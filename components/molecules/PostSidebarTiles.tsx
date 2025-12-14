@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
-import Link from 'next/link'
 import { getBlogPostsByCategoryId } from '@/client/contentful/BlogApi'
 import PostTile from '@/molecules/PostTile'
-import Heading from '@/atoms/Heading'
+import { getTranslations } from 'next-intl/server'
 
 interface PostSidebarTilesProps {
+    locale: string
     postId: string
     categoryId: string
 }
@@ -14,10 +14,13 @@ const getRandomEntries = <T,>(arr: T[], num: number): T[] => {
 }
 
 const PostSidebarTiles: FC<PostSidebarTilesProps> = async ({
+    locale,
     postId,
     categoryId,
 }) => {
-    const posts = await getBlogPostsByCategoryId(categoryId, 6, postId)
+    const t = await getTranslations('Post')
+
+    const posts = await getBlogPostsByCategoryId(locale, categoryId, 6, postId)
 
     if (posts.length === 0) {
         return <></>
@@ -27,7 +30,7 @@ const PostSidebarTiles: FC<PostSidebarTilesProps> = async ({
 
     return (
         <div>
-            <h3 className="text-xl font-noto mb-sm ">Bekijk ook</h3>
+            <h3 className="text-xl font-noto mb-sm ">{t('also-see')}</h3>
             <div className="flex flex-col gap-xs">
                 {randomPosts.map((post) => (
                     <PostTile key={post.id} post={post} />

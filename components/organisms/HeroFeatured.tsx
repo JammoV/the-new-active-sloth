@@ -2,14 +2,21 @@ import type { FC } from 'react'
 
 import { getFeaturedBlogPost } from '@/client/contentful/BlogApi'
 import Button from '@/atoms/Button'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import ResponsiveImage from '@/atoms/ResponsiveImage'
 import Container from '@/atoms/Container'
 import vliegtuigeImg from '@/public/images/doodle/primary-light/vliegtuigje.png'
 import Image from 'next/image'
+import { getLocale, getTranslations } from 'next-intl/server'
 
-const HeroFeatured: FC = async () => {
-    const featuredBlog = await getFeaturedBlogPost()
+interface Props {
+    locale: string
+}
+
+const HeroFeatured: FC<Props> = async ({ locale }) => {
+    const t = await getTranslations('Generic')
+
+    const featuredBlog = await getFeaturedBlogPost(locale)
 
     if (!featuredBlog) return null
 
@@ -21,7 +28,7 @@ const HeroFeatured: FC = async () => {
                         <div className="aspect-video w-full relative desktop:mx-lg">
                             <Link
                                 href={`/${featuredBlog.category.slug}/${featuredBlog.slug}`}
-                                title={`Bekijk artikel: ${featuredBlog.title}`}
+                                title={`${t('view-post')}: ${featuredBlog.title}`}
                             >
                                 <ResponsiveImage
                                     image={featuredBlog.image}
@@ -37,8 +44,8 @@ const HeroFeatured: FC = async () => {
                             className="absolute top-0 opacity-20 desktop:left-lg max-desktop:right-lg max-tablet:hidden max-desktop:max-w-[300px]"
                         />
                         <div className="relative z-30 desktop:my-lg">
-                            <span className="font-noto text-primary">
-                                HIGHLIGHT ARTIKEL
+                            <span className="font-noto text-primary uppercase">
+                                {t('featured-post')}
                             </span>
                             <h3 className="font-noto text-3xl">
                                 {featuredBlog.title}
@@ -48,10 +55,10 @@ const HeroFeatured: FC = async () => {
                             </p>
                             <Link
                                 href={`/${featuredBlog.category.slug}/${featuredBlog.slug}`}
-                                title={`Bekijk artikel: ${featuredBlog.title}`}
+                                title={`${t('view-post')}: ${featuredBlog.title}`}
                             >
                                 <Button variant="secondary">
-                                    Bekijk artikel
+                                    {t('view-post')}
                                 </Button>
                             </Link>
                         </div>

@@ -1,5 +1,7 @@
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import type { FC } from 'react'
+import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 
 export interface ContentHeading {
     identifier: string
@@ -11,10 +13,12 @@ interface TableOfContentsProps {
     headers: ContentHeading[]
 }
 
-const TableOfContents: FC<TableOfContentsProps> = ({ headers }) => {
+const TableOfContents: FC<TableOfContentsProps> = async ({ headers }) => {
+    const t = await getTranslations('Post')
+
     return (
         <div className="hidden desktop:flex flex-col  bg-primary-lighter rounded-xl py-md px-lg">
-            <span className="font-noto text-[22px] mb-sm">Inhoudsopgave</span>
+            <span className="font-noto text-[22px] mb-sm">{t('contents')}</span>
 
             {headers.map((header) => (
                 <Link

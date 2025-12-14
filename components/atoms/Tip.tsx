@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import type { FC } from 'react'
 import { BlogTip } from '@/interfaces/BlogTip'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import ResponsiveImage from '@/atoms/ResponsiveImage'
 import { cn } from '@/utils/cn'
 

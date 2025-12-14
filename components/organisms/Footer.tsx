@@ -3,6 +3,7 @@ import React from 'react'
 
 import Container from '@/atoms/Container'
 import ScrollToTop from '@/atoms/ScrollToTop'
+import { getTranslations } from 'next-intl/server'
 
 const Footer: FC = () => {
     return (

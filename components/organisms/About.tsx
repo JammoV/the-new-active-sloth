@@ -2,11 +2,13 @@ import Image from 'next/image'
 import type { FC } from 'react'
 import aboutImg from '@/public/images/ElineSurfSkate.jpeg'
 import kofferImg from '@/public/images/doodle/primary/koffer.png'
-import ScrollDown from '@/atoms/ScrollDown'
 import Button from '@/atoms/Button'
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
+import { getTranslations } from 'next-intl/server'
 
-const About: FC = () => {
+const About: FC = async  () => {
+    const t  = await getTranslations('Home.About')
+
     return (
         <div className="relative flex flex-col items-center bg-primary-light tablet:min-h-[700px] py-[84px] desktop:py-[148px]">
             <div className="h-[60px] desktop:h-[100px] absolute left-0 top-0 w-full bg-[url('/images/doodle/primary/tegel.png')] bg-contain opacity-50"></div>
@@ -24,21 +26,21 @@ const About: FC = () => {
                 </div>
                 <div className="px-lg tablet:px-0 tablet:flex-1 flex flex-col gap-sm text-center tablet:text-left ">
                     <div className="px-md tablet:px-0 font-noto text-2xl tablet:text-3xl">
-                        <span className="font-bold ">Hoi!</span> Ik ben Eline
+                        {t.rich('title', {
+                            bold: (children) => <span className="font-bold ">{children}</span>,
+                        })}
                     </div>
                     <p className="px-md tablet:px-0 tablet:text-lg max-w-[340px]">
-                        Welkom op mijn persoonlijke travel blog{' '}
-                        <b>The Active Sloth!</b>
+                        {t.rich('subtitle', {
+                            bold: (children) => <span className="font-bold">{children}</span>,
+                        })}
                     </p>
                     <p className="px-md mb-sm tablet:px-0 tablet:text-lg max-w-[360px]">
-                        Of je nu houdt van actief avontuur of juist van
-                        ontspannen momenten, hier vind je tips, verhalen en
-                        inspiratie om het beste van beide werelden te
-                        combineren.
+                        {t('content')}
                     </p>
-                    <Link href="/artikelen">
+                    <Link href="/posts">
                         <Button variant="secondary">
-                            Bekijk mijn artikelen
+                            {t('view-my-posts')}
                         </Button>
                     </Link>
                 </div>
