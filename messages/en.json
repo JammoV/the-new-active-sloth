@@ -1,9 +1,11 @@
 {
     "Metadata": {
         "site-title": "The Active Sloth - Travelblog",
-        "site-description": "Travel, relax repeat! Find the best travel inspiration at The Active Sloth",
+        "site-description": "Travel, relax, repeat! Find the best travel inspiration at The Active Sloth",
         "category-title": "Travel posts about {category} | The Active Sloth",
-        "category-description": "Travel, relax repeat! Find the best travel inspiration about {category} at The Active Sloth"
+        "category-description": "Travel, relax, repeat! Find the best travel inspiration about {category} at The Active Sloth",
+        "posts-title": "ALl posts | The Active Sloth",
+        "posts-description": "Travel, relax, repeat! Find the best travel inspiration at The Active Sloth"
     },
     "Generic": {
         "all-posts": "All posts",
