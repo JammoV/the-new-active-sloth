@@ -6,8 +6,11 @@ import {
 import React from 'react'
 import Header from '@/organisms/Header'
 import CategoryPosts from '@/molecules/CategoryPosts'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { getContentFullLocale } from '@/utils/locales'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata({
     params,
@@ -36,6 +39,13 @@ export default async function CategoryPage({
 }) {
     const t = await getTranslations('Generic')
     const { locale, categorySlug } = await params
+
+    if (!hasLocale(routing.locales, locale)) {
+        notFound()
+    }
+
+    // Enable static rendering
+    setRequestLocale(locale)
 
     const contentfulLocale = getContentFullLocale(locale)
 

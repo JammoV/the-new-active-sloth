@@ -13,6 +13,9 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import { draftMode } from 'next/headers'
 import { getContentFullLocale } from '@/utils/locales'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { setRequestLocale } from 'next-intl/server'
 
 export async function generateMetadata({
     params,
@@ -38,6 +41,14 @@ export default async function Post({
     params: Promise<{ locale: string, postSlug: string; }>
 }) {
     const { locale, postSlug } = await params
+
+    if (!hasLocale(routing.locales, locale)) {
+        notFound()
+    }
+
+    // Enable static rendering
+    setRequestLocale(locale)
+
     const { isEnabled } = await draftMode()
     const contentfulLocale = getContentFullLocale(locale)
 

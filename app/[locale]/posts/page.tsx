@@ -5,7 +5,10 @@ import PostTile from '@/molecules/PostTile'
 import React from 'react'
 import Header from '@/organisms/Header'
 import { getContentFullLocale } from '@/utils/locales'
-import { getTranslations } from 'next-intl/server'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { hasLocale } from 'next-intl'
+import { routing } from '@/i18n/routing'
+import { notFound } from 'next/navigation'
 
 export async function generateMetadata() {
     const t = await getTranslations('Metadata')
@@ -17,6 +20,14 @@ export async function generateMetadata() {
 
 export default async function PostsPage({ params }: PageProps<'/[locale]'>) {
     const { locale } = await params
+
+    if (!hasLocale(routing.locales, locale)) {
+        notFound()
+    }
+
+    // Enable static rendering
+    setRequestLocale(locale)
+
     const contentfulLocale = getContentFullLocale(locale)
     const posts = await getBlogPosts(contentfulLocale)
     return (
