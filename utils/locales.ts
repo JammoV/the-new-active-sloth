@@ -8,3 +8,13 @@ export const getContentFullLocale = (locale: string) => {
             return 'nl-NL'
     }
 }
+
+export const getRoutingLocale = (locale: string): 'nl' | 'en' => {
+    const routingLocale = locale.slice(0, 2)
+
+    if (routingLocale === 'en') {
+        return 'en'
+    }
+
+    return 'nl'
+}
