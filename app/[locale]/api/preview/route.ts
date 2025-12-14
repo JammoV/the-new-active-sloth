@@ -11,6 +11,8 @@ export async function GET(request: Request) {
     const locale = searchParams.get('locale') || 'nl-NL'
     const routingLocale = getRoutingLocale(locale)
 
+    console.log(`Preview request received with slug: ${slug} and locale: ${locale}`)
+
     if (token !== process.env.CONTENTFUL_PREVIEW_URL_TOKEN || !slug) {
         return new Response('Invalid token', { status: 401 })
     }
@@ -26,7 +28,9 @@ export async function GET(request: Request) {
 
     draft.enable()
 
-    redirect({
+    console.log(`Preview mode enabled for post: ${post.title} (${post.slug})`)
+
+    return redirect({
         href: `/${post.category.slug}/${post.slug}`,
         locale: routingLocale
     })
