@@ -6,10 +6,7 @@ import {
 import React from 'react'
 import Header from '@/organisms/Header'
 import CategoryPosts from '@/molecules/CategoryPosts'
-import { getTranslations, setRequestLocale } from 'next-intl/server'
-import { hasLocale } from 'next-intl'
-import { routing } from '@/i18n/routing'
-import { notFound } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 export async function generateMetadata({
     params,
@@ -34,15 +31,12 @@ export default async function CategoryPage({
 }: {
     params: Promise<{ locale: string; categorySlug: string }>
 }) {
-    const t = await getTranslations('Generic')
     const { locale, categorySlug } = await params
 
-    if (!hasLocale(routing.locales, locale)) {
-        notFound()
-    }
-
-    // Enable static rendering
-    setRequestLocale(locale)
+    const t = await getTranslations({
+        namespace: 'Generic',
+        locale: locale,
+    })
 
     const category = await getBlogCategoryBySlug(locale, categorySlug)
 
@@ -67,4 +61,19 @@ export default async function CategoryPage({
             </div>
         </Container>
     )
+}
+
+export async function generateStaticParams(): Promise<
+    { locale: string; slug: string }[]
+> {
+    return [
+        { locale: 'en-US', slug: '/asia' },
+        { locale: 'en-US', slug: '/central-america' },
+        { locale: 'en-US', slug: '/europe' },
+        { locale: 'en-US', slug: '/other' },
+        { locale: 'nl-NL', slug: '/azie' },
+        { locale: 'nl-NL', slug: '/centraal-amerika' },
+        { locale: 'nl-NL', slug: '/europa' },
+        { locale: 'nl-NL', slug: '/overig' },
+    ]
 }

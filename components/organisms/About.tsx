@@ -6,8 +6,15 @@ import Button from '@/atoms/Button'
 import { Link } from '@/i18n/navigation'
 import { getTranslations } from 'next-intl/server'
 
-const About: FC = async  () => {
-    const t  = await getTranslations('Home.About')
+interface Props {
+    locale: string
+}
+
+const About:  FC<Props> = async ({ locale }) => {
+    const t  = await getTranslations({
+        namespace: 'Home.About',
+        locale
+    })
 
     return (
         <div className="relative flex flex-col items-center bg-primary-light tablet:min-h-[700px] py-[84px] desktop:py-[148px]">

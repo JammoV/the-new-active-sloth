@@ -14,7 +14,10 @@ interface Props {
 }
 
 const HeroFeatured: FC<Props> = async ({ locale }) => {
-    const t = await getTranslations('Generic')
+    const t = await getTranslations({
+        namespace: 'Generic',
+        locale
+    })
 
     const featuredBlog = await getFeaturedBlogPost(locale)
 

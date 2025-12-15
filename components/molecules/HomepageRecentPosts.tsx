@@ -13,7 +13,10 @@ interface Props {
 }
 
 const HomepageRecentPosts: FC<Props> = async ({ locale }) => {
-    const t = await getTranslations('Generic')
+    const t = await getTranslations({
+        namespace: 'Generic',
+        locale
+    })
 
     const posts = await getBlogPosts(locale, 6, true)
 

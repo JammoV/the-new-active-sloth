@@ -29,10 +29,10 @@ export default async function Home({ params }: PageProps<'/[locale]'>) {
 
             <HeroHome locale={locale} />
 
-            <About />
+            <About locale={locale} />
 
             <Container>
-                <HomepageCategories />
+                <HomepageCategories locale={locale} />
             </Container>
             <HeroFeatured locale={locale} />
 

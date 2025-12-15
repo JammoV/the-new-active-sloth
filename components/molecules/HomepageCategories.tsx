@@ -10,8 +10,15 @@ import Heading from '@/atoms/Heading'
 import Image from 'next/image'
 import { getTranslations } from 'next-intl/server'
 
-const HomepageCategories: FC = async () => {
-    const t = await getTranslations('Categories')
+interface Props {
+    locale: string
+}
+
+const HomepageCategories:  FC<Props> = async ({ locale }) => {
+    const t = await getTranslations({
+        namespace: 'Categories',
+        locale
+    })
 
     return (
         <div className="my-lg tablet:my-xl">

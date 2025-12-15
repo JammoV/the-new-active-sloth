@@ -11,7 +11,10 @@ interface Props {
 
 const HeroHome: FC<Props> = async ({ locale }) => {
     const featuredImage = await getFeaturedBlogImage(locale)
-    const t = await getTranslations('Home.Hero')
+    const t = await getTranslations({
+        namespace: 'Home.Hero',
+        locale
+    })
 
     return (
         <div
