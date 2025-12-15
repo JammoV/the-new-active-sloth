@@ -73,13 +73,13 @@ export async function generateStaticParams(): Promise<
     { locale: string; slug: string }[]
 > {
     return [
-        { locale: 'en', slug: 'asia' },
-        { locale: 'en', slug: 'central-america' },
-        { locale: 'en', slug: 'europe' },
-        { locale: 'en', slug: 'other' },
-        { locale: 'nl', slug: 'azie' },
-        { locale: 'nl', slug: 'centraal-amerika' },
-        { locale: 'nl', slug: 'europa' },
-        { locale: 'nl', slug: 'overig' },
+        { locale: 'en-US', slug: 'asia' },
+        { locale: 'en-US', slug: 'central-america' },
+        { locale: 'en-US', slug: 'europe' },
+        { locale: 'en-US', slug: 'other' },
+        { locale: 'nl-NL', slug: 'azie' },
+        { locale: 'nl-NL', slug: 'centraal-amerika' },
+        { locale: 'nl-NL', slug: 'europa' },
+        { locale: 'nl-NL', slug: 'overig' },
     ]
 }

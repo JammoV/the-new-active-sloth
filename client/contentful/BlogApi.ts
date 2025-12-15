@@ -99,7 +99,7 @@ export const getDynamicBlogSlugs = async (
 
     return response.items.map((post) => {
         return {
-            locale: 'nl',
+            locale: 'nl-NL',
             // @ts-ignore
             slug: `/${post.fields.category.fields.slug}/${post.fields.slug}`,
         }
