@@ -68,18 +68,3 @@ export default async function CategoryPage({
         </Container>
     )
 }
-
-export async function generateStaticParams(): Promise<
-    { locale: string; slug: string }[]
-> {
-    return [
-        { locale: 'en-US', slug: 'asia' },
-        { locale: 'en-US', slug: 'central-america' },
-        { locale: 'en-US', slug: 'europe' },
-        { locale: 'en-US', slug: 'other' },
-        { locale: 'nl-NL', slug: 'azie' },
-        { locale: 'nl-NL', slug: 'centraal-amerika' },
-        { locale: 'nl-NL', slug: 'europa' },
-        { locale: 'nl-NL', slug: 'overig' },
-    ]
-}
