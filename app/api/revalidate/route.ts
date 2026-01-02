@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
             revalidated: false,
             now: Date.now(),
             message: 'Missing entity ID to revalidate',
+            locale,
+            entityId,
         })
     }
 
@@ -26,6 +28,8 @@ export async function POST(request: NextRequest) {
             revalidated: false,
             now: Date.now(),
             message: 'Missing locale to revalidate',
+            locale,
+            entityId,
         })
     }
 
@@ -43,12 +47,16 @@ export async function POST(request: NextRequest) {
                     revalidated: true,
                     now: Date.now(),
                     message: 'Revalidated',
+                    locale,
+                    entityId,
                 })
             } else {
                 return Response.json({
                     revalidated: false,
                     now: Date.now(),
                     message: 'Could not find post to revalidate',
+                    locale,
+                    entityId,
                 })
             }
         } catch (error) {
@@ -56,6 +64,9 @@ export async function POST(request: NextRequest) {
                 revalidated: false,
                 now: Date.now(),
                 message: 'Failed to retrieve post to revalidate',
+                locale,
+                entityId,
+                error: (error as Error).message,
             })
         }
     }
