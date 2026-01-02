@@ -53,6 +53,7 @@
         "updated-at": "updated on {date}",
         "contents": "Contents",
         "contents-mobile": "Contents",
-        "also-see": "Also see"
+        "also-see": "Also see",
+        "view-on-google-maps": "View on Google Maps"
     }
 }

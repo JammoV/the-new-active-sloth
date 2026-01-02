@@ -53,6 +53,7 @@
         "updated-at": "bijgewerkt op {date}",
         "contents": "Inhoudsopgave",
         "contents-mobile": "Inhoud",
-        "also-see": "Bekijk ook"
+        "also-see": "Bekijk ook",
+        "view-on-google-maps": "Bekijk op Google Maps"
     }
 }
