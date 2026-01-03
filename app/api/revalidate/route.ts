@@ -3,16 +3,16 @@ import { headers } from 'next/headers'
 import type { NextRequest } from 'next/server'
 import { getBlogPostById } from '@/client/contentful/BlogApi'
 
-const revalidatePost = async (entityId: string, locale: string): Promise<boolean> => {
+const revalidatePost = async (
+    entityId: string,
+    locale: string
+): Promise<boolean> => {
     try {
         const post = await getBlogPostById(entityId, locale)
 
         if (post) {
             revalidatePath(`/${post.category.slug}/${post.slug}`)
             revalidatePath(`/${post.category.slug}`)
-            revalidatePath(`/artikelen`)
-            revalidatePath(`/`)
-
             return true
         } else {
             return false
@@ -44,6 +44,9 @@ export async function POST(request: NextRequest) {
     if (entityId) {
         const nlResult = await revalidatePost(entityId, 'nl-NL')
         const enResult = await revalidatePost(entityId, 'en-US')
+        revalidatePath(`/artikelen`)
+        revalidatePath(`/posts`)
+        revalidatePath(`/`)
 
         if (nlResult || enResult) {
             return Response.json({
