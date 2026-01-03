@@ -76,9 +76,9 @@ export default async function Post({
 export async function generateStaticParams({
     params,
 }: {
-    params: Promise<{ locale: string }>
+    params: Awaited<PageProps<'/[locale]/[categorySlug]/[postSlug]'>['params']>
 }): Promise<{ locale: string; slug: string }[]> {
-    const { locale } = await params
+    const { locale } = params
 
     return await getDynamicBlogSlugs(locale)
 }
