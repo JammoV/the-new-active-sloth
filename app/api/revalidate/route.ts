@@ -11,11 +11,11 @@ const revalidatePost = async (
         const post = await getBlogPostById(entityId, locale)
 
         if (post) {
-            revalidatePath(`/${post.category.slug}/${post.slug}`)
-            revalidatePath(`/${post.category.slug}`)
+            revalidatePath(`/${locale}/${post.category.slug}/${post.slug}`)
+            revalidatePath(`/${locale}/${post.category.slug}`)
             return [
-                `/${post.category.slug}/${post.slug}`,
-                `/${post.category.slug}`,
+                `/${locale}/${post.category.slug}/${post.slug}`,
+                `/${locale}/${post.category.slug}`,
             ]
         } else {
             return []
@@ -47,9 +47,11 @@ export async function POST(request: NextRequest) {
     if (entityId) {
         const nlResults = await revalidatePost(entityId, 'nl-NL')
         const enResults = await revalidatePost(entityId, 'en-US')
-        revalidatePath(`/artikelen`)
-        revalidatePath(`/posts`)
+        revalidatePath(`/nl-NL/artikelen`)
+        revalidatePath(`/en-US/posts`)
         revalidatePath(`/`)
+        revalidatePath(`/nl-NL`)
+        revalidatePath(`/en-US`)
 
         if (nlResults.length > 0 || enResults.length > 0) {
             return Response.json({
