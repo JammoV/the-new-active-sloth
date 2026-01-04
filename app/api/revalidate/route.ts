@@ -6,19 +6,22 @@ import { getBlogPostById } from '@/client/contentful/BlogApi'
 const revalidatePost = async (
     entityId: string,
     locale: string
-): Promise<boolean> => {
+): Promise<string[]> => {
     try {
         const post = await getBlogPostById(entityId, locale)
 
         if (post) {
             revalidatePath(`/${post.category.slug}/${post.slug}`)
             revalidatePath(`/${post.category.slug}`)
-            return true
+            return [
+                `/${post.category.slug}/${post.slug}`,
+                `/${post.category.slug}`,
+            ]
         } else {
-            return false
+            return []
         }
     } catch (error) {
-        return false
+        return []
     }
 }
 
@@ -42,18 +45,19 @@ export async function POST(request: NextRequest) {
     }
 
     if (entityId) {
-        const nlResult = await revalidatePost(entityId, 'nl-NL')
-        const enResult = await revalidatePost(entityId, 'en-US')
+        const nlResults = await revalidatePost(entityId, 'nl-NL')
+        const enResults = await revalidatePost(entityId, 'en-US')
         revalidatePath(`/artikelen`)
         revalidatePath(`/posts`)
         revalidatePath(`/`)
 
-        if (nlResult || enResult) {
+        if (nlResults.length > 0 || enResults.length > 0) {
             return Response.json({
                 revalidated: true,
                 now: Date.now(),
                 message: 'Revalidated',
                 entityId,
+                paths: { 'nl-NL': nlResults, 'en-US': enResults },
             })
         } else {
             return Response.json({
