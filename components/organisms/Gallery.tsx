@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 
 import ResponsiveImage from '@/atoms/ResponsiveImage'
+import MapImage from '@/atoms/MapImage'
 import { BlogImage } from '@/interfaces/BlogPost'
 
 const getGalleryDisplayType = (display: string): GalleryDisplay => {
@@ -16,6 +17,9 @@ const getGalleryDisplayType = (display: string): GalleryDisplay => {
     if (display.startsWith('In-line')) {
         return GalleryDisplay.INLINE
     }
+    if (display.startsWith('Map')) {
+        return GalleryDisplay.MAP
+    }
     return GalleryDisplay.LANDSCAPE
 }
 
@@ -30,6 +34,7 @@ export enum GalleryDisplay {
     CAROUSEL = 'carousel',
     CAROUSEL_REVERSED = 'carousel_reversed',
     THUMBNAILS = 'thumbnails',
+    MAP = 'map'
 }
 
 const isLandscape = (image: BlogImage): boolean => {
@@ -43,6 +48,12 @@ const isLandscape = (image: BlogImage): boolean => {
 
 const Gallery: FC<GalleryProps> = ({ images, displayType }) => {
     const display = getGalleryDisplayType(displayType)
+
+    if (display === GalleryDisplay.MAP && images.length === 1) {
+        return (
+            <MapImage image={images[0]} />
+        )
+    }
 
     if (display === GalleryDisplay.INLINE) {
         return (
