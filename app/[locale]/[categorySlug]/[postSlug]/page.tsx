@@ -19,7 +19,7 @@ import { setRequestLocale } from 'next-intl/server'
 export async function generateMetadata({
     params,
 }: {
-    params: Promise<{ locale: string, postSlug: string }>
+    params: Promise<{ locale: string; postSlug: string }>
 }): Promise<Metadata> {
     const { locale, postSlug } = await params
 
@@ -36,7 +36,7 @@ export async function generateMetadata({
 export default async function Post({
     params,
 }: {
-    params: Promise<{ locale: string, postSlug: string; }>
+    params: Promise<{ locale: string; postSlug: string }>
 }) {
     const { locale, postSlug } = await params
 
@@ -73,6 +73,12 @@ export default async function Post({
     )
 }
 
-export async function generateStaticParams(): Promise<{ locale: string, slug: string }[]> {
-    return await getDynamicBlogSlugs()
+export async function generateStaticParams({
+    params,
+}: {
+    params: Awaited<PageProps<'/[locale]/[categorySlug]/[postSlug]'>['params']>
+}): Promise<{ locale: string; slug: string }[]> {
+    const { locale } = params
+
+    return await getDynamicBlogSlugs(locale)
 }

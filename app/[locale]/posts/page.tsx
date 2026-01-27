@@ -18,6 +18,7 @@ export async function generateMetadata() {
 }
 
 export default async function PostsPage({ params }: PageProps<'/[locale]'>) {
+    const t = await getTranslations('Generic')
     const { locale } = await params
 
     if (!hasLocale(routing.locales, locale)) {
@@ -33,7 +34,7 @@ export default async function PostsPage({ params }: PageProps<'/[locale]'>) {
         <Container>
             <Header withBorder />
             <div className="mt-md">
-                <h2 className={`text-2xl font-noto mb-md`}>Alle artikelen</h2>
+                <h2 className={`text-2xl font-noto mb-md`}>{t('all-posts')}</h2>
                 <div className="grid gap-sm grid-cols-1 tablet:grid-cols-2 desktop:grid-cols-3">
                     {posts.map((post) => (
                         <PostTile key={post.id} post={post} />

@@ -5,8 +5,7 @@ import type { FC } from 'react'
 import { BlogTip } from '@/interfaces/BlogTip'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Link } from '@/i18n/navigation'
-import ResponsiveImage from '@/atoms/ResponsiveImage'
-import { cn } from '@/utils/cn'
+import { useTranslations } from 'next-intl'
 
 export enum TipType {
     GENERAL = 'General',
@@ -63,6 +62,8 @@ export interface TipProps {
 }
 
 const Tip: FC<TipProps> = ({ tip }) => {
+    const t = useTranslations('Post')
+
     const tipConfig = tipMap[tip.category]
     // @ts-ignore
     const tipImageUrl = tip.tipImage?.fields?.image?.fields?.file?.url
@@ -106,7 +107,7 @@ const Tip: FC<TipProps> = ({ tip }) => {
                                     className="w-4 mt-[2px] text-primary/40"
                                     icon={faMap}
                                 />
-                                <span>Bekijk op Google Maps</span>
+                                <span>{t('view-on-google-maps')}</span>
                             </>
                         ) : (
                             'Meer informatie'

@@ -10,10 +10,13 @@ import { mapBlogCategory } from '@/client/mappers/BlogCategoryMapper'
 import { BlogCategory } from '@/interfaces/BlogCategory'
 import { mapBlogImage } from '@/client/mappers/BlogImageMapper'
 
-export const getBlogPostById = async (id: string, locale: string): Promise<BlogPost | null> => {
+export const getBlogPostById = async (
+    id: string,
+    locale: string
+): Promise<BlogPost | null> => {
     // @ts-ignore
     const response = await client.getEntry<TypeBlog>(id, {
-        locale
+        locale,
     })
 
     if (!response) {
@@ -36,7 +39,7 @@ export const getBlogPostBySlug = async (
         limit: 1,
         include: 3,
         'fields.slug': slug,
-        locale
+        locale,
     })
 
     if (!response.items.length) {
@@ -46,7 +49,9 @@ export const getBlogPostBySlug = async (
     return mapBlogPost(response.items[0] as TypeBlog)
 }
 
-export const getFeaturedBlogPost = async (locale: string): Promise<BlogPost | null> => {
+export const getFeaturedBlogPost = async (
+    locale: string
+): Promise<BlogPost | null> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
         content_type: 'blog',
@@ -64,7 +69,9 @@ export const getFeaturedBlogPost = async (locale: string): Promise<BlogPost | nu
     return mapBlogPost(response.items[0] as TypeBlog)
 }
 
-export const getFeaturedBlogImage = async ( locale: string ): Promise<BlogImage | null> => {
+export const getFeaturedBlogImage = async (
+    locale: string
+): Promise<BlogImage | null> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlogImage>({
         content_type: 'blogImage',
@@ -82,15 +89,16 @@ export const getFeaturedBlogImage = async ( locale: string ): Promise<BlogImage 
 }
 
 export const getDynamicBlogSlugs = async (
-    limit = 30
-): Promise<{ locale: string, slug: string }[]> => {
+    locale: string,
+    limit = 50
+): Promise<{ locale: string; slug: string }[]> => {
     // @ts-ignore
     const response = await client.getEntries<TypeBlog>({
         content_type: 'blog',
         select: ['fields.slug', 'fields.category'],
         order: '-fields.updatedAt',
         limit,
-        locale: 'nl-NL',
+        locale,
     })
 
     if (!response.items.length) {
@@ -99,7 +107,7 @@ export const getDynamicBlogSlugs = async (
 
     return response.items.map((post) => {
         return {
-            locale: 'nl-NL',
+            locale,
             // @ts-ignore
             slug: `/${post.fields.category.fields.slug}/${post.fields.slug}`,
         }
